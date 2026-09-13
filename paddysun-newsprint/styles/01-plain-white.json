@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/wp/7.1/theme.json",
+	"version": 3,
+	"title": "素白（高对比印张）",
+	"settings": {
+		"color": {
+			"palette": [
+				{ "slug": "paper", "color": "#ffffff", "name": "纸面" },
+				{ "slug": "paper-shade", "color": "#e8e8e4", "name": "纸影（桌面 / 代码底）" },
+				{ "slug": "paper-tint", "color": "#f5f5f2", "name": "纸晕" },
+				{ "slug": "ink", "color": "#1c1a17", "name": "墨" },
+				{ "slug": "ink-soft", "color": "#26221d", "name": "墨·深" },
+				{ "slug": "ink-muted", "color": "#3a3630", "name": "墨·柔" },
+				{ "slug": "ink-faded", "color": "#4a463f", "name": "墨·褪" },
+				{ "slug": "ink-ghost", "color": "#6b645a", "name": "墨·淡" },
+				{ "slug": "accent", "color": "#6b1f1f", "name": "深红" },
+				{ "slug": "accent-soft", "color": "#c99a5b", "name": "古金（墨底反白）" },
+				{ "slug": "kicker", "color": "#8a5a2a", "name": "眉题棕" },
+				{ "slug": "rule", "color": "rgba(28,26,23,0.25)", "name": "规线" },
+				{ "slug": "rule-faint", "color": "rgba(28,26,23,0.18)", "name": "规线·细" },
+				{ "slug": "zebra", "color": "#f3f3ef", "name": "斑马行" }
+			]
+		}
+	}
+}

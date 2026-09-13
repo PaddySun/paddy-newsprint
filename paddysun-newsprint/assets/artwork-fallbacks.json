@@ -1,0 +1,44 @@
+[
+  {
+    "image": "/wp-content/themes/paddysun-newsprint/assets/img/fallback/fallback-qian-xuan.webp",
+    "url": "https://example.com/artworks/1",
+    "alt": "示例作品 1：原图加载失败时的顶班占位",
+    "title": "示例作品 1"
+  },
+  {
+    "image": "/wp-content/themes/paddysun-newsprint/assets/img/fallback/fallback-chen-hongshou.webp",
+    "url": "https://example.com/artworks/2",
+    "alt": "示例作品 2：原图加载失败时的顶班占位",
+    "title": "示例作品 2"
+  },
+  {
+    "image": "/wp-content/themes/paddysun-newsprint/assets/img/fallback/fallback-bada-shanren.webp",
+    "url": "https://example.com/artworks/3",
+    "alt": "示例作品 3：原图加载失败时的顶班占位",
+    "title": "示例作品 3"
+  },
+  {
+    "image": "/wp-content/themes/paddysun-newsprint/assets/img/fallback/fallback-ren-yi.webp",
+    "url": "https://example.com/artworks/4",
+    "alt": "示例作品 4：原图加载失败时的顶班占位",
+    "title": "示例作品 4"
+  },
+  {
+    "image": "/wp-content/themes/paddysun-newsprint/assets/img/fallback/fallback-raven.webp",
+    "url": "https://example.com/artworks/5",
+    "alt": "示例作品 5：原图加载失败时的顶班占位",
+    "title": "示例作品 5"
+  },
+  {
+    "image": "/wp-content/themes/paddysun-newsprint/assets/img/fallback/fallback-crow.webp",
+    "url": "https://example.com/artworks/6",
+    "alt": "示例作品 6：原图加载失败时的顶班占位",
+    "title": "示例作品 6"
+  },
+  {
+    "image": "/wp-content/themes/paddysun-newsprint/assets/img/fallback/fallback-eastern-shore.webp",
+    "url": "https://example.com/artworks/7",
+    "alt": "示例作品 7：原图加载失败时的顶班占位",
+    "title": "示例作品 7"
+  }
+]

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" role="img" aria-label="人物头像占位图">
+  <rect width="480" height="480" fill="#e7dfce"/>
+  <rect x="8" y="8" width="464" height="464" fill="none" stroke="#6b645a" stroke-width="2"/>
+  <circle cx="240" cy="185" r="72" fill="none" stroke="#6b645a" stroke-width="8"/>
+  <path d="M96 432c0-79 64-132 144-132s144 53 144 132" fill="none" stroke="#6b645a" stroke-width="8" stroke-linecap="round"/>
+  <line x1="16" y1="368" x2="464" y2="368" stroke="#6b645a" stroke-width="1" stroke-dasharray="4 6"/>
+</svg>

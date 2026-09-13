@@ -1,0 +1,175 @@
+/*
+ * Paddysun Newsprint — 原生登录页视觉适配（0.10.0 U9）
+ *
+ * 范围：wp-login.php 的登录 / 找回密码 / 重置密码 / 注册（启用时）。
+ * 原则：仅展示层适配（纸色 / 墨色 / 直角规线 / focus 语言），
+ * 不隐藏或削弱任何原生控件、错误消息、密码管理器与
+ * Wordfence 附加控件；认证逻辑零变更。
+ */
+
+body.login {
+    background-color: #e7dfce; /* paper-shade：与前台 html 背景一致 */
+}
+body.login #login {
+    padding-top: 12%;
+}
+
+/* 报头字标：保留 WP 默认 logo 图形，仅去除默认圆角感知 */
+body.login h1 a {
+    background-size: contain;
+}
+
+/* 表单面板：纸面 + 直角细规线（报纸语言，无圆角阴影堆叠） */
+body.login #loginform,
+body.login #registerform,
+body.login #lostpasswordform,
+body.login #resetpassform {
+    background-color: #f4efe4; /* paper */
+    border: 1px solid rgba(28, 26, 23, 0.2); /* rule */
+    border-radius: 0;
+    box-shadow: none;
+    color: #1c1a17; /* ink */
+}
+body.login label {
+    color: #4a463f; /* ink-faded */
+    font-size: 13px;
+    letter-spacing: 0.04em;
+}
+
+/* 输入控件：保留原生形态，仅改墨线与纸底 */
+body.login input[type="text"],
+body.login input[type="password"],
+body.login input[type="email"],
+body.login input[type="url"],
+body.login input[type="number"],
+body.login input[type="search"],
+body.login input[type="tel"],
+body.login input[type="date"],
+body.login select,
+body.login textarea {
+    background-color: #f4efe4;
+    color: #1c1a17;
+    border: 1px solid #1c1a17;
+    border-radius: 0;
+    box-shadow: none;
+}
+body.login input[type="checkbox"] {
+    accent-color: #6b1f1f; /* accent */
+}
+body.login input[type="text"]:focus,
+body.login input[type="password"]:focus,
+body.login input[type="email"]:focus,
+body.login input[type="url"]:focus,
+body.login input[type="number"]:focus,
+body.login input[type="search"]:focus,
+body.login input[type="tel"]:focus,
+body.login input[type="date"]:focus,
+body.login select:focus,
+body.login textarea:focus {
+    border-color: #6b1f1f;
+    box-shadow: 0 0 0 2px rgba(107, 31, 31, 0.25);
+    outline: 2px solid #6b1f1f;
+    outline-offset: 0;
+}
+
+/* 主按钮：accent 深红描边 → 悬停实底，与前台订阅 / 评论按钮同语言。
+   核心 colors 面板样式后载入且以变量取色，此处用 id 级特异性压回 */
+body.login #login .wp-core-ui .button-primary,
+body.login #loginform .button-primary,
+body.login #registerform .button-primary,
+body.login #lostpasswordform .button-primary,
+body.login #resetpassform .button-primary {
+    background-color: transparent !important;
+    border: 1px solid #6b1f1f !important;
+    border-radius: 0 !important;
+    color: #6b1f1f !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+body.login #login .wp-core-ui .button-primary:hover,
+body.login #login .wp-core-ui .button-primary:focus-visible,
+body.login #loginform .button-primary:hover {
+    background-color: #6b1f1f !important;
+    color: #f4efe4 !important;
+    border-color: #6b1f1f !important;
+}
+body.login #login .wp-core-ui .button-primary:focus {
+    border-color: #6b1f1f !important;
+    box-shadow: 0 0 0 2px rgba(107, 31, 31, 0.25) !important;
+}
+
+/* 次级按钮保持原生灰阶，只换纸底墨字 */
+body.login .wp-core-ui .button {
+    border-color: rgba(28, 26, 23, 0.2);
+    border-radius: 0;
+    color: #26221d;
+    background-color: #f4efe4;
+}
+
+/* 消息与错误：保留核心结构，仅调纸面色；错误一律完整可见 */
+body.login #login_error,
+body.login .message,
+body.login .notice {
+    background-color: #f4efe4;
+    border-left: 4px solid #6b1f1f;
+    border-radius: 0;
+    box-shadow: none;
+    color: #1c1a17;
+}
+body.login .message,
+body.login .notice {
+    border-left-color: #1c1a17;
+}
+
+/* 底部导航链接 */
+body.login #nav,
+body.login #backtoblog {
+    font-size: 13px;
+}
+body.login #nav a,
+body.login #backtoblog a {
+    color: #6b645a; /* ink-ghost */
+    text-decoration: none;
+}
+body.login #nav a:hover,
+body.login #nav a:focus-visible,
+body.login #backtoblog a:hover,
+body.login #backtoblog a:focus-visible {
+    color: #6b1f1f;
+}
+body.login #nav a:focus-visible,
+body.login #backtoblog a:focus-visible {
+    outline: 2px solid #6b1f1f;
+    outline-offset: 2px;
+}
+
+/* 语言切换器保持原生可用 */
+body.login .language-switcher label {
+    color: #4a463f;
+}
+
+/* Wordfence 等插件附加控件：不做定向覆盖，仅保证继承墨色与可聚焦 */
+body.login #loginform .wfls-prompt,
+body.login #login form p {
+    color: #26221d;
+}
+
+/* 高对比 / 强制颜色：交还系统配色，不干扰 */
+@media (forced-colors: active) {
+    body.login #loginform,
+    body.login #registerform,
+    body.login #lostpasswordform,
+    body.login #resetpassform {
+        background-color: Canvas;
+        color: CanvasText;
+    }
+}
+
+/* 小屏：核心已有响应式，这里只确保留白不顶格 */
+@media (max-width: 480px) {
+    body.login #login {
+        padding-top: 8%;
+    }
+}

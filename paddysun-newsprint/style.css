@@ -1,0 +1,2739 @@
+/*
+Theme Name: Paddysun Newsprint
+Theme URI: https://example.com/
+Author: Paddy
+Author URI: https://example.com/
+Description: 报纸风格的极简中文博客块主题。首页全量移植 Broadside 报纸版面（报头三件套、三栏头条、本期要目），文章页保持 Typora Newsprint 阅读体验；英文内容采用 Broadside 字体方案（Source Serif 4 / Libre Caslon / Unifraktur）。全部模板区块化，色板/字体/间距由 theme.json 提供，站点编辑器所见即所得。内置 KaTeX、Mermaid、代码高亮按需加载与一键复制 Markdown。零外部请求。
+Version: 0.10.11
+Requires at least: 7.1
+Tested up to: 7.1
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: paddysun-newsprint
+Tags: blog, one-column, custom-colors, custom-menu, editor-style, block-styles, block-patterns, full-site-editing, style-variations, translation-ready
+*/
+
+/* ============================================================
+   0. 设计令牌 —— 全部由 theme.json 提供（--wp--preset--* / --wp--custom--*），
+      此处仅做「报纸版面内部命名」的别名映射，并保留字面回退值：
+      站长在「样式」面板改色板 / 字体，报头、头条、要目等版面组件随之生效。
+      （报纸版面 = Broadside；文章节奏 = Typora Newsprint）
+   ============================================================ */
+:root {
+    /* 色板 → theme.json settings.color.palette */
+    --np-paper: var(--wp--preset--color--paper, #f4efe4);
+    --np-paper-shade: var(--wp--preset--color--paper-shade, #e7dfce);
+    --np-paper-tint: var(--wp--preset--color--paper-tint, #eef0e6);
+    --np-ink: var(--wp--preset--color--ink, #1c1a17);
+    --np-ink-soft: var(--wp--preset--color--ink-soft, #26221d);
+    --np-ink-muted: var(--wp--preset--color--ink-muted, #3a3630);
+    --np-ink-faded: var(--wp--preset--color--ink-faded, #4a463f);
+    --np-ink-ghost: var(--wp--preset--color--ink-ghost, #6b645a);
+    --np-accent: var(--wp--preset--color--accent, #6b1f1f);
+    --np-accent-soft: var(--wp--preset--color--accent-soft, #c99a5b);
+    --np-kicker: var(--wp--preset--color--kicker, #8a5a2a);
+    --np-rule: var(--wp--preset--color--rule, rgba(28, 26, 23, 0.2));
+    --np-rule-faint: var(--wp--preset--color--rule-faint, rgba(28, 26, 23, 0.14));
+    --np-rule-heavy: var(--wp--preset--color--ink, #1c1a17);
+    --np-zebra: var(--wp--preset--color--zebra, #ece6d6);
+
+    /* 字体栈 → theme.json settings.typography.fontFamilies（@font-face 亦由其 fontFace 生成） */
+    --np-body: var(--wp--preset--font-family--np-body, "Source Serif 4", "Noto Serif SC", "Songti SC", "SimSun", serif);
+    --np-display: var(--wp--preset--font-family--np-display, "Libre Caslon Display", "Noto Serif SC", "Songti SC", "SimSun", serif);
+    --np-masthead-font: var(--wp--preset--font-family--np-masthead, "UnifrakturMaguntia", "Libre Caslon Display", serif);
+    --np-mono: var(--wp--preset--font-family--np-mono, ui-monospace, Menlo, Consolas, monospace);
+    --np-kai: var(--wp--preset--font-family--np-kai, "Libre Caslon Display", "KaiTi", "STKaiti", "Noto Serif SC", serif);
+
+    /* Broadside 字号阶梯（版面小件专用；正文字号由 theme.json 根排版控制） */
+    --np-fs-micro: 10.5px;
+    --np-fs-eyebrow: 11px;
+    --np-fs-utility: 11.5px;
+    --np-fs-meta: 12px;
+    --np-fs-caption: 12.5px;
+    --np-fs-small: 13px;
+    --np-fs-compact: 14px;
+    --np-fs-base: 15px;
+    --np-fs-reading: 16.5px;
+    --np-fs-prose: 19px;
+    --np-fs-deck: clamp(20px, 2.4vw, 26px);
+    --np-fs-subhead: 25px;
+    --np-fs-headline: 34px;
+    --np-fs-lead: clamp(38px, 4.6vw, 60px);
+    --np-fs-masthead: clamp(46px, 8vw, 104px);
+
+    /* 度量 → theme.json settings.custom.np */
+    --np-measure: var(--wp--custom--np--measure, 40em);             /* 文章栏宽（Typora Newsprint 原值） */
+    --np-measure-wide: var(--wp--custom--np--measure-wide, 914px);  /* ≥1400px 视口加宽 */
+    --np-sheet: var(--wp--custom--np--sheet, 1180px);               /* 报纸版面总宽（wideSize） */
+    --np-sheet-margin: var(--wp--custom--np--sheet-margin, clamp(22px, 4vw, 40px));
+    --np-desk-gutter: 16px;         /* 桌面留边：窄屏收窄、绝不归零 */
+
+    /* 动效令牌（阶段三）：时长/缓动由 theme.json 提供（编辑器同步联动）；
+       shift 为实现常量——全站唯一允许的位移是弹层入场 3px 上浮，不开放调节 */
+    --np-motion-dur: var(--wp--custom--np--motion-duration, 150ms);
+    --np-motion-ease: var(--wp--custom--np--motion-ease, cubic-bezier(0.4, 0, 0.2, 1));
+    --np-motion-shift: 3px;
+}
+
+/* ============================================================
+   1. 桌面与纸张 —— Broadside 的「桌上一张纸」
+      body 背景（纸面）由 theme.json 控制；桌面色由 functions.php 仅在前台注入到 html。
+      .wp-site-blocks 是块主题自动生成的站点根容器，即「那张纸」；
+      站点编辑器画布根容器同样带此类名，所见即所得。
+   ============================================================ */
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    overflow-wrap: break-word;
+    text-rendering: optimizeLegibility;
+}
+
+.wp-site-blocks {
+    background-color: var(--np-paper);
+    max-width: calc(var(--np-sheet) + (2 * var(--np-sheet-margin)));
+    margin-inline: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    box-shadow: var(--wp--preset--shadow--paper, 0 1px 0 rgba(28, 26, 23, 0.5), 0 40px 90px -50px rgba(28, 26, 23, 0.7));
+    padding-inline: var(--np-sheet-margin);
+    box-sizing: border-box;
+}
+
+/* 块布局（flow）会给容器子元素加 block-gap 上边距；版面组件自管间距，统一归零 */
+.np-utility > *,
+.np-masthead > *,
+.np-ear > *,
+.np-folio > *,
+.np-lead > *,
+.np-lead__story > *,
+.np-lead__hero > *,
+.np-brief > *,
+.np-aside > *,
+.np-sections > *,
+.np-section > *,
+.np-subscribe > *,
+.np-subscribe__body > *,
+.np-entry > *,
+.np-entry__body > *,
+.np-archive__head > *,
+.np-article__header > *,
+.np-article__footer > *,
+.np-comment__body > *,
+.np-footer > *,
+.np-site-header > *,
+.np-masthead--compact > *,
+.wp-block-post-template > .wp-block-post,
+.wp-block-term-template > .wp-block-term {
+    margin-block: 0;
+}
+
+/* 核心区块的内层包装：摘要 / 说明的 <p> 不再带默认外边距 */
+.wp-block-post-excerpt__excerpt,
+.wp-block-term-description p,
+.np-archive__count p {
+    margin: 0;
+}
+/* 正文内容里插入的版面区块（要目/清单/评论）不得继承 .np-content ul li 的圆点 */
+.np-content :is(.wp-block-post-template, .wp-block-term-template, .wp-block-comment-template) > li {
+    list-style: none;
+    margin: 0;
+}
+.wp-block-post-excerpt__more-text {
+    margin: 12px 0 0;
+}
+
+::selection {
+    background-color: var(--np-accent);
+    color: var(--np-paper);
+}
+
+a:focus-visible {
+    outline: 2px solid var(--np-accent);
+    outline-offset: 2px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+hr {
+    border: 0;
+    border-bottom: 1px solid var(--np-rule);
+    margin: 2em 0;
+}
+
+.screen-reader-text {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* ============================================================
+   3. 报纸小件 —— 大写间距字（全站的连接组织）
+   ============================================================ */
+.np-utility-type,
+.np-folio,
+.np-nav,
+.np-kicker,
+.np-byline,
+.np-rail-title,
+.np-section-head,
+.np-footer {
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: var(--np-fs-utility);
+    line-height: 1.4;
+}
+
+.np-kicker {
+    display: block;
+    font-size: var(--np-fs-micro);
+    letter-spacing: 0.16em;
+    font-weight: 700;
+    /* 0.10.0 U6 站长裁决：各处分类组件统一 accent 深红（原棕调 E-13 混色退役）。
+       同一令牌覆盖：简报眉题 / 卡片分类 / 文章分类链接 / 要目分类标题。
+       hover 反馈转墨（保留），不染文章标题与栏目大标题。 */
+    color: var(--np-accent);
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+.np-kicker:hover,
+.np-kicker:focus-visible {
+    color: var(--np-ink);
+}
+
+/* 行内图标（阶段三）：Phosphor Icons（MIT，regular 线性风格）内联 SVG。
+   stroke 用 currentColor —— 继承宿主链接/按钮的颜色与 hover 变色；
+   装饰性 aria-hidden，语义由宿主 aria-label 承担。 */
+.np-icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+    fill: none;
+}
+
+/* ============================================================
+   4. 报头三件套（Broadside masthead）
+   ============================================================ */
+
+/* 4.1 工具条：三列网格，中列永远居中于整条（而非剩余空间） */
+.np-utility {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 16px;
+    color: var(--np-ink-ghost);
+    padding-top: 14px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--np-ink);
+}
+.np-utility__strapline {
+    color: var(--np-accent);
+    font-weight: 600;
+    text-align: center;
+}
+.np-utility > :last-child {
+    justify-self: end;
+    text-align: right;
+}
+/* 工具栏固定在最后一列：站点副标题为空时也不落入中列。 */
+.np-utility > .np-utility__menu {
+    grid-column: -2 / -1;
+    justify-self: end;
+    text-align: right;
+}
+.np-utility__menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    position: relative;             /* 检索弹层锚点 */
+}
+.np-utility__menu p {
+    margin: 0;
+}
+/* 工具条图标（检索/RSS）：略大于小写字号，广播符号与放大镜的笔画才清晰 */
+.np-utility__menu .np-icon,
+.np-footer__copy .np-icon {
+    width: 14px;
+    height: 14px;
+}
+a.np-icon-link {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+}
+.np-utility__menu a {
+    color: var(--np-ink-ghost);
+    border-bottom: 1px solid transparent;   /* 常驻底边：hover 变色不跳版 */
+    transition: color var(--np-motion-dur) var(--np-motion-ease), border-color var(--np-motion-dur) var(--np-motion-ease);
+}
+.np-utility__menu a:hover {
+    color: var(--np-accent);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+}
+
+/* 4.1a 检索弹出（V-12）：点「检索」上方弹出输入框，回车进结果页。
+   纯 details/summary + CSS，零 JS；键盘原生可达（Enter 开合 / 表单提交）。 */
+.np-search-toggle {
+    position: relative;
+    color: var(--np-ink-ghost);
+}
+.np-search-toggle > summary {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    list-style: none;
+    color: inherit;
+    user-select: none;
+    border-bottom: 1px solid transparent;   /* 常驻底边：hover 变色不跳版 */
+    transition: color var(--np-motion-dur) var(--np-motion-ease), border-color var(--np-motion-dur) var(--np-motion-ease);
+}
+.np-search-toggle > summary::-webkit-details-marker,
+.np-search-toggle > summary::marker {
+    display: none;
+    content: "";
+}
+.np-search-toggle > summary::after {
+    content: "▾";
+    font-size: 0.75em;
+    margin-left: 3px;
+    color: var(--np-ink-ghost);
+}
+.np-search-toggle:hover > summary,
+.np-search-toggle[open] > summary {
+    color: var(--np-accent);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+}
+.np-search-pop {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    z-index: 40;
+    display: flex;
+    border: 1px solid var(--np-ink);
+    background: var(--np-paper);
+    box-shadow: 0 14px 34px -20px rgba(28, 26, 23, 0.65);
+    padding: 3px;
+}
+/* 弹层入场：淡入 + 3px 上浮（全站唯一允许的位移量）；prefers-reduced-motion 下被 §11 归零 */
+.np-search-toggle[open] .np-search-pop {
+    animation: np-pop-in var(--np-motion-dur) var(--np-motion-ease);
+}
+@keyframes np-pop-in {
+    from {
+        opacity: 0;
+        transform: translateY(calc(var(--np-motion-shift) * -1));
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+.np-search-pop:focus-within {
+    border-color: var(--np-accent);
+}
+.np-search-pop {
+    transition: border-color var(--np-motion-dur) var(--np-motion-ease);
+}
+.np-search-pop input[type="search"] {
+    border: 0;
+    /* 不设 outline:none：键盘聚焦时沿用全局 :focus-visible 2px accent 描边（E0-P3）；
+       鼠标聚焦无描边，外观不受影响 */
+    background: transparent;
+    font-family: var(--np-body);
+    font-size: var(--np-fs-compact);
+    color: var(--np-ink);
+    padding: 9px 12px;
+    width: min(240px, calc(100vw - 60px));
+}
+.np-search-pop input[type="search"]::placeholder {
+    color: var(--np-ink-ghost);
+}
+
+/* 4.2 报头：哥特体站名 + 左右双耳（底对齐站名，耳垂直居中） */
+.np-masthead {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 18px;
+    padding: 20px 0 12px;
+}
+.np-ear {
+    font-size: var(--np-fs-meta);
+    line-height: 1.5;
+    color: var(--np-ink-faded);
+    align-self: center;
+}
+.np-ear--right {
+    text-align: right;
+}
+.np-ear__title {
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: var(--np-fs-eyebrow);
+    margin: 0;
+}
+.np-ear__body {
+    margin: 4px 0 0;
+    font-style: italic;
+    white-space: pre-line;
+}
+
+.np-nameplate {
+    font-family: var(--np-masthead-font);
+    font-weight: 400;
+    font-size: var(--np-fs-masthead);
+    line-height: 0.9;
+    letter-spacing: 0.5px;
+    text-align: center;
+    margin: 0;
+}
+.np-nameplate a {
+    color: var(--np-ink);
+    text-decoration: none;
+}
+.np-nameplate a:hover {
+    text-decoration: none;
+    color: var(--np-ink);
+}
+.np-nameplate img {
+    max-height: 120px;
+    width: auto;
+    margin-inline: auto;
+}
+
+/* 4.3 版面信息行：卷期 / 日期 / 铭言，1px 上规 + 3px 双规下 */
+.np-folio {
+    border-top: 1px solid var(--np-ink);
+    border-bottom: 3px double var(--np-ink);
+    padding: 7px 0;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 12px;
+    font-size: var(--np-fs-meta);
+    letter-spacing: 0.1em;
+    color: var(--np-ink-muted);
+}
+.np-folio > :last-child {
+    justify-self: end;
+    text-align: right;
+}
+.np-folio__dateline {
+    font-weight: 600;
+}
+
+/* 4.4 导航：居中，大写间距，悬停 accent 下划线 */
+.np-nav {
+    padding: 11px 0 4px;
+    margin: 0;
+}
+.np-nav .wp-block-navigation__container,
+.np-nav .wp-block-page-list {
+    display: flex;
+    justify-content: center;
+    gap: 26px;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color: var(--np-ink-muted);
+}
+.np-nav .wp-block-navigation-item__content {
+    color: var(--np-ink-muted);
+    text-decoration: none;
+}
+.np-nav .wp-block-navigation-item__content:hover,
+.np-nav .wp-block-navigation-item__content:focus-visible,
+.np-nav .current-menu-item > .wp-block-navigation-item__content {
+    color: var(--np-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* 4.5 紧凑报头（文章页/独立页面，header-compact part；审查 C-F18：归档页用完整报头） */
+.np-masthead--compact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 16px 0;
+    border-bottom: 2px solid var(--np-ink);
+}
+.np-masthead--compact .np-nameplate {
+    font-size: 26px;
+    line-height: 1;
+    text-align: left;
+}
+.np-masthead--compact .np-nav {
+    padding: 0;
+}
+.np-masthead--compact .np-nav .wp-block-navigation__container {
+    gap: 18px;
+}
+.np-masthead--compact .np-compact-meta {
+    font-size: var(--np-fs-meta);
+    color: var(--np-ink-ghost);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ============================================================
+   5. 首页 —— 三栏头条 + 订阅框 + 本期要目（Broadside front-page）
+   ============================================================ */
+.np-front {
+    /* 0.10.4 站长反馈：导航→三栏距离减半（原 ≈51.5px 收至约 25px：本类自设
+       margin-top 覆盖模板件间 blockGap，再配上内距；其余页面不经此类不受影响） */
+    margin-top: 12px;
+    padding: 13px 0 44px;
+}
+
+/* 5.1 三栏头条：1fr / 2.1fr / 1.35fr，栏间规线而非留白 */
+.np-lead {
+    display: grid;
+    grid-template-columns: 1fr 2.1fr 1.35fr;
+    gap: 0;
+    margin-top: 14px;
+}
+.np-lead > * {
+    margin-block: 0;
+}
+/* 桌面三栏共享高度预算：网格行的最小值必须为 0，防止右栏长文
+   以 min-content 高度撑大整行。正文收缩裁切，两个阅读入口不收缩；
+   手机和平板不进入此规则，保持自然高度。 */
+@media (min-width: 1025px) {
+    :root {
+        --np-lead-clip: 820px;
+    }
+    .np-lead {
+        height: var(--np-lead-clip);
+        max-height: var(--np-lead-clip);
+        grid-template-rows: minmax(0, 1fr);
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+    .np-lead > * {
+        min-height: 0;
+        max-height: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+    .np-lead__main .np-lead__more-wrap,
+    .np-lead__aside .np-aside__more-wrap {
+        flex-shrink: 0;
+    }
+}
+.np-lead__rail {
+    padding-right: 24px;
+    border-right: 1px solid var(--np-rule);
+}
+.np-lead__main {
+    padding-inline: 26px;
+    min-width: 0;
+}
+.np-lead .wp-block-post-template {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.np-lead__aside {
+    padding-left: 24px;
+    border-left: 1px solid var(--np-rule);
+    min-width: 0;
+}
+
+/* 5.1a 简报栏 */
+.np-rail-title {
+    text-align: center;
+    font-weight: 400;
+    font-size: var(--np-fs-eyebrow);
+    letter-spacing: 0.22em;
+    color: var(--np-accent);
+    border-bottom: 1px solid var(--np-rule);
+    padding-bottom: 7px;
+    margin: 0 0 14px;
+}
+.np-brief {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px dotted var(--np-rule);
+}
+.np-briefs .wp-block-post:last-child .np-brief {
+    border-bottom: 0;
+    margin-bottom: 0;
+}
+.np-brief__head {
+    font-family: var(--np-display);
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 1.18;
+    color: var(--np-ink);
+    margin: 0 0 2px;
+}
+.np-brief__head a {
+    color: inherit;
+    text-decoration: none;
+}
+.np-brief__head a:hover {
+    color: var(--np-accent);
+    text-decoration: none;
+}
+.np-brief__sum {
+    font-size: var(--np-fs-small);
+    color: var(--np-ink-faded);
+    margin: 6px 0 0;
+    line-height: 1.55;
+}
+
+/* 5.1b 主稿：题图压底（非叠图）——灰度化 0.7、透明度 0.2、四向羽化 */
+.np-lead__hero {
+    position: relative;
+    isolation: isolate;
+    padding: 54px 22px 24px;
+    margin-inline: -26px;
+    margin-top: -14px;
+}
+.np-lead__hero .np-lead__backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    margin: 0;
+    overflow: hidden;
+    max-width: none;
+}
+.np-lead__hero .np-lead__backdrop a {
+    display: block;
+    height: 100%;
+}
+.np-lead__hero .np-lead__backdrop img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.2;
+    filter: grayscale(0.7) contrast(0.75) brightness(1.06);
+    -webkit-mask-image:
+        linear-gradient(to bottom, transparent 0%, #000 22%, #000 58%, transparent 100%),
+        linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%);
+    mask-image:
+        linear-gradient(to bottom, transparent 0%, #000 22%, #000 58%, transparent 100%),
+        linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+}
+/* 无题图：撤掉为压底图预留的呼吸空间 */
+.np-lead__hero:not(:has(.np-lead__backdrop img)) {
+    padding: 0 0 8px;
+    margin-inline: 0;
+    margin-top: 0;
+}
+
+.np-lead__label {
+    text-align: center;
+    font-size: var(--np-fs-meta);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--np-accent);
+    margin: 0 0 12px;
+}
+.np-lead__title {
+    font-family: var(--np-display);
+    font-weight: 400;
+    font-size: var(--np-fs-lead);
+    line-height: 1.08;
+    text-align: center;
+    margin: 0 0 14px;
+}
+.np-lead__title a {
+    color: var(--np-ink);
+    text-decoration: none;
+}
+.np-lead__title a:hover {
+    color: var(--np-accent);
+    text-decoration: none;
+}
+.np-lead__deck {
+    font-family: var(--np-display);
+    font-size: 19px;
+    line-height: 1.4;
+    text-align: center;
+    color: var(--np-ink-muted);
+    font-style: italic;
+    margin: 0 auto 16px;
+    max-width: 44ch;
+}
+.np-byline {
+    text-align: center;
+    color: var(--np-ink-ghost);
+    letter-spacing: 0.12em;
+    border-top: 1px solid var(--np-rule);
+    border-bottom: 1px solid var(--np-rule);
+    padding: 7px 0;
+    margin-bottom: 18px;
+}
+.np-byline a {
+    color: var(--np-ink-ghost);
+}
+.np-byline {
+    gap: 0.5em;
+}
+.np-byline > * + *::before,
+.np-article__meta > * + *::before {
+    content: "·";
+    margin-right: 0.5em;
+}
+
+/* 主稿正文：两栏两端对齐 + 首字下沉（报纸的"继续读"） */
+.np-columns {
+    columns: 2;
+    column-gap: 26px;
+    column-rule: 1px solid var(--np-rule-faint);
+}
+.np-columns > p {
+    margin: 0 0 12px;
+    font-size: var(--np-fs-base);
+    line-height: 1.6;
+    text-align: justify;
+    hyphens: auto;
+}
+.np-dropcap::first-letter {
+    font-family: var(--np-display);
+    font-size: 4.4em;
+    line-height: 0.78;
+    float: left;
+    padding: 6px 10px 0 0;
+    color: var(--np-accent);
+}
+
+/* 头版三栏底对齐（0.8.4）：主稿/侧栏正文 flex 吃满栏高、超出逐行隐藏
+   （多栏容器在定高下，放不下的整行转入右侧溢出栏并被 overflow 裁掉，
+   不会出现半行截断）；「阅读全文 →」与「读这篇文章 →」margin-top:auto
+   锚到各自栏底——grid 行高统一，两链接即同一高度。窄屏单列时各行独立、
+   容器高度=内容高度，此机制自然失效（不裁字）。 */
+.np-lead__main,
+.np-lead__main .wp-block-post-template,
+.np-lead__main .wp-block-post-template > li,
+.np-lead__main .np-lead__story,
+.np-lead__aside,
+.np-lead__aside .wp-block-post-template,
+.np-lead__aside .wp-block-post-template > li,
+.np-lead__aside aside.np-aside {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+.np-lead__main .wp-block-post-template,
+.np-lead__main .wp-block-post-template > li,
+.np-lead__main .np-lead__story,
+.np-lead__aside .wp-block-post-template,
+.np-lead__aside .wp-block-post-template > li,
+.np-lead__aside aside.np-aside {
+    flex: 1;
+}
+.np-lead__story .np-columns {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+.np-lead__story .np-lead__more-wrap {
+    margin-top: auto;
+    margin-bottom: 0;
+}
+.np-lead__aside aside.np-aside .np-aside__body {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+.np-lead__aside aside.np-aside .np-aside__more-wrap {
+    margin-top: auto;
+    margin-bottom: 0;
+}
+
+.np-lead__more-wrap {
+    text-align: center;
+    margin: 14px 0 0;
+}
+.np-lead__more,
+.wp-block-post-excerpt__more-link {
+    display: inline-block;
+    font-size: var(--np-fs-meta);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--np-accent);
+    font-weight: 700;
+    text-decoration: none;
+}
+.np-lead__more:hover,
+.wp-block-post-excerpt__more-link:hover {
+    color: var(--np-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* 指针设备上的悬停（触屏会卡在 hover 态，故限定） */
+@media (hover: hover) and (pointer: fine) {
+    .np-lead__hero .np-lead__backdrop img {
+        transition: opacity 180ms ease, filter 180ms ease;
+    }
+    .np-lead__main:hover .np-lead__backdrop img,
+    .np-lead__main:focus-within .np-lead__backdrop img {
+        opacity: 0.32;
+        filter: grayscale(0.45) contrast(0.85) brightness(1.02);
+    }
+    .np-lead__title a,
+    .np-brief__head,
+    .np-aside__title a {
+        transition: color 140ms ease;
+    }
+}
+
+/* 5.2 订阅框（Broadside newsletter，改造为 RSS/llms.txt 实用链接） */
+.np-subscribe {
+    margin-top: 34px;
+    border: 3px double var(--np-rule-heavy);
+    background-color: var(--np-ink);
+    color: var(--np-paper);
+    padding: 30px clamp(20px, 4vw, 40px);
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 36px;
+    align-items: center;
+}
+.np-subscribe__eyebrow {
+    font-size: var(--np-fs-eyebrow);
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--np-accent-soft);
+    margin: 0 0 10px;
+}
+.np-subscribe__name {
+    font-family: var(--np-display);
+    font-weight: 400;
+    font-size: clamp(34px, 4vw, 50px);
+    line-height: 1;
+    margin: 0 0 12px;
+    color: var(--np-paper);
+}
+.np-subscribe__blurb {
+    font-size: var(--np-fs-reading);
+    line-height: 1.5;
+    color: #d8d1c2;
+    margin: 0;
+    font-style: italic;
+}
+.np-subscribe__links.wp-block-buttons {
+    gap: 10px;
+}
+.np-subscribe__links .wp-block-button {
+    width: 100%;
+}
+.np-subscribe__link .wp-block-button__link {
+    display: block;
+    text-align: center;
+    background-color: var(--np-accent);
+    color: var(--np-paper);
+    border: 0;
+    font-size: var(--np-fs-meta);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 13px 22px;
+    text-decoration: none;
+}
+.np-subscribe__link .wp-block-button__link:hover,
+.np-subscribe__link .wp-block-button__link:focus-visible {
+    background-color: var(--np-ink-soft);
+    color: var(--np-paper);
+    text-decoration: none;
+}
+.np-subscribe__note {
+    font-size: var(--np-fs-meta);
+    color: #9a9285;
+    margin: 0;
+    font-style: italic;
+    text-align: center;
+}
+
+/* 5.3 本期要目：框线分块网格（容器画框、单元格画内线） */
+.np-section-head {
+    margin: 36px 0 0;
+    font-weight: 400;
+    text-align: center;
+    font-size: var(--np-fs-meta);
+    letter-spacing: 0.24em;
+    color: var(--np-accent);
+    border-bottom: 3px double var(--np-ink);
+    padding-bottom: 8px;
+}
+.np-sections {
+    border: 1px solid var(--np-rule);
+    overflow: hidden;              /* 裁掉单元格越界的边线，任意列数不错位 */
+    margin-top: 20px;
+}
+.np-sections .wp-block-term-template {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.np-sections .wp-block-term {
+    margin: 0 -1px -1px 0;
+    padding: 0;
+}
+.np-section {
+    height: 100%;
+    box-sizing: border-box;
+    padding: 22px 24px;
+    border-right: 1px solid var(--np-rule);
+    border-bottom: 1px solid var(--np-rule);
+}
+.np-section__name {
+    font-family: var(--np-display);
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--np-accent);          /* U6：要目分类标题与眉题/卡片分类同色（accent 深红） */
+    border-bottom: 2px solid var(--np-ink);   /* 分隔规线保持墨色，不随分类色 */
+    padding-bottom: 7px;
+    margin: 0 0 12px;
+}
+.np-section__name a {
+    color: inherit;
+    text-decoration: none;
+}
+.np-section__name a:hover {
+    color: var(--np-accent);
+    text-decoration: none;
+}
+.np-section__posts .wp-block-post-template {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.np-section__link {
+    font-size: 14.5px;
+    line-height: 1.3;
+    gap: 8px;
+    align-items: baseline;
+    padding: 6px 0;
+    border-bottom: 1px dotted var(--np-rule);
+}
+.np-section__posts .wp-block-post:last-child .np-section__link {
+    border-bottom: 0;
+}
+.np-section__post {
+    font-family: var(--np-body);
+    font-size: inherit;
+    font-weight: 400;
+    line-height: inherit;
+    margin: 0;
+}
+.np-section__post a {
+    color: var(--np-ink-soft);
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;           /* 多篇并列时标题单行省略 */
+    overflow: hidden;
+}
+.np-section__posts .wp-block-post:first-child:last-child .np-section__post a {
+    -webkit-line-clamp: unset;       /* 仅一篇时完整显示 */
+    overflow: visible;
+}
+.np-section__post a:hover {
+    color: var(--np-accent);
+    text-decoration: none;
+}
+.np-section__date {
+    flex-shrink: 0;
+    font-size: var(--np-fs-micro);
+    color: var(--np-ink-ghost);
+    letter-spacing: 0.08em;
+    margin-left: 6px;
+}
+
+/* 5.4（0.10.5 移除）近期文章卡片流：板块已按站长裁决整体删除。 */
+
+/* ============================================================
+   6. 归档 / 检索 —— 规线清单
+   ============================================================ */
+.np-archive {
+    max-width: calc(var(--np-sheet) - 2 * var(--np-sheet-margin));
+    margin: 0 auto;
+    padding: 26px 0 44px;
+}
+.np-archive__head {
+    padding-bottom: 12px;
+    margin-bottom: 6px;
+}
+.np-archive__title {
+    margin: 0;
+    font-family: var(--np-display);
+    font-weight: 400;
+    font-size: var(--np-fs-headline);
+    line-height: 1.1;
+    border-bottom: 3px double var(--np-ink);
+    padding-bottom: 10px;
+}
+.np-archive__count {
+    font-size: var(--np-fs-meta);
+    color: var(--np-ink-ghost);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 8px 0 0;
+}
+
+.np-archive .wp-block-post-template {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.np-entry {
+    display: flex;
+    gap: 1.25rem;
+    align-items: baseline;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--np-rule);
+}
+.np-entry__date {
+    flex: 0 0 6.5em;
+    font-size: var(--np-fs-meta);
+    color: var(--np-ink-ghost);
+    letter-spacing: 0.05em;
+}
+.np-entry__body {
+    flex: 1;
+    min-width: 0;
+}
+.np-entry__title {
+    margin: 0 0 0.2em;
+    font-family: var(--np-display);
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 1.18;
+}
+.np-entry__title a {
+    color: var(--np-ink);
+    text-decoration: none;
+}
+.np-entry__title a:hover {
+    color: var(--np-accent);
+    text-decoration: none;
+}
+.np-entry__excerpt {
+    margin: 0;
+    font-size: var(--np-fs-compact);
+    color: var(--np-ink-faded);
+}
+
+.np-pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    font-size: var(--np-fs-compact);
+}
+
+/* ============================================================
+   6b. 站点栏目页（links / about）+ 徽章挂件 —— 阶段四
+   ============================================================ */
+.np-links,
+.np-about {
+    max-width: calc(var(--np-sheet) - 2 * var(--np-sheet-margin));
+    margin: 0 auto;
+    padding: 26px 0 44px;
+}
+.np-pagehead {
+    padding-bottom: 12px;
+}
+.np-pagehead > * {
+    margin-block: 0;
+}
+.np-pagehead .np-kicker {
+    margin-bottom: 8px;
+}
+.np-pagehead__title {
+    font-family: var(--np-display);
+    font-weight: 400;
+    font-size: var(--np-fs-headline);
+    line-height: 1.1;
+    border-bottom: 3px double var(--np-ink);
+    padding-bottom: 10px;
+}
+
+/* 友链网格：1px 缝隙当分隔线的直角卡片墙 */
+.np-links__intro {
+    font-style: italic;
+    color: var(--np-ink-faded);
+    margin: 0 0 6px;
+}
+.np-links__group {
+    margin-top: 36px;
+}
+.np-linkgrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--np-rule);
+    border: 1px solid var(--np-rule);
+}
+.np-link-card {
+    background: var(--np-paper);
+    padding: 14px 16px;
+    transition: background-color var(--np-motion-dur) var(--np-motion-ease);
+}
+.np-link-card:hover,
+.np-link-card:focus-within {
+    background: var(--np-paper-tint);
+}
+.np-link-card__avatar {
+    margin: 0;
+    flex: 0 0 auto;
+}
+.np-link-card__avatar img {
+    display: block;
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border: 1px solid var(--np-rule);
+}
+.np-link-card__body > * {
+    margin-block: 0;
+}
+.np-link-card__body > * + * {
+    margin-block-start: 3px;
+}
+.np-link-card__name {
+    font-weight: 700;
+    font-size: var(--np-fs-compact);
+}
+.np-link-card__name a {
+    color: var(--np-ink);
+    text-decoration: none;
+}
+.np-link-card__name a:hover {
+    color: var(--np-accent);
+}
+.np-link-card__lost {
+    color: var(--np-accent);
+    font-weight: 400;
+    font-size: var(--np-fs-small);
+}
+.np-link-card__desc {
+    font-size: var(--np-fs-small);
+    color: var(--np-ink-faded);
+    line-height: 1.5;
+}
+
+/* 88×31 按钮墙：尺寸锁死 + 像素风保真 */
+.np-btnwall {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+.np-btnwall figure {
+    margin: 0;
+}
+.np-btnwall img {
+    width: 88px;
+    height: 31px;
+    image-rendering: pixelated;
+}
+.np-btnwall__note {
+    font-size: var(--np-fs-small);
+    color: var(--np-ink-faded);
+}
+.np-snippet {
+    font-size: var(--np-fs-caption);
+    overflow-x: auto;
+}
+
+/* （0.10.5 移除）徽章墙样式：pattern 已按站长裁决删除。 */
+
+/* 关于页时间线：规线清单 */
+.np-about__timeline {
+    padding: 0;
+    list-style: none;
+}
+.np-about__timeline li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--np-rule-faint);
+    font-size: var(--np-fs-compact);
+}
+
+/* ============================================================
+   7. 文章页 —— Typora Newsprint 的节奏 × Broadside 的墨色
+   ============================================================ */
+.np-article {
+    max-width: var(--np-measure);
+    margin: 0 auto;
+    padding: 26px 0 44px;
+}
+@media only screen and (min-width: 1400px) {
+    .np-article {
+        max-width: var(--np-measure-wide);
+    }
+}
+
+.np-article__header {
+    margin: 2rem 0 1.5rem;
+}
+.np-article__kicker {
+    font-size: var(--np-fs-meta);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--np-accent); /* U6：分类色统一 accent 深红（原 E-13 棕调混色） */
+    font-weight: 700;
+    margin-bottom: 0.6em;
+}
+.np-article__kicker a {
+    color: inherit;
+}
+/* Newsprint h1 规格：30px / 1.3 / 常规字重 / 底部细线 */
+.np-article__title {
+    font-family: var(--np-display);
+    font-size: clamp(26px, 5.4vw, 30px);
+    line-height: 1.3;
+    font-weight: 400;
+    margin: 0 0 0.5em;
+    padding-bottom: 0.8125em;
+    border-bottom: 1px solid var(--np-rule);
+}
+/* 0.10.4 站长反馈：单篇特色题图（有图才输出；报纸灰度观感与卡片一致，
+   悬停不褪色——正文题图是内容不是装饰） */
+.np-article__image {
+    margin: 18px 0 0;
+    border-bottom: 1px solid var(--np-rule);
+    padding-bottom: 18px;
+}
+.np-article__image img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.np-article__byline {
+    font-size: var(--np-fs-meta);
+    color: var(--np-ink-ghost);
+    letter-spacing: 0.05em;
+    border-top: 1px solid var(--np-rule-faint);
+    padding-top: 8px;
+}
+
+/* 目录盒（Broadside 式：1px 框 + 点线行分隔 + h3 缩进）。
+   0.7.2 站长要求：details/summary 原生「收起/拉出」；链接未选中深灰、当前章红 */
+.np-toc {
+    margin: 1.5em 0 2em;
+    padding: 14px 18px;
+    border: 1px solid rgba(28, 26, 23, 0.22);
+}
+.np-toc__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    font-size: var(--np-fs-eyebrow);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--np-ink-muted);
+    font-weight: 700;
+    margin: 0 0 10px;
+    cursor: pointer;
+    user-select: none;
+}
+.np-toc__title::-webkit-details-marker,
+.np-toc__title::marker {
+    display: none;
+    content: "";
+}
+.np-toc__box:not([open]) .np-toc__title {
+    margin-bottom: 0;          /* 收起态：框贴合标题行 */
+}
+.np-toc__toggle {
+    font-size: var(--np-fs-micro);
+    letter-spacing: 0.12em;
+    color: var(--np-ink-ghost);
+    white-space: nowrap;
+    transition: color var(--np-motion-dur) var(--np-motion-ease);
+}
+.np-toc__toggle::before {
+    content: "\25BE  ";        /* ▾ 展开态指示 */
+}
+.np-toc__box:not([open]) .np-toc__toggle::before {
+    content: "\25B8  ";        /* ▸ 收起态指示 */
+}
+.np-toc__box[open] .np-toc__toggle-out {
+    display: none;
+}
+.np-toc__box:not([open]) .np-toc__toggle-in {
+    display: none;
+}
+.np-toc__title:hover .np-toc__toggle {
+    color: var(--np-accent);
+}
+.np-toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+/* 杀序号：目录注入在 .np-content 内，正文区 .np-content ol li 的 decimal
+   （特异性更高/位置更后）会把 1. 2. 3. 打到目录上——用更高特异性归零 */
+.np-content .np-toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.np-content .np-toc ol > li {
+    list-style: none;
+}
+.np-toc ol ol {
+    margin: 0;
+    padding: 0;
+}
+.np-toc a {
+    display: block;
+    font-size: var(--np-fs-compact);
+    line-height: 1.45;
+    color: var(--np-ink-faded);
+    text-decoration: none;
+    padding: 4px 0;
+    border-bottom: 1px dotted var(--np-rule);
+}
+.np-toc a:hover {
+    color: var(--np-accent);
+}
+.np-toc li:last-child a {
+    border-bottom: 0;
+}
+.np-toc .np-toc__sub a {
+    padding-left: 14px;
+    font-size: var(--np-fs-small);
+}
+/* 目录（悬浮形态）：≥1240px 固定右侧贴版面外缘，滚动跟随当前章节；
+   窄屏与无 JS 环境回退为头部目录盒（静态流内） */
+@media (min-width: 1240px) {
+    .np-toc--float {
+        position: fixed;
+        top: 110px;
+        right: max(18px, calc(50vw - var(--np-sheet) / 2 - 262px));
+        width: 238px;
+        max-height: min(62vh, 540px);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        margin: 0;
+        box-sizing: border-box;
+        /* 0.10.0 U3 站长要求：更通透的毛玻璃——纸面混色 78%→62%、
+           blur 6px→10px；文字对比不随背景变淡（仅背景实度降低）。
+           首版试值，按可读性复验定稿。 */
+        /* 0.10.4 站长反馈：毛玻璃感强化——实度 62%→48%、blur 10→16px、
+           叠 saturate 提亮透底内容，内描边高光 + 双层柔影（玻璃厚度） */
+        background-color: color-mix(in srgb, var(--np-paper) 48%, transparent);
+        -webkit-backdrop-filter: blur(16px) saturate(1.3);
+        backdrop-filter: blur(16px) saturate(1.3);
+        border: 1px solid color-mix(in srgb, var(--np-paper) 65%, var(--np-rule));
+        box-shadow:
+            inset 0 1px 0 color-mix(in srgb, var(--np-paper) 80%, transparent),
+            0 4px 18px rgba(28, 26, 23, 0.10);
+        z-index: 20;
+        /* U3：目录自身滚动条主题化（细轨、纸墨配色，不完全隐藏） */
+        scrollbar-width: thin;
+        scrollbar-color: var(--np-rule) transparent;
+    }
+    .np-toc--float::-webkit-scrollbar {
+        width: 8px;
+    }
+    .np-toc--float::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .np-toc--float::-webkit-scrollbar-thumb {
+        background: var(--np-rule);
+        border-radius: 0;
+    }
+    .np-toc--float::-webkit-scrollbar-thumb:hover {
+        background: var(--np-ink-ghost);
+    }
+    /* U3 降级：不支持 backdrop-filter / 强制颜色模式下恢复高实度纸底，
+       保证正文透底时目录文字仍可读（仅调背景，文字透明度不动） */
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+        .np-toc--float {
+            background-color: color-mix(in srgb, var(--np-paper) 94%, transparent);
+        }
+    }
+    @media (forced-colors: active) {
+        .np-toc--float {
+            background-color: Canvas;
+            scrollbar-color: CanvasText transparent;
+        }
+    }
+    /* 0.7.1 站长要求：下滚一屏（scrollY ≥ 视口高）才浮现，回顶即隐。
+       armed 类由 toc-float.js 运行时添加——无 JS 时不进此分支，
+       目录保持常显（渐进增强，不破无 JS 回退）。 */
+    .np-toc--float.np-toc--armed {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity var(--np-motion-dur) var(--np-motion-ease), visibility 0s linear var(--np-motion-dur);
+    }
+    .np-toc--float.np-toc--armed.is-on {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity var(--np-motion-dur) var(--np-motion-ease), visibility 0s;
+    }
+    .np-toc--float a.is-current {
+        /* 0.7.2 站长裁决：未选中深灰，当前章才是红 */
+        color: var(--np-accent);
+        font-weight: 700;
+        border-bottom-color: var(--np-accent);
+    }
+}
+
+/* ---- 正文：Newsprint 元素规格 ----
+   字号 / 行高 / 标题字体与节奏 / 引用 / 代码块 / 按钮的规格全部在 theme.json
+   （styles.typography / styles.elements / styles.blocks）里声明，编辑器与前台同源；
+   这里只保留 theme.json 表达不了的部分（底线、斑马行、滚动容器、clreq 细则）。 */
+.np-content h1,
+.wp-block-post-content > h1 {
+    border-bottom: 1px solid var(--np-rule);
+    padding-bottom: 0.8125em;
+}
+.np-content :is(h2, h3, h4) {
+    scroll-margin-top: 20px;
+}
+
+/* 标题节奏：theme.json elements 的外边距会被块布局 gap 规则（特异性更高）覆盖，
+   此处双端补齐——前台落在 .np-content（文章内容包装），编辑器落在 .is-root-container
+   （编辑画布根，样式注入时自动获得 .editor-styles-wrapper 前缀）。 */
+.np-content > :is(h1, h2, h3, h4, h5, h6),
+.is-root-container > :is(h1, h2, h3, h4, h5, h6) {
+    margin-block: 2em 0.75em;
+}
+.np-content > h1,
+.is-root-container > h1 {
+    margin-block: 2em 0.8em;
+}
+.np-content > :is(h2, h3),
+.is-root-container > :is(h2, h3) {
+    margin-block: 2.285714em 0.75em;
+}
+.np-content > h4,
+.is-root-container > h4 {
+    margin-block: 2.67em 0.75em;
+}
+
+.np-content p + ul,
+.np-content p + ol {
+    margin-top: 0.5em;
+}
+.np-content h3 + ul,
+.np-content h4 + ul,
+.np-content h5 + ul,
+.np-content h6 + ul,
+.np-content h3 + ol,
+.np-content h4 + ol,
+.np-content h5 + ol,
+.np-content h6 + ol {
+    margin-top: 0.5em;
+}
+.np-content ul,
+.np-content ol {
+    margin-block: 0;
+    padding-inline-start: 1.5em;
+}
+.np-content ul li {
+    list-style-type: disc;
+    list-style-position: outside;
+}
+.np-content ol li {
+    list-style-type: decimal;
+    list-style-position: outside;
+}
+.np-content li > ul,
+.np-content li > ol {
+    margin-top: inherit;
+    margin-bottom: 0;
+}
+.np-content li ol > li {
+    list-style-type: lower-alpha;
+}
+.np-content li li ol > li {
+    list-style-type: lower-roman;
+}
+
+/* 引用：边条 / 斜体 / 墨色见 theme.json core/quote；此处只管内部段距 */
+blockquote p,
+.wp-block-quote p {
+    margin: 0 0 0.5em;
+}
+blockquote :is(ul, ol),
+.wp-block-quote :is(ul, ol) {
+    margin-left: 0;
+}
+
+/* 行内代码：纸影底（theme.json 无「行内 code」元素，故留在此处；不限定 .np-content，编辑器同样生效） */
+code {
+    font-family: var(--np-mono);
+    font-size: 0.875em;
+    background-color: var(--np-paper-shade);
+    padding-left: 2px;
+    padding-right: 2px;
+}
+pre,
+.wp-block-code {
+    overflow-x: auto;
+}
+/* 代码块一键复制（V-10）：右上角描边小按钮，与「复制 MD」同款视觉 */
+.np-code-wrap {
+    position: relative;
+    margin: 0 0 1.5em;
+}
+.np-code-wrap pre,
+.np-code-wrap .wp-block-code {
+    margin: 0;
+}
+.np-code-copy {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 7px;
+    border: 1px solid var(--np-rule);
+    background: var(--np-paper);
+    color: var(--np-ink-ghost);
+    line-height: 0;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity var(--np-motion-dur) var(--np-motion-ease), color var(--np-motion-dur) var(--np-motion-ease), border-color var(--np-motion-dur) var(--np-motion-ease);
+}
+.np-code-copy .np-icon {
+    width: 13px;
+    height: 13px;
+}
+.np-code-wrap:hover .np-code-copy,
+.np-code-copy:focus-visible {
+    opacity: 1;
+}
+.np-code-copy:hover {
+    border-color: var(--np-accent);
+    color: var(--np-accent);
+}
+@media (hover: none) {
+    .np-code-copy {
+        opacity: 1;               /* 触屏无 hover，常显 */
+    }
+}
+pre code,
+.wp-block-code code {
+    background: none;
+    padding: 0;
+    font-size: 1em;
+}
+
+/* 表格：三线表 × Broadside 墨（选择器不限定 .np-content，编辑器同样生效） */
+.np-table-wrap {
+    overflow-x: auto;
+    margin-bottom: 1.5em;
+    -webkit-overflow-scrolling: touch;
+    /* 0.10.4 站长反馈：横向滚动条融入纸墨（细轨主题化） */
+    scrollbar-width: thin;
+    scrollbar-color: var(--np-rule) transparent;
+}
+.np-table-wrap::-webkit-scrollbar {
+    height: 8px;
+}
+.np-table-wrap::-webkit-scrollbar-track {
+    background: transparent;
+}
+.np-table-wrap::-webkit-scrollbar-thumb {
+    background: var(--np-rule);
+}
+.np-table-wrap::-webkit-scrollbar-thumb:hover {
+    background: var(--np-ink-ghost);
+}
+/* 移动端宽表收起（table-collapse.js 渐进增强） */
+.np-table-wrap.is-collapsed {
+    display: none;
+}
+.np-table-toggle {
+    display: block;
+    width: 100%;
+    margin: 0 0 1.5em;
+    padding: 9px 12px;
+    border: 1px solid var(--np-rule);
+    background: transparent;
+    color: var(--np-ink-muted);
+    font-family: var(--np-body);
+    font-size: var(--np-fs-meta);
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    transition: color var(--np-motion-dur) var(--np-motion-ease), border-color var(--np-motion-dur) var(--np-motion-ease);
+}
+.np-table-toggle:hover {
+    border-color: var(--np-accent);
+    color: var(--np-accent);
+}
+table,
+.wp-block-table table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 0.95em;
+    margin-bottom: 1.5em;
+}
+.np-table-wrap > table,
+.np-table-wrap .wp-block-table table {
+    margin-bottom: 0;
+    min-width: 100%;
+}
+/* 列宽随内容自适应（V-09）：粘贴产生的 has-fixed-layout 等宽列在
+   中文宽表里会把列挤成等分，前台一律内容自适应（归一化器亦会在
+   保存时剥离该类；核心「固定宽度表格单元格」开关在本主题无效） */
+.np-table-wrap table,
+.wp-block-table table {
+    table-layout: auto;
+}
+/* 三线表（论文格式）：顶线与底线 2px 墨、行间无线、底色纯净，靠留白分行。
+   0.10.0 U1 站长裁决：表头不再墨底反白——背景透明、墨字，靠表头底部
+   2px 粗规线与正文区隔（斑马纹 / 边线 / 列宽自适应 / 宽表收起不变） */
+table,
+.wp-block-table table {
+    border-top: 2px solid var(--np-rule-heavy);
+    border-bottom: 2px solid var(--np-rule-heavy);
+}
+thead,
+.wp-block-table thead {
+    background-color: transparent;
+    border-bottom: 2px solid var(--np-rule-heavy);
+}
+thead th,
+tfoot th,
+.wp-block-table th {
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 0.82em;
+    letter-spacing: 0.06em;
+    padding: 0.5em 0.75em 0.5em 0.4em;
+    border: none;
+    vertical-align: top;
+    color: var(--np-ink);            /* 透明表头 → 墨字（原纸白反白随墨底一起取消） */
+    background-color: transparent;   /* 覆盖潜在的主题色继承，保表头透明 */
+    white-space: nowrap;            /* 表头不折行：短表头列不再被挤压过窄（V-09） */
+}
+td,
+.wp-block-table td {
+    vertical-align: top;
+    padding: 0.5em 0.75em 0.5em 0.4em;
+    border-bottom: none;
+    background: var(--np-paper);
+}
+td.has-text-align-right,
+th.has-text-align-right {
+    text-align: right;
+}
+.wp-block-table figcaption {
+    font-size: var(--np-fs-caption);
+    color: var(--np-ink-ghost);
+    font-style: italic;
+    text-align: center;
+    margin-top: 0.5em;
+}
+
+/* 图片与图注（选择器不限定 .np-content，编辑器画布同样默认居中） */
+.np-content img,
+.wp-block-image img {
+    display: block;
+    margin-inline: auto;
+}
+.np-content img {
+    margin-bottom: 1.5em;
+}
+.np-content .wp-block-image figcaption,
+.np-content figure figcaption {
+    font-size: var(--np-fs-caption);
+    color: var(--np-ink-ghost);
+    font-style: italic;
+    text-align: center;
+    margin-top: -1em;
+    margin-bottom: 1.5em;
+}
+.np-content .wp-caption-text {
+    font-size: var(--np-fs-caption);
+    color: var(--np-ink-ghost);
+    text-align: center;
+    margin: 0.3em 0 1.5em;
+}
+
+/* 0.10.0 U5 独立插图容器：显式包裹才居中，不全局改 HTML/SVG。
+   协议（.np-inline-figure）：块级、水平居中、不超栏宽、保持长宽比；
+   复杂图过窄时允许容器内横向滚动。SVG 内部坐标与文字不改动。 */
+.np-inline-figure {
+    display: block;
+    margin-inline: auto;
+    margin-bottom: 1.5em;
+    max-width: 100%;
+}
+.np-inline-figure > svg {
+    display: block;
+    margin-inline: auto;
+    max-width: 100%;
+    height: auto;
+}
+
+/* 0.10.0 U2 长内容折叠：JS 渐进增强——无 JS 不加类、全文可读；
+   折叠态限高由 JS 写入（代码 320px / Mermaid 45vh），此处只管形态。
+   无高度过渡（不制造布局抖动），打印强制展开。 */
+.np-fold--on {
+    overflow: hidden;
+}
+/* 0.10.5 站长反馈：折叠按钮悬浮在内容内部底部（图片上方内缘）。
+   展开态=文档流小签（内容末尾）；折叠态=绝对定位于宿主内底（overlay 类） */
+.np-fold-host {
+    position: relative;
+}
+.np-fold-host--wrap {
+    display: block;
+}
+.np-fold-toggle {
+    display: inline-block;
+    width: auto;
+    margin: 8px 0 1.5em;
+    padding: 7px 12px;
+    border: 1px solid var(--np-rule-faint);
+    background: color-mix(in srgb, var(--np-paper) 72%, transparent);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 1px 0 rgba(28, 26, 23, 0.06);
+    color: var(--np-ink-muted);
+    font-family: var(--np-body);
+    font-size: var(--np-fs-meta);
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    transition: color var(--np-motion-dur) var(--np-motion-ease), border-color var(--np-motion-dur) var(--np-motion-ease);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .np-fold-toggle {
+        background: var(--np-paper);
+    }
+}
+.np-fold-toggle--overlay {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+}
+.np-fold-toggle:hover,
+.np-fold-toggle:focus-visible {
+    border-color: var(--np-accent);
+    color: var(--np-accent);
+}
+@media print {
+    .np-fold--on {
+        max-height: none !important;
+        overflow: visible;
+    }
+    .np-fold-toggle {
+        display: none;
+    }
+}
+
+/* 0.10.0 U7 失效图片替换：可见提示 + 独立作品链接（textContent 注入） */
+.np-img-fallback-note {
+    font-size: var(--np-fs-caption);
+    color: var(--np-ink-ghost);
+    margin: -1em 0 1.5em;
+}
+.np-img-fallback-note a {
+    color: var(--np-ink-muted);
+    text-decoration: underline;
+}
+.np-img-fallback-note a:hover,
+.np-img-fallback-note a:focus-visible {
+    color: var(--np-accent);
+}
+/* 二次失败降级：纯文字态 */
+.np-img-fallback-note--text {
+    border: 1px dashed var(--np-rule);
+    padding: 10px 12px;
+    margin: 0 0 1.5em;
+}
+
+/* 分隔线（含「双规线」区块样式） */
+hr,
+.wp-block-separator {
+    border: 0;
+    border-bottom: 1px solid var(--np-rule);
+    margin: 2em auto;
+    max-width: 100%;
+    opacity: 1;
+}
+.wp-block-separator.is-style-np-double {
+    border-bottom: 5px double var(--np-ink);
+}
+.wp-block-separator.is-style-dots {
+    border: none;
+}
+.wp-block-separator.is-style-dots::before {
+    content: "··· ··· ···";
+    color: var(--np-ink-muted);
+    letter-spacing: 1em;
+    font-size: 1em;
+}
+
+/* 公式容器（KaTeX 保底） */
+.np-content .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.25em 0;
+    margin: 1.5em 0;
+}
+.katex {
+    font-size: 1.15em;
+}
+
+/* Mermaid 容器（色板对齐暖纸） */
+.np-mermaid {
+    margin: 0 0 1.5em;
+    padding: 1em;
+    border: 1px solid var(--np-rule);
+    background: rgba(255, 253, 246, 0.5);
+    text-align: center;
+    overflow-x: auto;
+}
+.np-mermaid svg {
+    max-width: 100%;
+    height: auto;
+}
+.np-mermaid .np-mermaid__fallback {
+    font-family: var(--np-mono);
+    font-size: 0.8em;
+    color: var(--np-ink-muted);
+    text-align: left;
+    white-space: pre-wrap;
+}
+
+/* 代码高亮灰阶分级（覆盖 ascetic：关键字最重、字符串斜体中灰、
+   注释深灰（站长裁决 2026-09-12：与字符串/文档串统一为 ink-muted，
+   原 ink-ghost 浅灰在深色代码上不可读）、数字次重、函数名衬线化下划线——
+   保持报纸单色气质，同时各 token 有明确视觉层级） */
+pre code.hljs,
+.wp-block-code code.hljs {
+    color: var(--np-ink);
+    background: transparent;
+}
+.hljs-comment, .hljs-quote {
+    color: var(--np-ink-muted);
+    font-style: italic;
+}
+/* ascetic.min.css（vendor，style.css 之后加载）用同特异性把注释改回 #ccc——
+   .np-content / pre 前缀提高特异性压回主题裁决色（站长 2026-09-12：注释统一深灰） */
+.np-content .hljs-comment, .np-content .hljs-quote,
+pre .hljs-comment, pre .hljs-quote {
+    color: var(--np-ink-muted);
+    font-style: italic;
+}
+.hljs-keyword, .hljs-selector-tag, .hljs-tag, .hljs-meta .hljs-keyword {
+    color: var(--np-ink);
+    font-weight: 700;
+}
+.hljs-string, .hljs-regexp, .hljs-addition {
+    color: var(--np-ink-muted);
+    font-style: italic;
+}
+.hljs-number, .hljs-literal, .hljs-symbol, .hljs-bullet, .hljs-attr, .hljs-variable, .hljs-template-variable {
+    color: var(--np-ink);
+    font-weight: 600;
+}
+.hljs-title, .hljs-section, .hljs-name, .hljs-selector-id, .hljs-selector-class {
+    color: var(--np-ink-muted);
+    font-weight: 700;
+}
+.hljs-attribute, .hljs-params {
+    color: var(--np-ink-faded);
+}
+.hljs-deletion {
+    color: var(--np-accent);
+    text-decoration: line-through;
+}
+.hljs-emphasis { font-style: italic; }
+.hljs-strong { font-weight: 700; }
+
+/* 任务列表 / 脚注 */
+.np-content li:has(> input[type="checkbox"]) {
+    list-style-type: none;
+    margin-left: -1.2em;
+}
+.np-content sup a {
+    text-decoration: none;
+}
+/* core/footnotes 文末列表（M-01）：小字点线清单，报纸注释栏气质 */
+.wp-block-footnotes {
+    margin: 2.5em 0 0;
+    padding: 1em 0 0;
+    border-top: 1px solid var(--np-rule);
+    font-size: var(--np-fs-small);
+    line-height: 1.65;
+    color: var(--np-ink-faded);
+}
+.wp-block-footnotes li {
+    margin: 0.35em 0;
+    padding-left: 0.4em;
+    list-style-position: outside;
+    overflow-wrap: break-word;
+}
+.wp-block-footnotes li::marker {
+    color: var(--np-ink-ghost);
+}
+.np-content .wp-block-footnotes a,
+.wp-block-footnotes li a {
+    color: var(--np-ink-muted);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--np-rule);
+}
+.np-content sup.fn a {
+    color: var(--np-accent);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin: 0 1px;
+}
+
+/* ============================================================
+   7.5 中文排印（clreq）—— :lang(zh) 差异化，英文环境不受影响
+   ============================================================ */
+
+/* 中西文自动间距（盘古之白）：纯渲染层插入 1/8em 间距，不改 DOM——
+   复制 Markdown 与 REST 输出保持原文。Chrome/Edge 140+、Safari 18.4+、
+   Firefox 145+（约 85%），其余浏览器静默回退。只声明 normal
+   （ideograph-alpha 等细分值 Chrome 不支持）。 */
+:lang(zh) {
+    text-autospace: normal;
+}
+
+/* 避头尾完整规则：点号/结束引号不出现在行首，开始引号不出现在行尾
+   （97% 支持）。双端一致生效。 */
+.np-content {
+    line-break: strict;
+}
+
+/* —— 中文行高：Broadside 的 1.08 等是拉丁数值，汉字填满字面框，
+      中文两行标题会视觉挤压。移动端标题换行更多，收益更大。—— */
+:lang(zh) .np-lead__title {
+    line-height: 1.25;
+}
+:lang(zh) .np-aside__title,
+:lang(zh) .np-brief__head {
+    line-height: 1.3;
+}
+:lang(zh) .np-content h1,
+:lang(zh) .np-content h2,
+:lang(zh) .np-content h3,
+:lang(zh) .np-content h4,
+:lang(zh) .np-content h5,
+:lang(zh) .np-content h6 {
+    line-height: 1.4;
+}
+
+/* —— 中文小字下限 12px：汉字笔画密度高，10.5–11.5px 是拉丁思维。
+      纯数字/日期保持原尺寸。—— */
+:lang(zh) .np-kicker {
+    font-size: var(--np-fs-caption);
+    letter-spacing: 0.12em;
+}
+:lang(zh) .np-ear__title {
+    font-size: var(--np-fs-caption);
+}
+:lang(zh) .np-utility,
+:lang(zh) .np-nav {
+    font-size: var(--np-fs-meta);
+}
+:lang(zh) .np-section-head {
+    letter-spacing: 0.18em;
+}
+
+/* —— 楷体直立：中文没有真斜体（合成倾斜不规范），引文/导语用楷体。
+      拉丁字符仍走 Caslon 斜体观感由栈内首位提供（直立为正）。—— */
+:lang(zh) .np-content blockquote,
+:lang(zh) .np-content .wp-block-quote,
+:lang(zh) .np-lead__deck,
+:lang(zh) .np-ear__body,
+:lang(zh) .np-subscribe__blurb,
+:lang(zh) .np-content .wp-block-image figcaption,
+:lang(zh) .np-content figure figcaption,
+:lang(zh) .np-content .wp-block-table figcaption {
+    font-style: normal;
+    font-family: var(--np-kai);
+}
+
+/* —— 「书卷式」区块样式（文章内容区块 → 样式 → 书卷式）：
+      段首 2em 缩进 + 两端对齐 + 段距收紧；首段不缩进（中文书卷惯例之一）。
+      移动端（≤40em）自动回退左对齐：窄栏里长 URL/英文串两端对齐会产生大字洞。—— */
+.is-style-np-book > p {
+    text-indent: 2em;
+    text-align: justify;
+}
+.is-style-np-book > p + p {
+    margin-block-start: 0.75em;
+}
+.is-style-np-book > p:first-of-type {
+    text-indent: 0;
+}
+@media (max-width: 40em) {
+    .is-style-np-book > p {
+        text-align: left;
+    }
+}
+
+/* 「框线盒」区块样式（组区块）：目录盒同款 1px 框 */
+.wp-block-group.is-style-np-boxed {
+    border: 1px solid rgba(28, 26, 23, 0.22);
+    padding: 18px 20px;
+}
+
+/* —— 移动端行高微增：窄栏行距略放宽（中文移动阅读惯例）—— */
+@media (max-width: 40em) {
+    .np-content {
+        line-height: calc(var(--wp--custom--np--leading-body, 1.75) + 0.05);
+    }
+}
+
+/* ============================================================
+   8. 文章尾部：标签 / 复制按钮 / 上下篇
+   ============================================================ */
+.np-article__footer {
+    margin-top: 2.5em;
+    border-top: 3px double var(--np-ink);
+    padding-top: 1.25em;
+}
+.np-copymd .wp-block-button__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-family: var(--np-body);
+    font-size: var(--np-fs-micro);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 6px 12px;
+    border: 1px solid var(--np-accent);
+    border-radius: 0;
+    background-color: transparent;
+    color: var(--np-accent);
+    cursor: pointer;
+    transition: background-color var(--np-motion-dur) var(--np-motion-ease), color var(--np-motion-dur) var(--np-motion-ease);
+}
+.np-copymd .wp-block-button__link:hover {
+    background-color: var(--np-accent);
+    color: var(--np-paper);
+    text-decoration: none;
+}
+.np-copymd .wp-block-button__link.is-busy {
+    opacity: 0.5;
+    cursor: wait;
+}
+.np-toast {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--np-ink);
+    color: var(--np-paper);
+    font-size: var(--np-fs-compact);
+    padding: 0.6em 1.2em;
+    letter-spacing: 0.1em;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--np-motion-dur) var(--np-motion-ease);
+    z-index: 99;
+}
+.np-toast.is-visible {
+    opacity: 0.95;
+}
+.np-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6em;
+    margin: 1em 0 1.25em;
+    font-size: var(--np-fs-meta);
+}
+.np-tags a {
+    color: var(--np-ink-faded);
+    border: 1px solid var(--np-rule);
+    padding: 0.15em 0.7em;
+    text-decoration: none;
+    transition: color var(--np-motion-dur) var(--np-motion-ease), border-color var(--np-motion-dur) var(--np-motion-ease);
+}
+.np-tags a:hover {
+    color: var(--np-accent);
+    border-color: var(--np-accent);
+    text-decoration: none;
+}
+.np-postnav {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+    margin-top: 1.25em;
+    font-size: var(--np-fs-compact);
+}
+.np-postnav > * {
+    max-width: 46%;
+}
+.np-postnav__prev {
+    text-align: right;
+    margin-left: auto;
+}
+.np-postnav a {
+    color: var(--np-ink);
+}
+.np-postnav a:hover {
+    color: var(--np-accent);
+}
+.np-postnav .post-navigation-link__label,
+.np-postnav__label {
+    display: block;
+    font-size: var(--np-fs-micro);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--np-ink-ghost);
+}
+
+/* ============================================================
+   9. 页面 / 评论区 / 页脚 / 检索
+   ============================================================ */
+.np-comments {
+    max-width: var(--np-measure);
+    margin: 0 auto 3rem;
+    font-size: var(--np-fs-compact);
+}
+.wp-block-comment-template {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.wp-block-comment-template > li {
+    border-left: 3px solid var(--np-rule);
+    border-bottom: 1px solid var(--np-rule-faint);   /* 条目分隔：阅读来信不串行 */
+    padding: 0.6em 0.4em 0.8em 1em;
+    margin: 1em 0;
+    transition: background-color var(--np-motion-dur) var(--np-motion-ease);
+}
+.wp-block-comment-template > li:last-child {
+    border-bottom-color: transparent;
+}
+.wp-block-comment-template > li:hover {
+    background-color: var(--np-zebra);               /* 淡纸纹色 hover 反馈（色板令牌） */
+}
+.wp-block-comment-template ol,
+.wp-block-comment-template ul {
+    list-style: none;
+    margin: 0.5em 0 0 1em;
+    padding: 0;
+}
+.np-comment {
+    gap: 0.75em;
+}
+/* 头像不参与 flex 收缩（长评论把 nowrap 行挤爆时曾把头像压到 10px）；
+   正文允许收窄，让文字换行而不是挤压铅印头像位 */
+.np-comment > .wp-block-avatar {
+    flex: 0 0 auto;
+}
+.np-comment > .np-comment__body {
+    flex: 1;
+    min-width: 0;
+}
+.np-comment__meta {
+    gap: 0.75em;
+}
+.np-comment__actions {
+    gap: 1em;
+}
+.wp-block-post-comments-form input:not([type="submit"]):not([type="checkbox"]),
+.wp-block-post-comments-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid var(--np-ink);
+    background: var(--np-paper);
+    color: var(--np-ink);
+    font-family: var(--np-body);
+    font-size: var(--np-fs-compact);
+    padding: 8px 10px;
+}
+.wp-block-post-comments-form label {
+    display: block;
+    font-size: var(--np-fs-meta);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--np-ink-ghost);
+    margin-bottom: 4px;
+}
+
+/* F-04 评论区深化：表单报纸化 / 层级视觉 / 折叠 / 本地头像 */
+.np-comments .comment-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 18px;
+}
+.np-comments .comment-form > .comment-form-comment,
+.np-comments .comment-form > .comment-form-cookies-consent,
+.np-comments .comment-form > .form-submit,
+.np-comments .comment-form > .comment-notes,
+.np-comments .comment-form > .logged-in-as {
+    grid-column: 1 / -1;
+}
+.np-comments .comment-form-comment textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+.np-comments .comment-form input:not([type="submit"]):not([type="checkbox"]):hover,
+.np-comments .comment-form textarea:hover {
+    border-color: var(--np-ink-muted);
+}
+.np-comments .comment-form input:not([type="submit"]):not([type="checkbox"]),
+.np-comments .comment-form textarea {
+    transition: border-color var(--np-motion-dur) var(--np-motion-ease), background-color var(--np-motion-dur) var(--np-motion-ease);
+}
+.np-comments .comment-form input:not([type="submit"]):not([type="checkbox"]):focus-visible,
+.np-comments .comment-form textarea:focus-visible {
+    outline: 2px solid var(--np-accent);
+    outline-offset: 0;
+    border-color: var(--np-accent);
+    background: color-mix(in srgb, var(--np-accent) 3%, transparent);   /* 极淡红晕：焦点可感知（边框+轮廓同时表意） */
+}
+.np-comments .comment-form-cookies-consent {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--np-fs-small);
+    color: var(--np-ink-faded);
+}
+.np-comments .comment-form-cookies-consent label {
+    text-transform: none;
+    letter-spacing: 0.02em;
+    color: inherit;
+    margin: 0;
+    font-size: inherit;
+}
+.np-comments .comment-form .submit,
+.np-comments .comment-form .form-submit .wp-block-button__link {
+    padding: 9px 26px;
+    border: 1px solid var(--np-accent);
+    background: transparent;
+    color: var(--np-accent);
+    font-family: var(--np-body);
+    font-size: var(--np-fs-meta);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color var(--np-motion-dur) var(--np-motion-ease), color var(--np-motion-dur) var(--np-motion-ease);
+}
+.np-comments .comment-form .submit:hover,
+.np-comments .comment-form .form-submit .wp-block-button__link:hover,
+.np-comments .comment-form .form-submit .wp-block-button__link:focus-visible {
+    background: var(--np-accent);
+    color: var(--np-paper);
+}
+.np-comments .comment-reply-title,
+.np-comments .comment-reply-title a {
+    font-family: var(--np-display);
+    font-weight: 400;
+    font-size: 19px;
+    color: var(--np-ink);
+    letter-spacing: 0.02em;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--np-rule);
+}
+.np-comments .comment-notes,
+.np-comments .logged-in-as {
+    font-size: var(--np-fs-small);
+    color: var(--np-ink-ghost);
+}
+@media (max-width: 600px) {
+    .np-comments .comment-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 回复层级视觉：二级起规线转淡、字号递减（一级评论为基准）；
+   子层级分隔线用虚线，与一级的实线拉开层级 */
+.wp-block-comment-template ol .wp-block-comment-template > li {
+    border-left: 2px solid var(--np-rule-faint);
+    border-bottom: 1px dashed var(--np-rule-faint);
+    font-size: 0.95em;
+}
+.wp-block-comment-template ol .wp-block-comment-template > li:last-child {
+    border-bottom-color: transparent;
+}
+.wp-block-comment-template ol .wp-block-comment-template .wp-block-comment-content p {
+    margin: 0.3em 0;
+}
+
+/* 作者徽章：与文章作者同人的评论，署名后缀描边小徽（block-hooks 注入） */
+.np-comment__badge {
+    display: inline-block;
+    font-size: var(--np-fs-micro);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--np-accent);
+    border: 1px solid color-mix(in srgb, var(--np-accent) 32%, transparent);
+    padding: 0 0.5em;
+    margin-left: 0.45em;
+    line-height: 1.6;
+    vertical-align: 1px;
+}
+
+/* 回复/编辑链接：hover 淡红晕底，令牌过渡（核心链接自带 aria-label「回复给 x」） */
+.np-comments .comment-reply-link,
+.np-comments .comment-edit-link {
+    display: inline-block;
+    padding: 1px 8px;
+    border: 1px solid transparent;
+    text-decoration: none;
+    transition: color var(--np-motion-dur) var(--np-motion-ease), background-color var(--np-motion-dur) var(--np-motion-ease), border-color var(--np-motion-dur) var(--np-motion-ease);
+}
+.np-comments .comment-reply-link:hover,
+.np-comments .comment-edit-link:hover {
+    color: var(--np-accent);
+    background: color-mix(in srgb, var(--np-accent) 7%, transparent);
+    border-color: color-mix(in srgb, var(--np-accent) 30%, transparent);
+    text-decoration: none;
+}
+
+/* 折叠与展开（comments-fold.js 渐进增强；无 JS 全展开） */
+.np-reply--folded {
+    display: none;
+}
+.np-replies-toggle {
+    margin: 0.6em 0 0.6em 1em;
+    padding: 4px 12px;
+    border: 1px dotted var(--np-rule);
+    background: transparent;
+    color: var(--np-ink-ghost);
+    font-family: var(--np-body);
+    font-size: var(--np-fs-meta);
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: color var(--np-motion-dur) var(--np-motion-ease), border-color var(--np-motion-dur) var(--np-motion-ease), background-color var(--np-motion-dur) var(--np-motion-ease);
+}
+.np-replies-toggle::before {
+    content: "\25B8  ";   /* ▸ 折叠态指示符（aria-expanded 驱动，纯装饰） */
+}
+.np-replies-toggle[aria-expanded="true"]::before {
+    content: "\25BE  ";   /* ▾ */
+}
+.np-replies-toggle:hover {
+    border-color: var(--np-accent);
+    border-style: solid;
+    color: var(--np-accent);
+}
+
+/* 本地头像徽章：纸影底墨字，方形铅印 */
+.np-comment .wp-block-avatar img,
+img.local-avatar {
+    display: block;
+    border-radius: 0;
+}
+
+/* 页脚：哥特体小字标 + 版权行 */
+.np-footer {
+    margin-top: 34px;
+    border-top: 2px solid var(--np-ink);
+    padding-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--np-ink-ghost);
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-bottom: 24px;
+}
+.np-footer__wordmark {
+    font-family: var(--np-masthead-font);
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 20px;
+    color: var(--np-ink);
+    text-decoration: none;
+}
+.np-footer__wordmark a,
+.np-footer__wordmark a:hover {
+    color: var(--np-ink);
+    text-decoration: none;
+}
+.np-footer a {
+    color: inherit;
+}
+.np-footer a:hover {
+    color: var(--np-accent);
+}
+
+/* 备案行：备案号靠左、服务状态（绿灯呼吸）靠右同处一行，窄屏自动换行；
+   打印样式随页脚整体隐藏 */
+.np-footer__beian {
+    flex-basis: 100%;
+    order: 10;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px 12px;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-size: 12px;
+}
+.np-footer__status {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    color: inherit;
+}
+.np-footer__dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%; /* 状态指示灯的圆点是站长点名的例外（直角规线针对版面组件） */
+    background: #2ecc71;
+    margin-right: 5px;
+    animation: np-dot-pulse 2.4s ease-in-out infinite; /* reduced-motion 归零后常亮 */
+}
+@keyframes np-dot-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.np-none {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+.np-none :is(h1, h2) {
+    font-family: var(--np-display);
+    font-weight: 400;
+    font-size: 2.2rem;
+    margin-bottom: 0.5em;
+}
+
+.np-searchform {
+    max-width: 24em;
+    margin: 1.5rem auto 0;
+}
+.np-searchform .wp-block-search__inside-wrapper {
+    display: flex;
+    border: 1px solid var(--np-ink);
+}
+.np-searchform .wp-block-search__input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    font-family: var(--np-body);
+    font-size: var(--np-fs-compact);
+    padding: 12px 14px;
+    color: var(--np-ink);
+}
+.np-searchform .wp-block-search__button {
+    margin: 0;
+    border: none;
+    border-left: 1px solid var(--np-ink);
+    border-radius: 0;
+    background: transparent;
+    font-family: var(--np-body);
+    font-size: var(--np-fs-meta);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 0 1em;
+    cursor: pointer;
+    color: var(--np-ink);
+}
+.np-searchform .wp-block-search__button:hover {
+    background: var(--np-paper-shade);
+    color: var(--np-ink);
+}
+
+/* ============================================================
+   10. 响应式 —— Broadside 的「拆版」策略
+        1024：三栏→两栏，侧栏落底；760：全部单列，规线转为区块分隔线
+   ============================================================ */
+@media (max-width: 1024px) {
+    .np-lead {
+        grid-template-columns: 1fr 1.6fr;
+    }
+    .np-lead__aside {
+        grid-column: 1 / -1;
+        padding-left: 0;
+        border-left: 0;
+        border-top: 1px solid var(--np-rule);
+        margin-top: 24px;
+        padding-top: 24px;
+    }
+    .np-sections .wp-block-term-template {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 760px) {
+    :root {
+        --np-desk-gutter: 10px;    /* 收窄不归零：纸仍是纸 */
+    }
+
+    /* 报头：单列居中，双耳是宽版装饰 */
+    .np-masthead {
+        grid-template-columns: 1fr;
+    }
+    .np-ear {
+        display: none;
+    }
+    .np-site-header .np-utility__strapline,
+    .np-site-header .np-folio__dateline,
+    .np-site-header .np-folio__motto {
+        display: none;
+    }
+    .np-utility,
+    .np-folio {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+    }
+    .np-folio > :last-child {
+        justify-self: center;
+        text-align: center;
+    }
+
+    /* 头条：单列堆叠，栏规线转为区块分隔线；主稿（长读）置顶 */
+    .np-lead {
+        grid-template-columns: 1fr;
+    }
+    .np-lead__main {
+        order: -1;                    /* V-04：移动端「长读」放最顶 */
+        padding-bottom: 24px;
+        margin-bottom: 24px;
+        border-bottom: 1px solid var(--np-rule);
+    }
+    .np-lead__rail,
+    .np-lead__main,
+    .np-lead__aside {
+        padding-inline: 0;
+        border: 0;
+    }
+    .np-lead__rail {
+        border-bottom: 1px solid var(--np-rule);
+        padding-bottom: 20px;
+        margin-bottom: 24px;
+    }
+    .np-lead__hero {
+        padding: 28px 18px 22px;
+        margin-inline: 0;
+    }
+    .np-lead__hero .np-lead__backdrop img {
+        opacity: 0.12;             /* 小屏多为标题，底图再调淡 */
+    }
+    .np-lead__hero:not(:has(.np-lead__backdrop img)) {
+        padding: 0 0 8px;
+    }
+
+    /* 两栏两端对齐在手机上不可读 */
+    .np-columns {
+        columns: 1;
+    }
+    .np-columns > p {
+        text-align: left;
+        hyphens: manual;
+    }
+    .np-dropcap::first-letter {
+        font-size: 3.4em;          /* 首字下沉收小，不吞段落 */
+    }
+
+    .np-sections .wp-block-term-template {
+        grid-template-columns: 1fr;
+    }
+    .np-section {
+        border-right: 0;
+    }
+    .np-subscribe {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .np-entry {
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+    .np-entry__date {
+        flex-basis: auto;
+    }
+    .np-footer {
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 40em) {
+    html {
+        font-size: 15px;
+    }
+}
+
+/* ============================================================
+   11. 可访问性 —— Broadside 的三个承诺
+   ============================================================ */
+/* 要求更高对比度的读者：移除装饰性压底图，字即是字 */
+@media (prefers-contrast: more) {
+    .np-lead__hero .np-lead__backdrop {
+        display: none;
+    }
+    .np-lead__hero {
+        padding: 0 0 8px;
+        margin-inline: 0;
+    }
+}
+
+/* 要求减少动效的读者：颜色变化保留（表意），缓动归零 */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--np-accent);
+    outline-offset: 2px;
+}
+
+/* ============================================================
+   12. 打印 —— 报纸本就为纸而生
+   ============================================================ */
+@media print {
+    body {
+        background: #fff;
+        color: #000;
+    }
+    .wp-site-blocks {
+        box-shadow: none;
+        max-width: none;
+        padding: 0;
+    }
+    .np-site-header,
+    .np-masthead--compact,
+    .np-masthead,
+    .np-utility,
+    .np-folio,
+    .np-nav,
+    .np-article__footer,
+    .np-comments,
+    .np-footer,
+    .np-toc,
+    .np-copymd,
+    .np-subscribe,
+    .np-sections,
+    .np-table-toggle,
+    .np-pagination {
+        display: none !important;
+    }
+    .np-article {
+        max-width: 100%;
+        padding: 0;
+    }
+    .np-table-wrap.is-collapsed {
+        display: block;           /* 打印时宽表始终展开 */
+    }
+    .np-content a {
+        color: #000;
+        text-decoration: underline;
+    }
+    .np-content a[href^="http"]::after {
+        content: " (" attr(href) ")";
+        font-size: 0.75em;
+        color: #555;
+    }
+    .np-content pre,
+    .np-content table thead {
+        background: #eee;
+    }
+}
+
+/* §13 提醒确认弹窗：编辑器为普通区块卡片，前台才有 dialog 外壳。 */
+.np-notice-wrap {
+    text-align: left;
+    text-transform: none;
+    letter-spacing: normal;
+}
+.np-notice-wrap .np-notice__close {
+    margin: 0;
+}
+.np-notice {
+    border: 1px solid var(--np-ink);
+    background: var(--np-paper);
+    color: var(--np-ink);
+    font-family: var(--np-body);
+    max-width: min(560px, calc(100vw - 48px));
+    max-height: calc(100dvh - 48px);
+    overflow: auto;
+    box-sizing: border-box;
+    padding: 28px 32px;
+    box-shadow: none;
+}
+.np-notice::backdrop {
+    background: rgba(28, 26, 23, 0.55);
+}
+.np-notice__title {
+    font-family: var(--np-display);
+    font-weight: 400;
+    font-size: 19px;
+    letter-spacing: 0.02em;
+    padding-bottom: 6px;
+    margin: 0 0 16px;
+    border-bottom: 1px solid var(--np-rule);
+}
+.np-notice__body {
+    font-size: var(--np-fs-compact);
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+.np-notice__body p {
+    margin: 0 0 0.8em;
+}
+button.np-notice__close,
+.np-notice__close .wp-block-button__link {
+    border: 1px solid var(--np-accent);
+    background: transparent;
+    color: var(--np-accent);
+    font-family: var(--np-body);
+    font-size: var(--np-fs-meta);
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    padding: 7px 22px;
+    cursor: pointer;
+    transition: background-color var(--np-motion-dur) var(--np-motion-ease), color var(--np-motion-dur) var(--np-motion-ease);
+}
+button.np-notice__close:hover,
+button.np-notice__close:focus-visible,
+.np-notice__close .wp-block-button__link:hover,
+.np-notice__close .wp-block-button__link:focus-visible {
+    background: var(--np-accent);
+    color: var(--np-paper);
+}

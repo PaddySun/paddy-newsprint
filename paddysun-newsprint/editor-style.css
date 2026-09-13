@@ -1,0 +1,27 @@
+/*
+ * 编辑器专属微调。
+ *
+ * 整份前台样式已由 functions.php 的
+ * add_editor_style( array( 'style.css', 'editor-style.css' ) ) 注入编辑画布，
+ * 色板 / 字体 / @font-face / 元素规格由 theme.json 双端同源提供，
+ * 故这里只补「文章编辑器里不存在文章模板包装」的少数差异。
+ */
+
+/* 文章编辑器的标题输入区：与前台文章标题同观感（显示字体 + 底线） */
+.editor-post-title__input,
+.editor-post-title .editor-post-title__input {
+	font-family: var(--wp--preset--font-family--np-display);
+	line-height: 1.3;
+	border-bottom: 1px solid var(--wp--preset--color--rule, rgba(28, 26, 23, 0.2));
+	padding-bottom: 0.8125em;
+}
+
+/* 画布渲染与前台对齐 */
+.editor-styles-wrapper {
+	-webkit-font-smoothing: antialiased;
+}
+
+/* 摘要「阅读全文」类链接沿用深红 */
+.wp-block-post-excerpt__more-link {
+	color: var(--wp--preset--color--accent);
+}
