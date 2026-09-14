@@ -1,0 +1,2125 @@
+{
+  "schema": "paddy-newsprint-resource-license-manifest/v2",
+  "version": "0.10.12",
+  "status": "PASS",
+  "scope": "Actual resources, 75 identified dependency versions and original notices; exact font and icon sources verified; remaining specific rights-chain and distribution-route review explicitly recorded",
+  "unresolved": [],
+  "components": [
+    {
+      "name": "Theme-owned resources",
+      "version": "0.10.12",
+      "license": "GPL-2.0-or-later",
+      "package_files": [
+        "assets/img/about-placeholder.svg",
+        "assets/img/placeholders/**"
+      ],
+      "notice_files": [
+        "LICENSE"
+      ],
+      "source_url": "readme.txt",
+      "verification": "Existing theme attribution; abstract locally bundled resources"
+    },
+    {
+      "name": "Met Open Access fallback composites",
+      "version": "2026-09-14",
+      "license": "CC0-1.0 (artwork) AND GPL-2.0-or-later (notice stamp)",
+      "package_files": [
+        "assets/img/fallback/**"
+      ],
+      "notice_files": [
+        "readme.txt",
+        "LICENSE"
+      ],
+      "source_url": "https://www.metmuseum.org/art/collection",
+      "verification": "Seven object/source identifiers retained in readme; prior API public-domain audit preserved"
+    },
+    {
+      "name": "Owner-approved public screenshot",
+      "version": "0.10.12",
+      "license": "Owner-authorized public theme preview",
+      "package_files": [
+        "screenshot.png"
+      ],
+      "notice_files": [
+        "readme.txt"
+      ],
+      "source_url": "readme.txt",
+      "verification": "Owner screenshot-delivery authorization; unchanged accepted SHA-256"
+    },
+    {
+      "name": "Source Serif 4",
+      "version": "4.004",
+      "license": "OFL-1.1",
+      "package_files": [
+        "assets/fonts/source-serif-4-normal.woff2",
+        "assets/fonts/source-serif-4-italic.woff2"
+      ],
+      "notice_files": [
+        "assets/fonts/LICENSE-OFL.txt"
+      ],
+      "source_url": "https://github.com/adobe-fonts/source-serif",
+      "verification": "Complete distributed WOFF2 bytes match trusted public distribution; embedded copyright/RFN retained and complete OFL1.1 supplied. No font binary modification.",
+      "verified_sources": [
+        {
+          "file": "source-serif-4-italic.woff2",
+          "sha256": "96e6393209728ab93c334ae739af8a040cd2006c82e8614d6465a8084db88f89",
+          "source_url": "https://fonts.gstatic.com/s/sourceserif4/v14/vEFK2_tTDB4M7-auWDN0ahZJW1gewtW_Wg.woff2"
+        },
+        {
+          "file": "source-serif-4-normal.woff2",
+          "sha256": "f2ea9c12d2fe9bd3a9589b02ad2c0909da88f30938c91adc838c4f4098f9f9e0",
+          "source_url": "https://fonts.gstatic.com/s/sourceserif4/v14/vEFI2_tTDB4M7-auWDN0ahZJW1gb8tc.woff2"
+        }
+      ]
+    },
+    {
+      "name": "Libre Caslon Display",
+      "version": "1.100",
+      "license": "OFL-1.1",
+      "package_files": [
+        "assets/fonts/libre-caslon-display-400.woff2"
+      ],
+      "notice_files": [
+        "assets/fonts/LICENSE-OFL.txt"
+      ],
+      "source_url": "https://github.com/impallari/Libre-Caslon-Display",
+      "verification": "Complete distributed WOFF2 bytes match trusted public distribution; embedded copyright/RFN retained and complete OFL1.1 supplied. No font binary modification.",
+      "verified_sources": [
+        {
+          "file": "libre-caslon-display-400.woff2",
+          "sha256": "84267e937417f10dff37df818c5ef7f1e9f2e6a703e03c2dd286d3320af53269",
+          "source_url": "https://registry.npmjs.org/@fontsource/libre-caslon-display/-/libre-caslon-display-5.3.0.tgz"
+        }
+      ]
+    },
+    {
+      "name": "UnifrakturMaguntia",
+      "version": "2010-11-24",
+      "license": "OFL-1.1",
+      "package_files": [
+        "assets/fonts/unifraktur-maguntia-400.woff2"
+      ],
+      "notice_files": [
+        "assets/fonts/LICENSE-OFL.txt"
+      ],
+      "source_url": "http://unifraktur.sourceforge.net/",
+      "verification": "Complete distributed WOFF2 bytes match trusted public distribution; embedded copyright/RFN retained and complete OFL1.1 supplied. No font binary modification.",
+      "verified_sources": [
+        {
+          "file": "unifraktur-maguntia-400.woff2",
+          "sha256": "a467466874b50cd9ffbe10e5caccd9b261f2bc2252bcfa7d160c744ed9da6f15",
+          "source_url": "https://fonts.gstatic.com/s/unifrakturmaguntia/v22/WWXPlieVYwiGNomYU-ciRLRvEmK7oaVemGZM.woff2"
+        }
+      ]
+    },
+    {
+      "name": "KaTeX JavaScript and CSS",
+      "version": "0.16.22",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/katex/katex.js",
+        "assets/vendor/katex/katex.min.js",
+        "assets/vendor/katex/katex.css",
+        "assets/vendor/katex/katex.min.css",
+        "assets/vendor/katex/contrib/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/KaTeX-LICENSE.txt"
+      ],
+      "source_url": "https://registry.npmjs.org/katex/-/katex-0.16.22.tgz",
+      "verification": "All46 actual dist files byte-equal exact upstream package; fonts attributed separately"
+    },
+    {
+      "name": "KaTeX fonts",
+      "version": "0.16.22 dist",
+      "license": "OFL-1.1",
+      "package_files": [
+        "assets/vendor/katex/fonts/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/KaTeX-FONTS-NOTICE.txt",
+        "assets/fonts/LICENSE-OFL.txt"
+      ],
+      "source_url": "https://registry.npmjs.org/katex/-/katex-0.16.22.tgz",
+      "verification": "40 exact upstream font files; original name tables/RFN retained and exported"
+    },
+    {
+      "name": "highlight.js",
+      "version": "11.11.1",
+      "license": "BSD-3-Clause",
+      "package_files": [
+        "assets/vendor/highlight/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/highlight.js-LICENSE.txt"
+      ],
+      "source_url": "https://registry.npmjs.org/highlight.js/-/highlight.js-11.11.1.tgz",
+      "verification": "Primary distributed artifact hash and upstream license retained"
+    },
+    {
+      "name": "Mermaid",
+      "version": "11.16.1",
+      "license": "MIT; nested components retain their own licenses",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/Mermaid-LICENSE.txt"
+      ],
+      "source_url": "https://registry.npmjs.org/mermaid/-/mermaid-11.16.1.tgz",
+      "verification": "Both distributed JS files exactly match upstream dist; source maps used recursively"
+    },
+    {
+      "name": "@braintree/sanitize-url",
+      "version": "7.1.2",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/braintree-sanitize-url-7.1.2-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/@braintree/sanitize-url/-/sanitize-url-7.1.2.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "@iconify/utils",
+      "version": "3.0.2",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/iconify-utils-3.0.2-license.txt"
+      ],
+      "source_url": "https://registry.npmjs.org/@iconify/utils/-/utils-3.0.2.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "@upsetjs/venn.js",
+      "version": "2.0.0",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/upsetjs-venn.js-2.0.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/@upsetjs/venn.js/-/venn.js-2.0.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "cose-base",
+      "version": "1.0.3",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/cose-base-1.0.3-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/cose-base/-/cose-base-1.0.3.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "cose-base",
+      "version": "2.2.0",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/cose-base-2.2.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/cose-base/-/cose-base-2.2.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "cytoscape-cose-bilkent",
+      "version": "4.1.0",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/cytoscape-cose-bilkent-4.1.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/cytoscape-cose-bilkent/-/cytoscape-cose-bilkent-4.1.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "cytoscape-fcose",
+      "version": "2.2.0",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/cytoscape-fcose-2.2.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/cytoscape-fcose/-/cytoscape-fcose-2.2.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "cytoscape",
+      "version": "3.33.3",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/cytoscape-3.33.3-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/cytoscape/-/cytoscape-3.33.3.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-array",
+      "version": "2.12.1",
+      "license": "BSD-3-Clause",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-array-2.12.1-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-array/-/d3-array-2.12.1.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-array",
+      "version": "3.2.4",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-array-3.2.4-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-array/-/d3-array-3.2.4.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-axis",
+      "version": "3.0.0",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-axis-3.0.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-axis/-/d3-axis-3.0.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-brush",
+      "version": "3.0.0",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-brush-3.0.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-brush/-/d3-brush-3.0.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-chord",
+      "version": "3.0.1",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-chord-3.0.1-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-chord/-/d3-chord-3.0.1.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-color",
+      "version": "3.1.0",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-color-3.1.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-color/-/d3-color-3.1.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-contour",
+      "version": "4.0.2",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-contour-4.0.2-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-contour/-/d3-contour-4.0.2.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-delaunay",
+      "version": "6.0.4",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-delaunay-6.0.4-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-delaunay/-/d3-delaunay-6.0.4.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-dispatch",
+      "version": "3.0.1",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-dispatch-3.0.1-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-dispatch/-/d3-dispatch-3.0.1.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-drag",
+      "version": "3.0.0",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-drag-3.0.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-drag/-/d3-drag-3.0.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-dsv",
+      "version": "3.0.1",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-dsv-3.0.1-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-dsv/-/d3-dsv-3.0.1.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-ease",
+      "version": "3.0.1",
+      "license": "BSD-3-Clause",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-ease-3.0.1-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-ease/-/d3-ease-3.0.1.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-fetch",
+      "version": "3.0.1",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-fetch-3.0.1-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-fetch/-/d3-fetch-3.0.1.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-force",
+      "version": "3.0.0",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-force-3.0.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-force/-/d3-force-3.0.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-format",
+      "version": "3.1.0",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-format-3.1.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-format/-/d3-format-3.1.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-geo",
+      "version": "3.1.1",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-geo-3.1.1-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-geo/-/d3-geo-3.1.1.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-hierarchy",
+      "version": "3.1.2",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-hierarchy-3.1.2-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-hierarchy/-/d3-hierarchy-3.1.2.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-interpolate",
+      "version": "3.0.1",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-interpolate-3.0.1-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-interpolate/-/d3-interpolate-3.0.1.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-path",
+      "version": "1.0.9",
+      "license": "BSD-3-Clause",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-path-1.0.9-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-path/-/d3-path-1.0.9.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-path",
+      "version": "3.1.0",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-path-3.1.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-path/-/d3-path-3.1.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-polygon",
+      "version": "3.0.1",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-polygon-3.0.1-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-polygon/-/d3-polygon-3.0.1.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-quadtree",
+      "version": "3.0.1",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-quadtree-3.0.1-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-quadtree/-/d3-quadtree-3.0.1.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-random",
+      "version": "3.0.1",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-random-3.0.1-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-random/-/d3-random-3.0.1.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-sankey",
+      "version": "0.12.3",
+      "license": "BSD-3-Clause",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-sankey-0.12.3-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-sankey/-/d3-sankey-0.12.3.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-scale-chromatic",
+      "version": "3.1.0",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-scale-chromatic-3.1.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-scale-chromatic/-/d3-scale-chromatic-3.1.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-scale",
+      "version": "4.0.2",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-scale-4.0.2-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-scale/-/d3-scale-4.0.2.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-selection",
+      "version": "3.0.0",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-selection-3.0.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-selection/-/d3-selection-3.0.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-shape",
+      "version": "1.3.7",
+      "license": "BSD-3-Clause",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-shape-1.3.7-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-shape/-/d3-shape-1.3.7.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-shape",
+      "version": "3.2.0",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-shape-3.2.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-shape/-/d3-shape-3.2.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-time-format",
+      "version": "4.1.0",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-time-format-4.1.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-time-format/-/d3-time-format-4.1.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-time",
+      "version": "3.1.0",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-time-3.1.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-time/-/d3-time-3.1.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-timer",
+      "version": "3.0.1",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-timer-3.0.1-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-timer/-/d3-timer-3.0.1.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-transition",
+      "version": "3.0.1",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-transition-3.0.1-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-transition/-/d3-transition-3.0.1.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3-zoom",
+      "version": "3.0.0",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-zoom-3.0.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3-zoom/-/d3-zoom-3.0.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "d3",
+      "version": "7.9.0",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/d3-7.9.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/d3/-/d3-7.9.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "dagre-d3-es",
+      "version": "7.0.14",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/dagre-d3-es-7.0.14-LICENSE.md"
+      ],
+      "source_url": "https://registry.npmjs.org/dagre-d3-es/-/dagre-d3-es-7.0.14.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "dayjs",
+      "version": "1.11.20",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/dayjs-1.11.20-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/dayjs/-/dayjs-1.11.20.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "dompurify",
+      "version": "3.4.0",
+      "license": "(MPL-2.0 OR Apache-2.0)",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/dompurify-3.4.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/dompurify/-/dompurify-3.4.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "es-toolkit",
+      "version": "1.45.1",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/es-toolkit-1.45.1-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/es-toolkit/-/es-toolkit-1.45.1.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "internmap",
+      "version": "2.0.3",
+      "license": "ISC",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/internmap-2.0.3-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/internmap/-/internmap-2.0.3.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "js-yaml",
+      "version": "4.1.1",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/js-yaml-4.1.1-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/js-yaml/-/js-yaml-4.1.1.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "katex",
+      "version": "0.16.45",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/katex-0.16.45-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/katex/-/katex-0.16.45.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "khroma",
+      "version": "2.1.0",
+      "license": "MIT (verified license text)",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/khroma-2.1.0-license"
+      ],
+      "source_url": "https://registry.npmjs.org/khroma/-/khroma-2.1.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "layout-base",
+      "version": "1.0.2",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/layout-base-1.0.2-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/layout-base/-/layout-base-1.0.2.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "layout-base",
+      "version": "2.0.1",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/layout-base-2.0.1-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/layout-base/-/layout-base-2.0.1.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "lodash-es",
+      "version": "4.18.1",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/lodash-es-4.18.1-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/lodash-es/-/lodash-es-4.18.1.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "marked",
+      "version": "16.3.0",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/marked-16.3.0-LICENSE.md"
+      ],
+      "source_url": "https://registry.npmjs.org/marked/-/marked-16.3.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "roughjs",
+      "version": "4.6.6",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/roughjs-4.6.6-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/roughjs/-/roughjs-4.6.6.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "stylis",
+      "version": "4.3.6",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/stylis-4.3.6-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/stylis/-/stylis-4.3.6.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "ts-dedent",
+      "version": "2.2.0",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/ts-dedent-2.2.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/ts-dedent/-/ts-dedent-2.2.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "uuid",
+      "version": "14.0.0",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-bundled/uuid-14.0.0-LICENSE.md"
+      ],
+      "source_url": "https://registry.npmjs.org/uuid/-/uuid-14.0.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "@chevrotain/gast",
+      "version": "11.1.2",
+      "license": "Apache-2.0",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-parser/chevrotain-gast-11.1.2-LICENSE.txt"
+      ],
+      "source_url": "https://registry.npmjs.org/@chevrotain/gast/-/gast-11.1.2.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "@chevrotain/regexp-to-ast",
+      "version": "11.1.2",
+      "license": "Apache-2.0",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-parser/chevrotain-regexp-to-ast-11.1.2-LICENSE.txt"
+      ],
+      "source_url": "https://registry.npmjs.org/@chevrotain/regexp-to-ast/-/regexp-to-ast-11.1.2.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "@chevrotain/utils",
+      "version": "11.1.2",
+      "license": "Apache-2.0",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-parser/chevrotain-utils-11.1.2-LICENSE.txt"
+      ],
+      "source_url": "https://registry.npmjs.org/@chevrotain/utils/-/utils-11.1.2.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "chevrotain-allstar",
+      "version": "0.3.1",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-parser/chevrotain-allstar-0.3.1-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/chevrotain-allstar/-/chevrotain-allstar-0.3.1.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "chevrotain",
+      "version": "11.1.2",
+      "license": "Apache-2.0",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-parser/chevrotain-11.1.2-LICENSE.txt"
+      ],
+      "source_url": "https://registry.npmjs.org/chevrotain/-/chevrotain-11.1.2.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "langium",
+      "version": "4.2.0",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-parser/langium-4.2.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/langium/-/langium-4.2.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "lodash-es",
+      "version": "4.17.23",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-parser/lodash-es-4.17.23-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/lodash-es/-/lodash-es-4.17.23.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "vscode-jsonrpc",
+      "version": "8.2.0",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-parser/vscode-jsonrpc-8.2.0-License.txt"
+      ],
+      "source_url": "https://registry.npmjs.org/vscode-jsonrpc/-/vscode-jsonrpc-8.2.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "vscode-languageserver-protocol",
+      "version": "3.17.5",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-parser/vscode-languageserver-protocol-3.17.5-License.txt"
+      ],
+      "source_url": "https://registry.npmjs.org/vscode-languageserver-protocol/-/vscode-languageserver-protocol-3.17.5.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "vscode-languageserver-textdocument",
+      "version": "1.0.12",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-parser/vscode-languageserver-textdocument-1.0.12-License.txt"
+      ],
+      "source_url": "https://registry.npmjs.org/vscode-languageserver-textdocument/-/vscode-languageserver-textdocument-1.0.12.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "vscode-languageserver-types",
+      "version": "3.17.5",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-parser/vscode-languageserver-types-3.17.5-License.txt"
+      ],
+      "source_url": "https://registry.npmjs.org/vscode-languageserver-types/-/vscode-languageserver-types-3.17.5.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "vscode-uri",
+      "version": "3.1.0",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/**"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/mermaid-parser/vscode-uri-3.1.0-LICENSE.md"
+      ],
+      "source_url": "https://registry.npmjs.org/vscode-uri/-/vscode-uri-3.1.0.tgz",
+      "verification": "Exact source-map package/version and upstream notice bytes; see development evidence for mapping/tarball SHA-256"
+    },
+    {
+      "name": "Phosphor Icons",
+      "version": "Owner-provided regular SVG collection; copyright 2020-2024",
+      "license": "MIT",
+      "package_files": [
+        "parts/header.html",
+        "parts/footer.html",
+        "inc/block-hooks.php"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/Phosphor-Icons-LICENSE.txt"
+      ],
+      "source_url": "https://github.com/phosphor-icons/core",
+      "verification": "Four inline instances match the owner-provided regular magnifying-glass/rss/copy SVG shapes after documented transparent-canvas removal and accessibility attributes; source LICENSE 2020-2024 copied byte-for-byte. No exact release tag asserted.",
+      "source_files": [
+        {
+          "name": "magnifying-glass.svg",
+          "sha256": "e452276c3688e173398bf25c798c5a65bdee08616fe119a0e4fae0e41c3b32f5",
+          "theme_file": "parts/header.html",
+          "inline_sha256": "cfcc89371bbcbc6459947fa02c5efb9b7f913f61f4ea52f067bbdc1a492e001d"
+        },
+        {
+          "name": "rss.svg",
+          "sha256": "b44710f30a0a1f3d6c9d1eec7a199011532ef19e4545b82ecd2ebd2fda70bd02",
+          "theme_file": "parts/header.html",
+          "inline_sha256": "b63f4eafdb31312e5b526ff0f09e20c9d00890fabca7f222acb850b90ed13fe3"
+        },
+        {
+          "name": "rss.svg",
+          "sha256": "b44710f30a0a1f3d6c9d1eec7a199011532ef19e4545b82ecd2ebd2fda70bd02",
+          "theme_file": "parts/footer.html",
+          "inline_sha256": "b63f4eafdb31312e5b526ff0f09e20c9d00890fabca7f222acb850b90ed13fe3"
+        },
+        {
+          "name": "copy.svg",
+          "sha256": "5136c6812c724bd039676e54062f6050ea3ef7ebfdd130f6830cf0ec7ddde0e0",
+          "theme_file": "inc/block-hooks.php",
+          "inline_sha256": "24eb1f195c414bf6087b28de71e296ec9abd43990a3fb0b963f6be7f0e826834"
+        }
+      ]
+    },
+    {
+      "name": "License documentation",
+      "version": "0.10.12",
+      "license": "Various original license texts",
+      "package_files": [
+        "assets/vendor/licenses/**",
+        "assets/fonts/LICENSE-OFL.txt",
+        "LICENSE",
+        "readme.txt"
+      ],
+      "notice_files": [
+        "LICENSE"
+      ],
+      "source_url": "readme.txt",
+      "verification": "Not software components; original upstream text preserved"
+    },
+    {
+      "name": "hachure-fill",
+      "version": "0.5.2",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/mermaid.js",
+        "assets/vendor/mermaid/mermaid.min.js"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/roughjs-children/hachure-fill-0.5.2-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/hachure-fill/-/hachure-fill-0.5.2.tgz",
+      "verification": "Exact roughjs npm gitHead lock integrity plus byte-identical 27748-byte ESM reproduction; full original notice retained",
+      "tarball_sha256": "d816b83fea8b39161ef35c46f5080a0a7e406dce39ebf26f1ec8a1daea06a837",
+      "upstream_notice_sha256": "5e807b516a9be9229ed459880bf353a336e2d947867247290680d437017be391"
+    },
+    {
+      "name": "path-data-parser",
+      "version": "0.1.0",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/mermaid.js",
+        "assets/vendor/mermaid/mermaid.min.js"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/roughjs-children/path-data-parser-0.1.0-and-points-on-curve-0.2.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/path-data-parser/-/path-data-parser-0.1.0.tgz",
+      "verification": "Exact roughjs npm gitHead lock integrity plus byte-identical 27748-byte ESM reproduction; full original notice retained",
+      "tarball_sha256": "09be555fc313a8e831b55d4cc727699655f5c224fde2d8062f3f52bc9386d3b0",
+      "upstream_notice_sha256": "e9754a00aebde654e80f40bcf41dab667d6a41dfbbd2912bcf14fb07d468bf71"
+    },
+    {
+      "name": "points-on-curve",
+      "version": "0.2.0",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/mermaid.js",
+        "assets/vendor/mermaid/mermaid.min.js"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/roughjs-children/path-data-parser-0.1.0-and-points-on-curve-0.2.0-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/points-on-curve/-/points-on-curve-0.2.0.tgz",
+      "verification": "Exact roughjs npm gitHead lock integrity plus byte-identical 27748-byte ESM reproduction; full original notice retained",
+      "tarball_sha256": "adc00f4d5ae800c315aea316822fb6f8dd4529f76107facbdccf356372e5ddbf",
+      "upstream_notice_sha256": "e9754a00aebde654e80f40bcf41dab667d6a41dfbbd2912bcf14fb07d468bf71"
+    },
+    {
+      "name": "points-on-path",
+      "version": "0.2.1",
+      "license": "MIT",
+      "package_files": [
+        "assets/vendor/mermaid/mermaid.js",
+        "assets/vendor/mermaid/mermaid.min.js"
+      ],
+      "notice_files": [
+        "assets/vendor/licenses/roughjs-children/points-on-path-0.2.1-LICENSE"
+      ],
+      "source_url": "https://registry.npmjs.org/points-on-path/-/points-on-path-0.2.1.tgz",
+      "verification": "Exact roughjs npm gitHead lock integrity plus byte-identical 27748-byte ESM reproduction; full original notice retained",
+      "tarball_sha256": "eb57ddbb156d4e73cbc8d9416e1b666ace0d8abf9dc783f8c934ab63dbae6e44",
+      "upstream_notice_sha256": "b6fc1f7f1d96a48bc97176f3dcef959e364c5c17ba44167511de421500a86c6c"
+    },
+    {
+      "name": "0.10.12 distribution route",
+      "version": "0.10.12",
+      "license": "GPL-2.0-or-later; GPLv3 option selected",
+      "package_files": [
+        "DISTRIBUTION-LICENSE.md",
+        "LICENSE-GPL-3.0.txt"
+      ],
+      "notice_files": [
+        "LICENSE",
+        "LICENSE-GPL-3.0.txt"
+      ],
+      "source_url": "https://www.gnu.org/licenses/gpl-3.0.txt",
+      "verification": "Owner selected GPLv3 option and DOMPurify Apache branch; full FSF license text retained"
+    }
+  ],
+  "files": [
+    {
+      "path": "DISTRIBUTION-LICENSE.md",
+      "bytes": 1763,
+      "sha256": "8f3ab2b353dc776039a95632cf32a2b8f7b6e344bf2237cfbe70afd9c8d5592f"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 18626,
+      "sha256": "a2a0a98ba6d9043e70a1c44ea25883a8c753fe6e198a0330f7faf77c5a905c48"
+    },
+    {
+      "path": "LICENSE-GPL-3.0.txt",
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "path": "assets/fonts/LICENSE-OFL.txt",
+      "bytes": 4966,
+      "sha256": "62df4037cd4142f6852b000ed27320d71c6b05299fa3261e218f0e22f38f884b"
+    },
+    {
+      "path": "assets/fonts/libre-caslon-display-400.woff2",
+      "bytes": 24236,
+      "sha256": "84267e937417f10dff37df818c5ef7f1e9f2e6a703e03c2dd286d3320af53269"
+    },
+    {
+      "path": "assets/fonts/source-serif-4-italic.woff2",
+      "bytes": 130188,
+      "sha256": "96e6393209728ab93c334ae739af8a040cd2006c82e8614d6465a8084db88f89"
+    },
+    {
+      "path": "assets/fonts/source-serif-4-normal.woff2",
+      "bytes": 122360,
+      "sha256": "f2ea9c12d2fe9bd3a9589b02ad2c0909da88f30938c91adc838c4f4098f9f9e0"
+    },
+    {
+      "path": "assets/fonts/unifraktur-maguntia-400.woff2",
+      "bytes": 26512,
+      "sha256": "a467466874b50cd9ffbe10e5caccd9b261f2bc2252bcfa7d160c744ed9da6f15"
+    },
+    {
+      "path": "assets/img/about-placeholder.svg",
+      "bytes": 570,
+      "sha256": "190010e6f2feb17c4e18e189f2a73b8df78a93e8d61f223318277bba8a3478fb"
+    },
+    {
+      "path": "assets/img/fallback/fallback-bada-shanren.webp",
+      "bytes": 114816,
+      "sha256": "2b55ffdefed40f25ee8343ee969ad39ead3cbad811b5c391b3e751a0ab1d42de"
+    },
+    {
+      "path": "assets/img/fallback/fallback-chen-hongshou.webp",
+      "bytes": 86010,
+      "sha256": "0cd1d6d8b72e262e024fe05a3bb0f619493747fe2e9c427557cee8c11b14978b"
+    },
+    {
+      "path": "assets/img/fallback/fallback-crow.webp",
+      "bytes": 142142,
+      "sha256": "b9e55cba065d7c855d4e057e3fc4a096918b74f2d46472af6f33995d4cd645e6"
+    },
+    {
+      "path": "assets/img/fallback/fallback-eastern-shore.webp",
+      "bytes": 226842,
+      "sha256": "819312fd1d374ef48621373e6c0a4e0cd782a74893d2579258aadf071ad2ed27"
+    },
+    {
+      "path": "assets/img/fallback/fallback-qian-xuan.webp",
+      "bytes": 246578,
+      "sha256": "f8b01233414a32d6d02f92147ac3a2b3c258a7bb774b50d2c245389ab2b9c4b0"
+    },
+    {
+      "path": "assets/img/fallback/fallback-raven.webp",
+      "bytes": 166398,
+      "sha256": "d972adbaf3374afb4f9baf5a4cc27100e536faafa9eb08dc3ec0fcb17fae7352"
+    },
+    {
+      "path": "assets/img/fallback/fallback-ren-yi.webp",
+      "bytes": 101066,
+      "sha256": "7b0da84d6b84d5a8c163e5547d86886e56caa87fec1713d5a0c6d657b8998a2d"
+    },
+    {
+      "path": "assets/img/placeholders/README.md",
+      "bytes": 1075,
+      "sha256": "6390e7358bed9da571bda8574972558804c8436118b8413acaedce5d148fd927"
+    },
+    {
+      "path": "assets/img/placeholders/ad-300x250.png",
+      "bytes": 2827,
+      "sha256": "bedaecaf80d2bcc43d99588e7f1fcf5acb0bc72beba017f628ddad84c17d91da"
+    },
+    {
+      "path": "assets/img/placeholders/ad-300x600.png",
+      "bytes": 4331,
+      "sha256": "f86d0f47851bba2df511aedc71c1cd5732929df05a1c0c2a967cbf387de33e00"
+    },
+    {
+      "path": "assets/img/placeholders/ad-320x50.png",
+      "bytes": 1742,
+      "sha256": "9c0643a905f3f91481901c8a04912e8ab2440f037b1b6ee4484915b5b85e527f"
+    },
+    {
+      "path": "assets/img/placeholders/ad-336x280.png",
+      "bytes": 3118,
+      "sha256": "b95e78683fa9f12f916c25223e171be75aecccc481bbe6e9cc174db4dd314407"
+    },
+    {
+      "path": "assets/img/placeholders/ad-468x60.png",
+      "bytes": 1788,
+      "sha256": "dec9fb78df68107b23d26d76111ac4c3b147b3ac131b84d7a5a1251a101bb640"
+    },
+    {
+      "path": "assets/img/placeholders/ad-728x90.png",
+      "bytes": 2321,
+      "sha256": "e37b7289aaf6ae911190fbbcec52c0a24fd33526a8536ffd7ded01f80502406f"
+    },
+    {
+      "path": "assets/img/placeholders/ad-970x250.png",
+      "bytes": 3918,
+      "sha256": "b18bd7600222bd019c860eb50b2393dd2f4d4eb84d2ce828d4ee637937dc6d62"
+    },
+    {
+      "path": "assets/img/placeholders/avatar-fallback.png",
+      "bytes": 2102,
+      "sha256": "68ce195cfddf80ddec5b4ff10f64aa1fc9e7da48b4e7ab78e4bc8fd0939449c3"
+    },
+    {
+      "path": "assets/img/placeholders/badge-88x31-1.png",
+      "bytes": 729,
+      "sha256": "10894f3d6bb8c5a6f4826971cd2410e3f9b69791da86d582398e8bef0ff7a0bd"
+    },
+    {
+      "path": "assets/img/placeholders/badge-88x31-2.png",
+      "bytes": 917,
+      "sha256": "1d5fcfef3c0411a2ab8cb46b398b12fdd2af9fa0e42c2665f879e91f5f2cf525"
+    },
+    {
+      "path": "assets/img/placeholders/badge-88x31-3.png",
+      "bytes": 928,
+      "sha256": "dd98213cdde42d2c4366e52dba10d3e8dbc27dc63806862774eced9cd8b3ecc0"
+    },
+    {
+      "path": "assets/img/placeholders/badge-88x31-4.png",
+      "bytes": 941,
+      "sha256": "46097db77d6779a408963164ad03623dc038191e8f19ede650cbdd0b08b667f0"
+    },
+    {
+      "path": "assets/img/placeholders/link-avatar-01.png",
+      "bytes": 528,
+      "sha256": "5b52b6a08b87a4103ddda167f4c96af5acdd3191f36d8402b985136459641dcd"
+    },
+    {
+      "path": "assets/img/placeholders/link-avatar-02.png",
+      "bytes": 737,
+      "sha256": "f7201f2f58b642fb5ac9392c99554cca22dcd535fde7e67b2f648ec132a202ea"
+    },
+    {
+      "path": "assets/img/placeholders/link-avatar-03.png",
+      "bytes": 607,
+      "sha256": "2d291d71796a22e571ac39965edb7185682435b17104f15d3f1a2bf7789874ec"
+    },
+    {
+      "path": "assets/img/placeholders/link-avatar-04.png",
+      "bytes": 1729,
+      "sha256": "eb3db32414ea63b4dc5e632758bb3c2d880c4e82b8ad0858326bdec57f5f968e"
+    },
+    {
+      "path": "assets/img/placeholders/link-avatar-05.png",
+      "bytes": 1191,
+      "sha256": "53dc96fe224fc4936aa86e4d6f9ef66e3d5beb633abac581301236d5c2705017"
+    },
+    {
+      "path": "assets/img/placeholders/link-avatar-06.png",
+      "bytes": 454,
+      "sha256": "8bb22dcd8c5aa67979c364c0d2343dde0ebea64c3b5ac2df98c562d582b15591"
+    },
+    {
+      "path": "assets/img/placeholders/link-avatar-07.png",
+      "bytes": 1696,
+      "sha256": "71da6e74710d6ebec07b5b7e8d1f0b92b7f8ee101a0a369982aa8f07a6112424"
+    },
+    {
+      "path": "assets/img/placeholders/link-avatar-08.png",
+      "bytes": 2123,
+      "sha256": "466dcb10762b50239f8fcee1206e5e315a39aa82e8e39e6e844db07efda5e38f"
+    },
+    {
+      "path": "assets/img/placeholders/stat-card-500x100.png",
+      "bytes": 3874,
+      "sha256": "31d62d5a2d1684f2bdb4935702f2cf8dd510c6711dbe7fa4b1c64c44331b2896"
+    },
+    {
+      "path": "assets/vendor/highlight/ascetic.css",
+      "bytes": 628,
+      "sha256": "0397ed3b25174497e4d11c909681a53574ad2ff1ee571f73ca92a9d7a0759615"
+    },
+    {
+      "path": "assets/vendor/highlight/ascetic.min.css",
+      "bytes": 454,
+      "sha256": "c7172b2f5414300d8e8c35218c4359942716e1724dd25a7804a652588c3201ec"
+    },
+    {
+      "path": "assets/vendor/highlight/highlight.js",
+      "bytes": 340441,
+      "sha256": "2d7d6b7330aad8ced0575badbe69f967e8f87d0cab1edba994e9e4669b5b4f42"
+    },
+    {
+      "path": "assets/vendor/highlight/highlight.min.js",
+      "bytes": 127496,
+      "sha256": "c4a399dd6f488bc97a3546e3476747b3e714c99c57b9473154c6fb8d259b9381"
+    },
+    {
+      "path": "assets/vendor/katex/contrib/auto-render.js",
+      "bytes": 10508,
+      "sha256": "1f5492e68752a1b1fbcd500840ca1d0191c26131fdc36381b493a02c6b8d4bcf"
+    },
+    {
+      "path": "assets/vendor/katex/contrib/auto-render.min.js",
+      "bytes": 3467,
+      "sha256": "bb53eb953394531aae36fdd537065c4244eb8542901a3ce914601d932675b8ac"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_AMS-Regular.woff",
+      "bytes": 33516,
+      "sha256": "30da91e84c893f875e252689faebdc590b2871145e8adc7f9a9d4dbd8ce0b251"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_AMS-Regular.woff2",
+      "bytes": 28076,
+      "sha256": "0cdd387c9590a1a9f9794560022dbb59654a7d86f187aa0c81495ad42d3a7308"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Caligraphic-Bold.woff",
+      "bytes": 7716,
+      "sha256": "1ae6bd7475590e97e7f145a89e09ccde322f7a6bc0b91607b1c8b8ee28290fed"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Caligraphic-Bold.woff2",
+      "bytes": 6912,
+      "sha256": "de7701e42cf1f4cf0b766c03fb27977207eee2f4fd5d76fa82188406da43ea4c"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Caligraphic-Regular.woff",
+      "bytes": 7656,
+      "sha256": "3398dd02302557a793f2863f88e02d96ce10df2abffa07c8e9fa90775116e65c"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Caligraphic-Regular.woff2",
+      "bytes": 6908,
+      "sha256": "5d53e70ad607c2352162dec9e0923fb54ecdafaccbf604cd8dcf7d00facb989b"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Fraktur-Bold.woff",
+      "bytes": 13296,
+      "sha256": "9be7ceb88004ab8ad124082246fbfcca4091e36385d4ec6ed1df67375dad50fb"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Fraktur-Bold.woff2",
+      "bytes": 11348,
+      "sha256": "74444efd593c005e3f4573b44524704c0af0a937fe911cca9e94068d0d140d3f"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Fraktur-Regular.woff",
+      "bytes": 13208,
+      "sha256": "5e28753be717dac97f559f49bc10be9cf3c124ddcabda6659d11cb68febc6463"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Fraktur-Regular.woff2",
+      "bytes": 11316,
+      "sha256": "51814d270d06ff0255dba0799994fa4d8c84d11f09951d47595f4abb1f3602dc"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Main-Bold.woff",
+      "bytes": 29912,
+      "sha256": "c76c5d696297d51b9cb1639c7da4334f0e7dec81b42b11213b5e25ef671bb822"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Main-Bold.woff2",
+      "bytes": 25324,
+      "sha256": "0f60d1b897938ec918c8ce073092411baf9438f6739465693ff18b0f9d20b021"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Main-BoldItalic.woff",
+      "bytes": 19412,
+      "sha256": "a6f7ec0d846ac7ad975adb8959c37ed49b94acbc4ae436db9ce9e20287e4a64c"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Main-BoldItalic.woff2",
+      "bytes": 16780,
+      "sha256": "99cd42a3c072d918f2f44984a807cf7aa16e13545fd0875fc07c6c65f99e715b"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Main-Italic.woff",
+      "bytes": 19676,
+      "sha256": "f1d6ef86f3b11a528bd5185199bd2443ecb2b0dead96d88674b5a2c12be24bdf"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Main-Italic.woff2",
+      "bytes": 16988,
+      "sha256": "97479ca6cce906abc961ecac96faa5f9ca2e61b8e7670d475826bcdee9a7c267"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Main-Regular.woff",
+      "bytes": 30772,
+      "sha256": "c6368d87e8a1a3a5d337623d83d8dc4b868f242a9ad476237d6f8d1e0f168cdc"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Main-Regular.woff2",
+      "bytes": 26272,
+      "sha256": "c2342cd8b869e01752a9321dc17213fc40d4d04c79688c1d43f2cf316abd7866"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Math-BoldItalic.woff",
+      "bytes": 18668,
+      "sha256": "850c0af5c2238497febaf5e461d880bf458c341f42f4f330f1b1ab5698b1998e"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Math-BoldItalic.woff2",
+      "bytes": 16400,
+      "sha256": "dc47344dbb6cb5b655c8460d561f4df5f501b90c804ad3c6cec65fe322351ab1"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Math-Italic.woff",
+      "bytes": 18748,
+      "sha256": "8a8d244581371912b8f3f5a23e2437cb2a59cd9bcaebb0346e722c05737a2571"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Math-Italic.woff2",
+      "bytes": 16440,
+      "sha256": "7af58c5ec8f132a2ddde9027c6d7814decce4d3b822a11192a42a20e2e973264"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_SansSerif-Bold.woff",
+      "bytes": 14408,
+      "sha256": "ece03cfd83e22c212cdef66feb8442d25a083beb988db3f1883f3f9738d750ba"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_SansSerif-Bold.woff2",
+      "bytes": 12216,
+      "sha256": "e99ae51144bf1232efcc1bfe5add36262c6866b0faab24fa75740e1b98577a62"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_SansSerif-Italic.woff",
+      "bytes": 14112,
+      "sha256": "91ee67500cc0129aa0ace3ac5c61ff1692102f0f31d02b69347fba35dcb75bf2"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_SansSerif-Italic.woff2",
+      "bytes": 12028,
+      "sha256": "00b26ac825e2095056396e0553b8ac26d3f8ad158c3826e28b4c45b385c4714a"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_SansSerif-Regular.woff",
+      "bytes": 12316,
+      "sha256": "11e4dc8a6471ff6d6ee561d53d10fde8f7489e798257ff449c5d37c197435605"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_SansSerif-Regular.woff2",
+      "bytes": 10344,
+      "sha256": "68e8c73ef42afd3ccec58bf0fba302cce448938e7fc020a5e31f8a952eee1342"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Script-Regular.woff",
+      "bytes": 10588,
+      "sha256": "d96cdf2b3bdd4d64a8fd5f74a4c467f123a8a73931cd435889f08ffaf9bf947a"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Script-Regular.woff2",
+      "bytes": 9644,
+      "sha256": "036d4e95149b69ff9bcc0cd55771efeb25ffa3947293e69acd78d5ac328c684b"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Size1-Regular.woff",
+      "bytes": 6496,
+      "sha256": "c943cc986384f59e86bea5fd7dc50a9c4dfe567a7c05eb40d6790720dead97c9"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Size1-Regular.woff2",
+      "bytes": 5468,
+      "sha256": "6b47c40166b6dbe21a5dfca7718413f2147fd2399be1ba605d8ad39cedf25dfe"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Size2-Regular.woff",
+      "bytes": 6188,
+      "sha256": "2014c523c3210bcc166648c4d4cc57f05b747df07a24277bf71c51e67dc79e3d"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Size2-Regular.woff2",
+      "bytes": 5208,
+      "sha256": "d04c54219f9eaec6d4d4fd42dfb28785975a4794d6b2fc71e566b9cd6db842dd"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Size3-Regular.woff",
+      "bytes": 4420,
+      "sha256": "6ab6b62e9b62dae2c00dd90f791bd10950be0ecc3490d7d6045f51c2e8fe0949"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Size3-Regular.woff2",
+      "bytes": 3624,
+      "sha256": "73d591271b1604960cb10bb90fee021670af7297017e0e98480b332d11f51995"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Size4-Regular.woff",
+      "bytes": 5980,
+      "sha256": "99f9c6750b489c9462bf04900bd3f939df9b829339daaaaa99ef5495cdddea58"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Size4-Regular.woff2",
+      "bytes": 4928,
+      "sha256": "a4af7d414440a1c1790825cfb700cf9cf43b0f2c4b04f0ebc523011ad9853ec0"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Typewriter-Regular.woff",
+      "bytes": 16028,
+      "sha256": "e14fed02b1aba7ce9f5afd5844b5d0321b22351febc720e0de8b8723527609f7"
+    },
+    {
+      "path": "assets/vendor/katex/fonts/KaTeX_Typewriter-Regular.woff2",
+      "bytes": 13568,
+      "sha256": "71d517d67827787cfabdf186914cc3358eda539e37931941f2b2fd4a21f68c0b"
+    },
+    {
+      "path": "assets/vendor/katex/katex.css",
+      "bytes": 31329,
+      "sha256": "009f1e58806819e90d02e90ffecafa988a3ee4b54418f8cab70f4f2cbf8ce2d8"
+    },
+    {
+      "path": "assets/vendor/katex/katex.js",
+      "bytes": 622663,
+      "sha256": "8f1f4fb1080439c012bb8fddf424fa253e9144ab4cdd7dc0eae0e92cd04a5e33"
+    },
+    {
+      "path": "assets/vendor/katex/katex.min.css",
+      "bytes": 23352,
+      "sha256": "19095127357ed6d29fe0a63a6b000c913a89f7f1963b765dd3715e97c9852e75"
+    },
+    {
+      "path": "assets/vendor/katex/katex.min.js",
+      "bytes": 276701,
+      "sha256": "e8d885505949f3a5f4abdd5dd0d53696bd1371ad26ffbf4f310dcd77c8cdae89"
+    },
+    {
+      "path": "assets/vendor/licenses/KaTeX-FONTS-NOTICE.txt",
+      "bytes": 9784,
+      "sha256": "e5ccdf9ef9239b896365e7f290b8affd7db40ebf5f11f9ed22e57ea9a944468f"
+    },
+    {
+      "path": "assets/vendor/licenses/KaTeX-LICENSE.txt",
+      "bytes": 1107,
+      "sha256": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3"
+    },
+    {
+      "path": "assets/vendor/licenses/Mermaid-LICENSE.txt",
+      "bytes": 1089,
+      "sha256": "ec9fb67dcb25eccc416ed56e1aab819222c805a2a4bfe4cb19e7556bf2ffde80"
+    },
+    {
+      "path": "assets/vendor/licenses/Phosphor-Icons-LICENSE.txt",
+      "bytes": 1097,
+      "sha256": "549c8a86f7426da08cd5319404f1660871516656f3ed66a50111c4af36331e00"
+    },
+    {
+      "path": "assets/vendor/licenses/README.txt",
+      "bytes": 760,
+      "sha256": "d3c572f6379b84a42a5e6d072f529156929cef02ff7c379a24495ef6cbfe0ad4"
+    },
+    {
+      "path": "assets/vendor/licenses/highlight.js-LICENSE.txt",
+      "bytes": 1514,
+      "sha256": "6c081431591d9df696c82dc598fe1423765b8a299b200ed00b281afd0f64c490"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/braintree-sanitize-url-7.1.2-LICENSE",
+      "bytes": 1066,
+      "sha256": "0984740e0c3d725c8044dec7edcefe1dbce180ef5a7bc710c251e19607000158"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/cose-base-1.0.3-LICENSE",
+      "bytes": 1081,
+      "sha256": "5fb3cf4a14c3c5af6e473a192df8bca10c77754e3a0c6492c79fb92a76a5478a"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/cose-base-2.2.0-LICENSE",
+      "bytes": 1081,
+      "sha256": "5fb3cf4a14c3c5af6e473a192df8bca10c77754e3a0c6492c79fb92a76a5478a"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/cytoscape-3.33.3-LICENSE",
+      "bytes": 1082,
+      "sha256": "eb319c6e6f233607f71e8e2f450391751883cfc0eeb3ca7ef574c13d1d9c2203"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/cytoscape-cose-bilkent-4.1.0-LICENSE",
+      "bytes": 1084,
+      "sha256": "440fc58a56a12814e417d2b341da89b050da052dc75bdb235607d37ec5fe74ef"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/cytoscape-fcose-2.2.0-LICENSE",
+      "bytes": 1079,
+      "sha256": "2837634f403949215760fcdd2fa1ed0c64875d02099ecc8318c704b852f1421d"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-7.9.0-LICENSE",
+      "bytes": 731,
+      "sha256": "3e6849627f74ff73c257a3ae1efb574015d94fc1035c05ec3c15805165efcbc4"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-array-2.12.1-LICENSE",
+      "bytes": 1475,
+      "sha256": "0747bebeb06b10954913149be9b9a8bdf6fad3e6fdcbd9f9524e7a94c13d2cea"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-array-3.2.4-LICENSE",
+      "bytes": 731,
+      "sha256": "3e6849627f74ff73c257a3ae1efb574015d94fc1035c05ec3c15805165efcbc4"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-axis-3.0.0-LICENSE",
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-brush-3.0.0-LICENSE",
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-chord-3.0.1-LICENSE",
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-color-3.1.0-LICENSE",
+      "bytes": 731,
+      "sha256": "faa682e3e430941f958d26180458f5934a62f58dac4d70ccdd15608c15d0f884"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-contour-4.0.2-LICENSE",
+      "bytes": 731,
+      "sha256": "e51cba0e4fa1d8c078e15319868f2b90188f413f9ce9dac1043b62db32901e93"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-delaunay-6.0.4-LICENSE",
+      "bytes": 757,
+      "sha256": "582c3022bd01942336095f92b58a90b1be624dc547d987555c6c956512dd24c1"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-dispatch-3.0.1-LICENSE",
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-drag-3.0.0-LICENSE",
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-dsv-3.0.1-LICENSE",
+      "bytes": 731,
+      "sha256": "7842a82012622e5a37bfe4f6c1b67cd3bae6350716b5bf87f36cea0bdc1319dc"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-ease-3.0.1-LICENSE",
+      "bytes": 1504,
+      "sha256": "b989d9085148d21ff64a75e14462aefa06b2589a55553b07b1460c70081c7d08"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-fetch-3.0.1-LICENSE",
+      "bytes": 731,
+      "sha256": "ffdc17dc9040006bddeb891c95bfbb492e86d6bc64a4a4233666febab1be35e0"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-force-3.0.0-LICENSE",
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-format-3.1.0-LICENSE",
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-geo-3.1.1-LICENSE",
+      "bytes": 1857,
+      "sha256": "3e3edc1224eec9c39cd26491a21304a62883c1e5b6a65c5283ccc7a6cc94baee"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-hierarchy-3.1.2-LICENSE",
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-interpolate-3.0.1-LICENSE",
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-path-1.0.9-LICENSE",
+      "bytes": 1475,
+      "sha256": "b8265327ab678f554800e71188b1cc6b1ff57522e292d2b1c0be66f27cf328b6"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-path-3.1.0-LICENSE",
+      "bytes": 731,
+      "sha256": "a09b0d6d76e768fca2085fad05743ee81ddd11946bcda160a3cf5e1081a479aa"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-polygon-3.0.1-LICENSE",
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-quadtree-3.0.1-LICENSE",
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-random-3.0.1-LICENSE",
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-sankey-0.12.3-LICENSE",
+      "bytes": 1471,
+      "sha256": "2bf785e778d67a4f5266cffcd4f2cc5bb98cde73791666e7efeb8002ba32dfa5"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-scale-4.0.2-LICENSE",
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-scale-chromatic-3.1.0-LICENSE",
+      "bytes": 1423,
+      "sha256": "0986d93944902cca9af86824b6a641b4b7c2d10602fc510c433a8bcd443919fe"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-selection-3.0.0-LICENSE",
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-shape-1.3.7-LICENSE",
+      "bytes": 1475,
+      "sha256": "7eea8533ea92bd8c32a901e89ecb0305890905bb12711449565ddff96891146d"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-shape-3.2.0-LICENSE",
+      "bytes": 731,
+      "sha256": "faa682e3e430941f958d26180458f5934a62f58dac4d70ccdd15608c15d0f884"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-time-3.1.0-LICENSE",
+      "bytes": 731,
+      "sha256": "faa682e3e430941f958d26180458f5934a62f58dac4d70ccdd15608c15d0f884"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-time-format-4.1.0-LICENSE",
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-timer-3.0.1-LICENSE",
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-transition-3.0.1-LICENSE",
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/d3-zoom-3.0.0-LICENSE",
+      "bytes": 731,
+      "sha256": "e008c5e25a6be382593089c29bfabbc553c6378eee02895aec46ce396cc404ee"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/dagre-d3-es-7.0.14-LICENSE.md",
+      "bytes": 1328,
+      "sha256": "d01eb84ccce437dbf5fd40853bceea0f287930920acea066597a4a25ead63858"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/dayjs-1.11.20-LICENSE",
+      "bytes": 1072,
+      "sha256": "5faab7526d055651be3aab769d58897be6bd91f3d39d137f25f12dba1b31d5dc"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/dompurify-3.4.0-LICENSE",
+      "bytes": 27729,
+      "sha256": "1b02e03c3fb4f87d476c128f0eb9def1f5a1709d28b180465228bd41574623b7"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/es-toolkit-1.45.1-LICENSE",
+      "bytes": 1424,
+      "sha256": "ed68888a2a28f32a05e88f24d4d4ee75075a1bda2b6372a1f2e00fa0576a5524"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/iconify-utils-3.0.2-license.txt",
+      "bytes": 1083,
+      "sha256": "a86793ac023162ce98b91899601c15f6712f44943163c4f92a0a4bf89152b3bf"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/internmap-2.0.3-LICENSE",
+      "bytes": 726,
+      "sha256": "9ea8903938dab5f12c4572d60725069bec2d1b0dc3bcc210b09bae946a5ebb1f"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/js-yaml-4.1.1-LICENSE",
+      "bytes": 1084,
+      "sha256": "a07bc24468b9654ce76a547d47a2db282d07733b715db4c73a98bd63961f9550"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/katex-0.16.45-LICENSE",
+      "bytes": 1107,
+      "sha256": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/khroma-2.1.0-license",
+      "bytes": 1105,
+      "sha256": "66b333b0f66759a0b710459e03f7029abe17f4358114a128d2c972e642961b49"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/layout-base-1.0.2-LICENSE",
+      "bytes": 1069,
+      "sha256": "eabb762d8a95109a39c9be3247325529a5239a7aca327d909c3ccdc41f3a06bf"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/layout-base-2.0.1-LICENSE",
+      "bytes": 1069,
+      "sha256": "eabb762d8a95109a39c9be3247325529a5239a7aca327d909c3ccdc41f3a06bf"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/lodash-es-4.18.1-LICENSE",
+      "bytes": 1952,
+      "sha256": "f71e8ed126b46346494aad5486874cd8f0aafe95092ed67d2e3cb6110f939abc"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/marked-16.3.0-LICENSE.md",
+      "bytes": 2942,
+      "sha256": "8e3a3f82f59a60958f56ca08f445647c32a4733dc7ca6c2c46f6eb898471ab9c"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/roughjs-4.6.6-LICENSE",
+      "bytes": 1068,
+      "sha256": "dca9a392272606ac748ac0976a2a1133f14eef841c27beaa51a844d53c56a09d"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/stylis-4.3.6-LICENSE",
+      "bytes": 1078,
+      "sha256": "88c579c6ee44b41137a21321190d177982e5b17d4fa1b83a4a2e3ea325a8fc9a"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/ts-dedent-2.2.0-LICENSE",
+      "bytes": 1073,
+      "sha256": "eff13095d9d762c3bd9dda74370c81e2130c28f2691bc455603abf973bac25b9"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/upsetjs-venn.js-2.0.0-LICENSE",
+      "bytes": 1106,
+      "sha256": "6a3508febf2cfccfee96597394543a6154a4bb0b1f91f28404be42c09e9fcb54"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-bundled/uuid-14.0.0-LICENSE.md",
+      "bytes": 1109,
+      "sha256": "beaa6b04fb82e41dd2ad679e19e27953afb5999b1abbb455b6564e78ebfeb332"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-parser/chevrotain-11.1.2-LICENSE.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-parser/chevrotain-allstar-0.3.1-LICENSE",
+      "bytes": 1068,
+      "sha256": "1db2cfbc7ce5fa3b82699b4ac4badce8984084d25b5308ece00f5c9b1381a0a5"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-parser/chevrotain-gast-11.1.2-LICENSE.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-parser/chevrotain-regexp-to-ast-11.1.2-LICENSE.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-parser/chevrotain-utils-11.1.2-LICENSE.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-parser/langium-4.2.0-LICENSE",
+      "bytes": 1052,
+      "sha256": "599bf70b4e55f06250571d103dbd8441e0c47cb7f858c0147ca312ce38e9ef2a"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-parser/lodash-es-4.17.23-LICENSE",
+      "bytes": 1952,
+      "sha256": "f71e8ed126b46346494aad5486874cd8f0aafe95092ed67d2e3cb6110f939abc"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-parser/vscode-jsonrpc-8.2.0-License.txt",
+      "bytes": 1095,
+      "sha256": "ec9ee83580841e8eb687aca9867f221503809ba6426c7f876ede17d91b9fcfd0"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-parser/vscode-languageserver-protocol-3.17.5-License.txt",
+      "bytes": 1095,
+      "sha256": "ec9ee83580841e8eb687aca9867f221503809ba6426c7f876ede17d91b9fcfd0"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-parser/vscode-languageserver-textdocument-1.0.12-License.txt",
+      "bytes": 1095,
+      "sha256": "ec9ee83580841e8eb687aca9867f221503809ba6426c7f876ede17d91b9fcfd0"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-parser/vscode-languageserver-types-3.17.5-License.txt",
+      "bytes": 1095,
+      "sha256": "ec9ee83580841e8eb687aca9867f221503809ba6426c7f876ede17d91b9fcfd0"
+    },
+    {
+      "path": "assets/vendor/licenses/mermaid-parser/vscode-uri-3.1.0-LICENSE.md",
+      "bytes": 1070,
+      "sha256": "c669138cb1eb01fbb745e8e460b291e4f2869c14a40061390b6095d845ed4c82"
+    },
+    {
+      "path": "assets/vendor/licenses/roughjs-children/hachure-fill-0.5.2-LICENSE",
+      "bytes": 1068,
+      "sha256": "5e807b516a9be9229ed459880bf353a336e2d947867247290680d437017be391"
+    },
+    {
+      "path": "assets/vendor/licenses/roughjs-children/path-data-parser-0.1.0-and-points-on-curve-0.2.0-LICENSE",
+      "bytes": 1068,
+      "sha256": "e9754a00aebde654e80f40bcf41dab667d6a41dfbbd2912bcf14fb07d468bf71"
+    },
+    {
+      "path": "assets/vendor/licenses/roughjs-children/points-on-path-0.2.1-LICENSE",
+      "bytes": 1062,
+      "sha256": "b6fc1f7f1d96a48bc97176f3dcef959e364c5c17ba44167511de421500a86c6c"
+    },
+    {
+      "path": "assets/vendor/mermaid/mermaid.js",
+      "bytes": 8215977,
+      "sha256": "aae8040a1dc2c4ad6aaa66a5ddd92426081478cc209ddfe5a2f6b4832a05e9b1"
+    },
+    {
+      "path": "assets/vendor/mermaid/mermaid.min.js",
+      "bytes": 3566058,
+      "sha256": "18327bef70d96fb505fe7287d9f6a7362ebf07ff6576ddfaffb1a06f3e1a2954"
+    },
+    {
+      "path": "inc/block-hooks.php",
+      "bytes": 35409,
+      "sha256": "c97b1d766d5bbc4923111baa75c34fc6ab23c5bb7321ee39135f2f07bfe40ebc"
+    },
+    {
+      "path": "inc/content-filters.php",
+      "bytes": 22694,
+      "sha256": "9a42a311829645ee421bfd1da81f41964bcd329d9bfab0939cf9c4e6b6c827e4"
+    },
+    {
+      "path": "parts/footer.html",
+      "bytes": 1421,
+      "sha256": "275c0bafb1403397a32bcb15db2088a72726eec9b007c88f9a1429fb887a2f4b"
+    },
+    {
+      "path": "parts/header-compact.html",
+      "bytes": 563,
+      "sha256": "32bdfe497e3f281a07fded229c76b0e0562568b00f2d122907fd95f0a2b744dd"
+    },
+    {
+      "path": "parts/header.html",
+      "bytes": 4160,
+      "sha256": "9f5baa291769320c0a3bb5c6c2af9e845c32c618d93609ada5bd41d06243007f"
+    },
+    {
+      "path": "readme.txt",
+      "bytes": 27521,
+      "sha256": "ccbc10b988516c6375fe8408da8e99de214772e0cf1a4def1aadc00b98382192"
+    },
+    {
+      "path": "screenshot.png",
+      "bytes": 728688,
+      "sha256": "99efc64d825111645620efa2855e35127c21ca07088b767f5569cc2adc56c87f"
+    }
+  ],
+  "note": "This inventory excludes its own hash to avoid self-reference; the release theme_manifest binds this file. Earlier54-name/5-missing-license reports are superseded by59 outer versions plus12 parser versions.",
+  "distribution_route": {
+    "theme": "GPL-2.0-or-later; exercise GPLv3 option for this distribution",
+    "dompurify": "Apache-2.0 alternative; preserve dual-license notice",
+    "points_on_curve": "Rely on complete upstream MIT grant; retain flatness adaptation attribution, no additional independently obtained grant asserted"
+  }
+}

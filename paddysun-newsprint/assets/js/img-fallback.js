@@ -1,14 +1,14 @@
 /**
- * 失效图片作品替换（0.10.0 U7 / 轨道 D-a）：正文图片加载失败时，
- * 替换为「作品图片＋介绍链接＋替代文字」固定配对的随机一组。
+ * 正文图片／视频加载失败时，随机选取作品图片及作品名作为回退。
+ * 只显示失效提示，不创建作品介绍链接；旧配置的 url 字段不使用。
  *
- * 边界（stage6-plan §6）：
- *  - 仅处理文章／页面正文容器内的 img（.np-content / .wp-block-post-content）；
+ * 边界：
+ *  - 仅处理文章／页面正文容器内的 img 和 video[src]（.np-content / .wp-block-post-content）；
  *    data: URI（本地头像）、88×31 按钮、用户标记 data-np-keep 的图不动。
  *  - 不为检测而触发懒加载：只监听 error + 捕捉监听安装前已失败的图。
  *  - 替换时清 srcset/sizes、移除 picture 内 source，避免再次命中坏候选；
- *    保留原图 alt 说明，另加可见失效提示与「作品介绍」独立链接
- *    （不嵌套锚点、不篡改原文链接目标）。
+ *    保留原图 alt 说明，视频回退图使用作品 alt，另加含作品名的纯文字提示；
+ *    不创建锚点，不篡改原文链接目标。
  *  - 替换图再次失败降级为文字提示，不循环重试。
  *  - 不使用内联 onerror；文案经 textContent 写入。
  */
@@ -20,7 +20,6 @@
 	if (!ITEMS.length) return;
 
 	var HANDLED = 'data-np-artwork';
-	var seq = 0;
 
 	function pickItem() {
 		// 每张失败图独立随机一组；选定后（页面内）保持稳定
@@ -66,13 +65,6 @@
 		note.className = 'np-img-fallback-note';
 		var title = item.title || item.alt || '';
 		note.textContent = (CFG.notice || '原图未能加载 · 已替换为作品《%s》').replace('%s', title);
-		if (item.url) {
-			var link = document.createElement('a');
-			link.href = item.url; // 已过服务端 scheme 白名单
-			link.textContent = CFG.more || '作品介绍 →';
-			note.appendChild(document.createTextNode(' '));
-			note.appendChild(link);
-		}
 		return note;
 	}
 
@@ -95,7 +87,7 @@
 			}
 		}
 
-		/* 可见失效提示 + 独立介绍链接（不嵌套锚点） */
+		/* 含作品名的纯文字失效提示，不添加介绍链接 */
 		var note = buildNote(item);
 		var anchor = img.parentNode && img.parentNode.classList && img.parentNode.classList.contains('wp-block-image')
 			? img.parentNode : img;
@@ -130,7 +122,6 @@
 		var item = pickItem();
 		var img = document.createElement('img');
 		img.alt = item.alt || '';
-		img.src = item.image;
 		img.style.maxWidth = '100%';
 		img.style.height = 'auto';
 		var note = buildNote(item);
@@ -142,6 +133,7 @@
 		video.parentNode.insertBefore(note, video.nextSibling);
 		video.parentNode.insertBefore(img, video);
 		if (video.parentNode) video.parentNode.removeChild(video);
+		img.src = item.image; // 先安装二次失败监听，再开始加载回退图
 	}
 
 	function install() {

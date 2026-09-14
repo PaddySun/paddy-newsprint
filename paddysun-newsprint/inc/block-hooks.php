@@ -606,7 +606,75 @@ function paddysun_ns_render_excerpt_skip_math( $content, $parsed_block, $block =
 	);
 	return is_string( $replaced ) ? $replaced : $content;
 }
-add_filter( 'render_block_core/post-excerpt', 'paddysun_ns_render_excerpt_skip_math', 20, 2 );
+add_filter( 'render_block_core/post-excerpt', 'paddysun_ns_render_excerpt_skip_math', 20, 3 );
+
+/**
+ * 简报的版面预算不随站点语言变化：汉字逐字计，其他文字按词计。
+ * 只截断区块渲染后的纯文本，不改变已保存摘要、正文或全局词数规则。
+ */
+function paddysun_ns_render_brief_excerpt( $content, $parsed_block ) {
+	$attrs = $parsed_block['attrs'] ?? array();
+	$classes = preg_split( '/\s+/', trim( $attrs['className'] ?? '' ) );
+	if ( ! in_array( 'np-brief__sum', $classes, true ) || is_admin() || is_feed()
+		|| ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+		return $content;
+	}
+	$limit = max( 1, min( 64, (int) ( $attrs['excerptLength'] ?? 64 ) ) );
+	$result = preg_replace_callback(
+		'~(<p\b[^>]*\bclass=["\'][^"\']*\bwp-block-post-excerpt__excerpt\b[^"\']*["\'][^>]*>)(.*?)(</p>)~is',
+		static function ( $match ) use ( $limit ) {
+			$text = html_entity_decode( wp_strip_all_tags( $match[2] ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+			$text = trim( preg_replace( '/\s+/u', ' ', $text ) );
+			// 保留每个词后的空白，避免把英文词重新拼接在一起。
+			$count = preg_match_all( '/(?:[\p{Han}\p{Hiragana}\p{Katakana}\p{Hangul}]|[^\s\p{Han}\p{Hiragana}\p{Katakana}\p{Hangul}]+)\s*/u', $text, $units );
+			if ( false === $count ) {
+				return $match[0];
+			}
+			$kept = array();
+			$characters = 0;
+			foreach ( $units[0] as $unit ) {
+				$length = preg_match_all( '/./us', $unit );
+				if ( count( $kept ) >= $limit || $characters + $length > 192 ) {
+					break;
+				}
+				$kept[] = $unit;
+				$characters += $length;
+			}
+			if ( count( $kept ) < $count ) {
+				// 正常词不切半；单个超长词仍须受版面字符预算约束。
+				if ( ! $kept ) {
+					preg_match( '/^.{1,192}/us', $text, $prefix );
+					$kept[] = $prefix[0] ?? '';
+				}
+				$text = rtrim( implode( '', $kept ) ) . '…';
+			}
+			return $match[1] . esc_html( $text ) . $match[3];
+		},
+		$content
+	);
+	return is_string( $result ) ? $result : $content;
+}
+add_filter( 'render_block_core/post-excerpt', 'paddysun_ns_render_brief_excerpt', 30, 2 );
+
+/**
+ * 连续超长拉丁词采用局部报头字号，不截断站名或影响普通标题。
+ */
+function paddysun_ns_render_long_nameplate( $content, $parsed_block ) {
+	$classes = preg_split( '/\s+/', trim( $parsed_block['attrs']['className'] ?? '' ) );
+	if ( ! in_array( 'np-nameplate', $classes, true ) ) {
+		return $content;
+	}
+	$text = html_entity_decode( wp_strip_all_tags( $content ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+	if ( ! preg_match( '/[A-Za-z]{32,}/', $text ) ) {
+		return $content;
+	}
+	$html = new WP_HTML_Tag_Processor( $content );
+	if ( $html->next_tag( array( 'class_name' => 'np-nameplate' ) ) ) {
+		$html->add_class( 'np-nameplate--long-token' );
+	}
+	return $html->get_updated_html();
+}
+add_filter( 'render_block_core/site-title', 'paddysun_ns_render_long_nameplate', 20, 2 );
 
 /**
  * 编辑器保存普通核心区块，只有前台 HTML 渲染才增强为提醒确认弹窗。

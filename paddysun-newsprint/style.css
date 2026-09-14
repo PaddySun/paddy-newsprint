@@ -1,10 +1,10 @@
 /*
 Theme Name: Paddysun Newsprint
-Theme URI: https://example.com/
+Theme URI: https://www.paddysun.top/paddy-newsprint
 Author: Paddy
-Author URI: https://example.com/
+Author URI: https://www.paddysun.top/about-us
 Description: 报纸风格的极简中文博客块主题。首页全量移植 Broadside 报纸版面（报头三件套、三栏头条、本期要目），文章页保持 Typora Newsprint 阅读体验；英文内容采用 Broadside 字体方案（Source Serif 4 / Libre Caslon / Unifraktur）。全部模板区块化，色板/字体/间距由 theme.json 提供，站点编辑器所见即所得。内置 KaTeX、Mermaid、代码高亮按需加载与一键复制 Markdown。零外部请求。
-Version: 0.10.11
+Version: 0.10.12
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 7.4
@@ -370,7 +370,7 @@ a.np-icon-link {
 /* 4.2 报头：哥特体站名 + 左右双耳（底对齐站名，耳垂直居中） */
 .np-masthead {
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 4fr) minmax(0, 1fr);
     align-items: center;
     gap: 18px;
     padding: 20px 0 12px;
@@ -398,6 +398,9 @@ a.np-icon-link {
 }
 
 .np-nameplate {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
     font-family: var(--np-masthead-font);
     font-weight: 400;
     font-size: var(--np-fs-masthead);
@@ -405,6 +408,10 @@ a.np-icon-link {
     letter-spacing: 0.5px;
     text-align: center;
     margin: 0;
+}
+.np-masthead .np-nameplate--long-token {
+    font-size: clamp(24px, 3vw, 40px);
+    line-height: 1.1;
 }
 .np-nameplate a {
     color: var(--np-ink);
@@ -772,11 +779,16 @@ a.np-icon-link {
 .np-lead__more-wrap {
     text-align: center;
     margin: 14px 0 0;
+    line-height: 1;
 }
 .np-lead__more,
+.np-lead__aside .wp-block-read-more.np-aside__more-wrap,
 .wp-block-post-excerpt__more-link {
     display: inline-block;
+    font-family: var(--np-body);
     font-size: var(--np-fs-meta);
+    font-style: normal;
+    line-height: 1.6;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--np-accent);
@@ -784,6 +796,7 @@ a.np-icon-link {
     text-decoration: none;
 }
 .np-lead__more:hover,
+.np-lead__aside .wp-block-read-more.np-aside__more-wrap:hover,
 .wp-block-post-excerpt__more-link:hover {
     color: var(--np-ink);
     text-decoration: underline;
@@ -1636,7 +1649,8 @@ tfoot th,
     vertical-align: top;
     color: var(--np-ink);            /* 透明表头 → 墨字（原纸白反白随墨底一起取消） */
     background-color: transparent;   /* 覆盖潜在的主题色继承，保表头透明 */
-    white-space: nowrap;            /* 表头不折行：短表头列不再被挤压过窄（V-09） */
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
 td,
 .wp-block-table td {
@@ -2407,6 +2421,7 @@ img.local-avatar {
 }
 .np-footer__dot {
     display: inline-block;
+    flex: 0 0 8px;
     width: 8px;
     height: 8px;
     border-radius: 50%; /* 状态指示灯的圆点是站长点名的例外（直角规线针对版面组件） */
@@ -2583,6 +2598,24 @@ img.local-avatar {
         justify-content: center;
         text-align: center;
     }
+    .np-footer__beian {
+        justify-content: center;
+        gap: 8px 12px;
+        line-height: 1.6;
+        letter-spacing: 0;
+    }
+    .np-footer__icp {
+        flex-basis: 100%;
+        text-wrap: balance;
+    }
+    .np-footer__icp a {
+        display: inline-block;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+    .np-footer__status {
+        margin-inline: 0;
+    }
 }
 
 @media (max-width: 40em) {
@@ -2607,6 +2640,10 @@ img.local-avatar {
 
 /* 要求减少动效的读者：颜色变化保留（表意），缓动归零 */
 @media (prefers-reduced-motion: reduce) {
+    .np-footer__dot {
+        animation: none;
+        opacity: 1;
+    }
     html {
         scroll-behavior: auto;
     }

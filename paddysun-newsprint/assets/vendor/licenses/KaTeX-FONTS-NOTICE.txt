@@ -1,0 +1,273 @@
+KaTeX bundled font notices
+
+The following copyright, Reserved Font Name and license statements are transcribed verbatim from name IDs 0, 13 and 14 of the 40 bundled WOFF/WOFF2 files.
+
+These fonts are licensed under SIL Open Font License 1.1, not the KaTeX JavaScript MIT license. The complete SIL Open Font License 1.1 is included in this theme at assets/fonts/LICENSE-OFL.txt (relative to this notice: ../../fonts/LICENSE-OFL.txt). Its OFL license terms also accompany these fonts; its separate copyright statements for other font families do not replace the notices below.
+
+========================================================================
+Files:
+assets/vendor/katex/fonts/KaTeX_AMS-Regular.woff
+assets/vendor/katex/fonts/KaTeX_AMS-Regular.woff2
+
+Font name table ID 0:
+Copyright (c) 2009-2010 Design Science, Inc.
+Copyright (c) 2014-2018 Khan Academy
+
+Font name table ID 13:
+Copyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)
+Copyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),
+with Reserved Font Name KaTeX_AMS.
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license available with a FAQ at:
+http://scripts.sil.org/OFL
+
+Font name table ID 14:
+http://scripts.sil.org/OFL
+
+========================================================================
+Files:
+assets/vendor/katex/fonts/KaTeX_Caligraphic-Bold.woff
+assets/vendor/katex/fonts/KaTeX_Caligraphic-Bold.woff2
+assets/vendor/katex/fonts/KaTeX_Caligraphic-Regular.woff
+assets/vendor/katex/fonts/KaTeX_Caligraphic-Regular.woff2
+
+Font name table ID 0:
+Copyright (c) 2009-2010 Design Science, Inc.
+Copyright (c) 2014-2018 Khan Academy
+
+Font name table ID 13:
+Copyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)
+Copyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),
+with Reserved Font Name KaTeX_Caligraphic.
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license available with a FAQ at:
+http://scripts.sil.org/OFL
+
+Font name table ID 14:
+http://scripts.sil.org/OFL
+
+========================================================================
+Files:
+assets/vendor/katex/fonts/KaTeX_Fraktur-Bold.woff
+assets/vendor/katex/fonts/KaTeX_Fraktur-Bold.woff2
+assets/vendor/katex/fonts/KaTeX_Fraktur-Regular.woff
+assets/vendor/katex/fonts/KaTeX_Fraktur-Regular.woff2
+
+Font name table ID 0:
+Copyright (c) 2009-2010 Design Science, Inc.
+Copyright (c) 2014-2018 Khan Academy
+
+Font name table ID 13:
+Copyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)
+Copyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),
+with Reserved Font Name KaTeX_Fraktur.
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license available with a FAQ at:
+http://scripts.sil.org/OFL
+
+Font name table ID 14:
+http://scripts.sil.org/OFL
+
+========================================================================
+Files:
+assets/vendor/katex/fonts/KaTeX_Main-Bold.woff
+assets/vendor/katex/fonts/KaTeX_Main-Bold.woff2
+assets/vendor/katex/fonts/KaTeX_Main-BoldItalic.woff
+assets/vendor/katex/fonts/KaTeX_Main-BoldItalic.woff2
+assets/vendor/katex/fonts/KaTeX_Main-Italic.woff
+assets/vendor/katex/fonts/KaTeX_Main-Italic.woff2
+assets/vendor/katex/fonts/KaTeX_Main-Regular.woff
+assets/vendor/katex/fonts/KaTeX_Main-Regular.woff2
+
+Font name table ID 0:
+Copyright (c) 2009-2010 Design Science, Inc.
+Copyright (c) 2014-2018 Khan Academy
+
+Font name table ID 13:
+Copyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)
+Copyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),
+with Reserved Font Name KaTeX_Main.
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license available with a FAQ at:
+http://scripts.sil.org/OFL
+
+Font name table ID 14:
+http://scripts.sil.org/OFL
+
+========================================================================
+Files:
+assets/vendor/katex/fonts/KaTeX_Math-BoldItalic.woff
+assets/vendor/katex/fonts/KaTeX_Math-BoldItalic.woff2
+assets/vendor/katex/fonts/KaTeX_Math-Italic.woff
+assets/vendor/katex/fonts/KaTeX_Math-Italic.woff2
+
+Font name table ID 0:
+Copyright (c) 2009-2010 Design Science, Inc.
+Copyright (c) 2014-2018 Khan Academy
+
+Font name table ID 13:
+Copyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)
+Copyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),
+with Reserved Font Name KaTeX_Math.
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license available with a FAQ at:
+http://scripts.sil.org/OFL
+
+Font name table ID 14:
+http://scripts.sil.org/OFL
+
+========================================================================
+Files:
+assets/vendor/katex/fonts/KaTeX_SansSerif-Bold.woff
+assets/vendor/katex/fonts/KaTeX_SansSerif-Bold.woff2
+assets/vendor/katex/fonts/KaTeX_SansSerif-Italic.woff
+assets/vendor/katex/fonts/KaTeX_SansSerif-Italic.woff2
+assets/vendor/katex/fonts/KaTeX_SansSerif-Regular.woff
+assets/vendor/katex/fonts/KaTeX_SansSerif-Regular.woff2
+
+Font name table ID 0:
+Copyright (c) 2009-2010 Design Science, Inc.
+Copyright (c) 2014-2018 Khan Academy
+
+Font name table ID 13:
+Copyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)
+Copyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),
+with Reserved Font Name KaTeX_SansSerif.
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license available with a FAQ at:
+http://scripts.sil.org/OFL
+
+Font name table ID 14:
+http://scripts.sil.org/OFL
+
+========================================================================
+Files:
+assets/vendor/katex/fonts/KaTeX_Script-Regular.woff
+assets/vendor/katex/fonts/KaTeX_Script-Regular.woff2
+
+Font name table ID 0:
+Copyright (c) 2009-2010 Design Science, Inc.
+Copyright (c) 2014-2018 Khan Academy
+
+Font name table ID 13:
+Copyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)
+Copyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),
+with Reserved Font Name KaTeX_Script.
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license available with a FAQ at:
+http://scripts.sil.org/OFL
+
+Font name table ID 14:
+http://scripts.sil.org/OFL
+
+========================================================================
+Files:
+assets/vendor/katex/fonts/KaTeX_Size1-Regular.woff
+assets/vendor/katex/fonts/KaTeX_Size1-Regular.woff2
+
+Font name table ID 0:
+Copyright (c) 2009-2010 Design Science, Inc.
+Copyright (c) 2014-2018 Khan Academy
+
+Font name table ID 13:
+Copyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)
+Copyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),
+with Reserved Font Name KaTeX_Size1.
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license available with a FAQ at:
+http://scripts.sil.org/OFL
+
+Font name table ID 14:
+http://scripts.sil.org/OFL
+
+========================================================================
+Files:
+assets/vendor/katex/fonts/KaTeX_Size2-Regular.woff
+assets/vendor/katex/fonts/KaTeX_Size2-Regular.woff2
+
+Font name table ID 0:
+Copyright (c) 2009-2010 Design Science, Inc.
+Copyright (c) 2014-2018 Khan Academy
+
+Font name table ID 13:
+Copyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)
+Copyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),
+with Reserved Font Name KaTeX_Size2.
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license available with a FAQ at:
+http://scripts.sil.org/OFL
+
+Font name table ID 14:
+http://scripts.sil.org/OFL
+
+========================================================================
+Files:
+assets/vendor/katex/fonts/KaTeX_Size3-Regular.woff
+assets/vendor/katex/fonts/KaTeX_Size3-Regular.woff2
+
+Font name table ID 0:
+Copyright (c) 2009-2010 Design Science, Inc.
+Copyright (c) 2014-2018 Khan Academy
+
+Font name table ID 13:
+Copyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)
+Copyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),
+with Reserved Font Name KaTeX_Size3.
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license available with a FAQ at:
+http://scripts.sil.org/OFL
+
+Font name table ID 14:
+http://scripts.sil.org/OFL
+
+========================================================================
+Files:
+assets/vendor/katex/fonts/KaTeX_Size4-Regular.woff
+assets/vendor/katex/fonts/KaTeX_Size4-Regular.woff2
+
+Font name table ID 0:
+Copyright (c) 2009-2010 Design Science, Inc.
+Copyright (c) 2014-2018 Khan Academy
+
+Font name table ID 13:
+Copyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)
+Copyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),
+with Reserved Font Name KaTeX_Size4.
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license available with a FAQ at:
+http://scripts.sil.org/OFL
+
+Font name table ID 14:
+http://scripts.sil.org/OFL
+
+========================================================================
+Files:
+assets/vendor/katex/fonts/KaTeX_Typewriter-Regular.woff
+assets/vendor/katex/fonts/KaTeX_Typewriter-Regular.woff2
+
+Font name table ID 0:
+Copyright (c) 2009-2010 Design Science, Inc.
+Copyright (c) 2014-2018 Khan Academy
+
+Font name table ID 13:
+Copyright (c) 2009-2010, Design Science, Inc. (<www.mathjax.org>)
+Copyright (c) 2014-2018 Khan Academy (<www.khanacademy.org>),
+with Reserved Font Name KaTeX_Typewriter.
+
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license available with a FAQ at:
+http://scripts.sil.org/OFL
+
+Font name table ID 14:
+http://scripts.sil.org/OFL

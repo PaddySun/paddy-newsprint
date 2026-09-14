@@ -1,14 +1,13 @@
 <?php
 /**
- * 失效图片作品替换（0.10.0 U7 / 轨道 D-a）。
+ * 失效图片／视频的本地作品图回退。
  *
- * 两阶段交付：本批交付机制与本地测试夹具；正式作品素材由站长
- * 在 assets/artwork-fallbacks.json 中录入后自动生效（D-b）。
+ * assets/artwork-fallbacks.json 提供作品图片、替代文字及准确作品名。
+ * 来源与许可保留在 readme 中，运行时不提供作品介绍链接。
  *
- * 行为约定（stage6-plan §6）：
- *  - 清单每项为「图片 URL ＋ 作品介绍 URL ＋ 替代文字／作品名」固定配对；
- *    失败时按图随机选一组，页面内保持稳定，不把作品 A 链接到作品 B。
- *  - 仅覆盖文章／页面正文图片；首页保持 0 JS。Logo、功能图标、
+ * 行为约定：
+ *  - 每个失败媒体随机选取一项，页面内保持稳定；提示只显示作品名。
+ *  - 仅覆盖文章／页面正文图片及带 src 的视频；首页保持 0 JS。Logo、功能图标、
  *    评论头像（data: URI）、88×31 按钮不在替换范围。
  *  - 正常图片与原链接不变；替换失败二次出错降级文字，不循环重试。
  *  - URL scheme 白名单：显式 http/https 或站点相对路径（协议相对 //host/…
@@ -26,9 +25,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * 读取并校验作品替换清单。
  *
  * 清单格式（assets/artwork-fallbacks.json）：
- * [ { "image": "https://…/artwork.webp", "url": "https://…/works/x", "alt": "…", "title": "作品名" }, … ]
+ * [ { "image": "assets/img/fallback/artwork.webp", "alt": "…", "title": "作品名" }, … ]
+ * 内置图片相对于父主题 URI 解析，兼容子目录安装及自定义 content 目录。
+ * 旧清单的 url 字段直接忽略，不参与校验，也不传给前端。
  *
- * @return array[] 校验通过的配对列表。
+ * @return array[] 校验通过的作品列表。
  */
 function paddysun_ns_artwork_fallbacks() {
 	static $list = null;
@@ -53,18 +54,20 @@ function paddysun_ns_artwork_fallbacks() {
 					continue;
 				}
 				$image = isset( $entry['image'] ) ? trim( (string) $entry['image'] ) : '';
-				$url   = isset( $entry['url'] ) ? trim( (string) $entry['url'] ) : '';
+				if ( 0 === strpos( $image, 'assets/img/fallback/' ) ) {
+					$relative = substr( $image, strlen( 'assets/img/fallback/' ) );
+					if ( ! preg_match( '/^[a-z0-9-]+\.webp$/i', $relative ) ) {
+						continue;
+					}
+					$image = get_template_directory_uri() . '/' . $image;
+				}
 				$alt   = isset( $entry['alt'] ) ? (string) $entry['alt'] : '';
 				$title = isset( $entry['title'] ) ? (string) $entry['title'] : '';
-				if ( '' === $image || '' === $url ) {
-					continue;
-				}
-				if ( ! paddysun_ns_artwork_url_allowed( $image ) || ! paddysun_ns_artwork_url_allowed( $url ) ) {
+				if ( ! paddysun_ns_artwork_url_allowed( $image ) ) {
 					continue;
 				}
 				$list[] = array(
 					'image' => esc_url_raw( $image ),
-					'url'   => esc_url_raw( $url ),
 					'alt'   => $alt,
 					'title' => $title,
 				);
@@ -105,7 +108,7 @@ function paddysun_ns_artwork_url_allowed( $url ) {
 }
 
 /**
- * 条件加载替换脚本：仅单篇正文含 <img> 且清单非空时；
+ * 条件加载替换脚本：仅单篇正文含 <img> 或 <video> 且清单非空时；
  * 密码文章不加载（与公开内容边界一致）；首页 / Feed 不涉及。
  *
  * 首页排除（R1-2）必须显式：is_front_page() 覆盖「文章列表」与
@@ -125,7 +128,7 @@ function paddysun_ns_maybe_enqueue_img_fallback() {
 	}
 	$list = paddysun_ns_artwork_fallbacks();
 	if ( ! $list ) {
-		return; // 素材未录入：机制待命，不加载脚本
+		return; // 无有效作品：不加载脚本
 	}
 	wp_enqueue_script(
 		'paddysun-img-fallback',
@@ -141,7 +144,6 @@ function paddysun_ns_maybe_enqueue_img_fallback() {
 			'items'  => $list,
 			/* translators: %s: 作品名 */
 			'notice' => __( '原图未能加载 · 已替换为作品《%s》', 'paddysun-newsprint' ),
-			'more'   => __( '作品介绍 →', 'paddysun-newsprint' ),
 		)
 	);
 }

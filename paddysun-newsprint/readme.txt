@@ -3,7 +3,7 @@ Contributors: paddysun
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.10.11
+Stable tag: 0.10.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, one-column, custom-colors, custom-menu, editor-style, block-styles, block-patterns, full-site-editing, style-variations, translation-ready
@@ -49,6 +49,13 @@ Paddysun Newsprint 是一款面向中文文字博客的块主题（Block Theme�
 官方标准整改：vendor 库随包附未压缩原始文件；检索词转义、检索表单 action、键盘焦点样式等可移植性/无障碍修正。升级后建议清一次缓存。
 
 == Changelog ==
+
+= 0.10.12 =
+* 公开源码补丁候选：报头长标题允许收缩与断行，长表头自然换行，手机页脚状态居中、备案分组及静态状态点优化。
+* 修正公开作者/主题链接和七组 Met 馆藏配对；内置回退图片相对于主题 URI 解析，兼容子目录安装。按钮示例链接改为本站首页。
+* 简报摘要按最多64个汉字/词单位及192个字符双重预算限制，避免英文站点语言下中文或中英混排摘要过长；只影响渲染，不修改存档正文与摘要。统一两种阅读入口字体。取消回退作品介绍外链，保留作品名与资源来源记录。
+* 连续超长拉丁词仅在报头采用局部字号，保留完整站名和普通标题排印；公开预览图采用站长已验收的 1200×900 PNG。
+* SEO/schema、Markdown 存档与 REST、llms 保留并回归；本轮仅自主分发，WordPress.org 不在范围。候选分发仍须完成许可、兼容性、独立视觉与发布检查。
 
 = 0.10.11 =
 * maintenance-notice 通用化为「提醒确认弹窗」，保留旧 slug。编辑器改用普通核心标题/段落/按钮区块，前台渲染后才包装 dialog 并按需加载脚本；后台/REST/Feed 不增强。补部件元数据、初始化防重、showModal 异常保护及旧 dialog 兼容；不自动覆盖数据库定制内容。
@@ -194,10 +201,11 @@ Paddysun Newsprint 是一款面向中文文字博客的块主题（Block Theme�
 * UnifrakturMaguntia — © j. 'mach' wust, Peter Wiegel, OFL 1.1, http://unifraktur.sourceforge.net/
 
 图标（内联 SVG，随模板直出，零额外请求）：
-* Phosphor Icons 2.1 — © Phosphor Icons, MIT License, https://github.com/phosphor-icons/core
-  （检索放大镜 / RSS 广播 / 复制，regular 线性风格，stroke=currentColor 随宿主变色）
+* Phosphor Icons — Copyright (c) 2020-2024 Phosphor Icons, MIT License, https://github.com/phosphor-icons/core
+  检索放大镜 / RSS 广播 / 复制来自站长提供的 regular SVG 集合；仅移除透明画布矩形并增加嵌入/可访问性属性，其余图形与来源一致。实际使用位置为 parts/header.html、parts/footer.html、inc/block-hooks.php。完整来源许可见 assets/vendor/licenses/Phosphor-Icons-LICENSE.txt；不凭目录推定具体上游发布标签。
 
-第三方脚本库（随主题打包，零外部请求；压缩制品与未压缩原始文件同时随包，两者 SHA-256 台账见开发仓库 security-sources/hashes.sha256，2026-09-13 复核）：
+第三方脚本库（随主题打包，零外部请求；压缩制品与未压缩文件同时随包）：
+完整通知位于 assets/vendor/licenses/；逐文件SHA-256、组件版本、实际路径和许可范围见 assets/resource-licenses.json。Mermaid 外层59个包版本、parser内嵌12个版本及roughjs下层4个精确锁定版本通知分别保留；roughjs下层按完整原文去重为3份通知，构建工具不随主题分发。四个主题字体已与公开分发来源逐字节核对一致。这不豁免清单中明确列出的特定权利链和组合分发路线待核事项。KaTeX字体采用OFL-1.1，版权/RFN见 assets/vendor/licenses/KaTeX-FONTS-NOTICE.txt 和 assets/fonts/LICENSE-OFL.txt，不以脚本MIT覆盖字体许可。本次分发保留GPL-2.0-or-later声明并行使GPLv3选项，DOMPurify采用Apache-2.0分支并保留双许可全文；详DISTRIBUTION-LICENSE.md与LICENSE-GPL-3.0.txt。points-on-curve 0.2.0按上游完整包MIT许可分发，flatness适配来源 https://seant23.wordpress.com/2010/11/12/offset-bezier-curves/ 保留说明，不另行改写其许可。
 * KaTeX 0.16.22 — © Khan Academy, MIT License, https://github.com/KaTeX/KaTeX
   制品 assets/vendor/katex/katex.min.js — sha256 e8d885505949f3a5f4abdd5dd0d53696bd1371ad26ffbf4f310dcd77c8cdae89
 * Mermaid 11.16.1 — © Knut Sveidqvist, MIT License, https://github.com/mermaid-js/mermaid
@@ -207,9 +215,16 @@ Paddysun Newsprint 是一款面向中文文字博客的块主题（Block Theme�
   制品 assets/vendor/highlight/highlight.min.js — sha256 c4a399dd6f488bc97a3546e3476747b3e714c99c57b9473154c6fb8d259b9381
 
 图片：
-* screenshot.png — 主题作者自制，GPLv2 or later
+* screenshot.png — 站长提供并授权缩放的公开主题预览图，PNG 1200×900；站长已确认后台主题预览正常。采用已验收公开文件，不在安装时导入私人媒体。
 * assets/img/about-placeholder.svg — 主题作者自制，GPLv2 or later
-* assets/img/fallback/fallback-*.webp — 失效图片替换占位图：底图取自 The Metropolitan Museum of Art 开放获取图像（Open Access，CC0 公有领域，collectionapi.metmuseum.org 逐件核实），「外派顶班」告示章由主题作者自制，GPLv2 or later；来源档案见开发仓库 ass/img/originals/来源与介绍.md
+* assets/img/fallback/fallback-*.webp — 失效图片替换图：底图取自 The Metropolitan Museum of Art Open Access（CC0 公有领域）；2026-09-14 经官方 collection API 逐件复核 isPublicDomain=true。告示章由主题作者自制，GPLv2 or later。图片随包提供，前端不显示作品介绍链接；下列馆藏地址仅作为资源来源记录。
+  fallback-qian-xuan.webp — Qian Xuan, Wang Xizhi watching geese, ca. 1295; DP273822.jpg; https://www.metmuseum.org/art/collection/search/40081
+  fallback-chen-hongshou.webp — Chen Hongshou, Miscellaneous Studies, one leaf dated 1619; DP157285.jpg; https://www.metmuseum.org/art/collection/search/37395
+  fallback-bada-shanren.webp — Bada Shanren (Zhu Da), Birds in a lotus pond, ca. 1690; DP205836_CRD.jpg; https://www.metmuseum.org/art/collection/search/49143
+  fallback-ren-yi.webp — Ren Yi (Ren Bonian), Animals, Flowers and Birds, 19th century; DP161418.jpg; https://www.metmuseum.org/art/collection/search/36170
+  fallback-raven.webp — Allen & Ginter, Raven, Birds of America series (N4), 1888; DP828738.jpg; https://www.metmuseum.org/art/collection/search/406647
+  fallback-crow.webp — Allen & Ginter, Crow, Birds of America series (N4), 1888; DP828750.jpg; https://www.metmuseum.org/art/collection/search/406660
+  fallback-eastern-shore.webp — The Eastern Shore, after Winslow Homer, published by Louis Prang & Co., 1896; DP875985.jpg; https://www.metmuseum.org/art/collection/search/348605
 
 88×31 按钮生成算法（GIF 不随主题包分发——站长经媒体库自行上传管理，此处记录按钮生成脚本的借鉴来源与许可边界）：
 * clouds — 深度移植自 Shadertoy「up in the cloud sea」© mdb (2021)，CC BY-NC-SA 3.0，https://www.shadertoy.com/view/Ndc3zl（算法结构与参数体系同构，跨媒介重写；保持非商业用途）

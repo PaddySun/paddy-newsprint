@@ -1,44 +1,37 @@
 [
   {
-    "image": "/wp-content/themes/paddysun-newsprint/assets/img/fallback/fallback-qian-xuan.webp",
-    "url": "https://example.com/artworks/1",
-    "alt": "示例作品 1：原图加载失败时的顶班占位",
-    "title": "示例作品 1"
+    "image": "assets/img/fallback/fallback-qian-xuan.webp",
+    "alt": "Qian Xuan, Wang Xizhi watching geese; local fallback image with a replacement notice",
+    "title": "Wang Xizhi watching geese"
   },
   {
-    "image": "/wp-content/themes/paddysun-newsprint/assets/img/fallback/fallback-chen-hongshou.webp",
-    "url": "https://example.com/artworks/2",
-    "alt": "示例作品 2：原图加载失败时的顶班占位",
-    "title": "示例作品 2"
+    "image": "assets/img/fallback/fallback-chen-hongshou.webp",
+    "alt": "Chen Hongshou, Miscellaneous Studies; local fallback image with a replacement notice",
+    "title": "Miscellaneous Studies"
   },
   {
-    "image": "/wp-content/themes/paddysun-newsprint/assets/img/fallback/fallback-bada-shanren.webp",
-    "url": "https://example.com/artworks/3",
-    "alt": "示例作品 3：原图加载失败时的顶班占位",
-    "title": "示例作品 3"
+    "image": "assets/img/fallback/fallback-bada-shanren.webp",
+    "alt": "Bada Shanren, Birds in a lotus pond; local fallback image with a replacement notice",
+    "title": "Birds in a lotus pond"
   },
   {
-    "image": "/wp-content/themes/paddysun-newsprint/assets/img/fallback/fallback-ren-yi.webp",
-    "url": "https://example.com/artworks/4",
-    "alt": "示例作品 4：原图加载失败时的顶班占位",
-    "title": "示例作品 4"
+    "image": "assets/img/fallback/fallback-ren-yi.webp",
+    "alt": "Ren Yi, Animals, Flowers and Birds; local fallback image with a replacement notice",
+    "title": "Animals, Flowers and Birds"
   },
   {
-    "image": "/wp-content/themes/paddysun-newsprint/assets/img/fallback/fallback-raven.webp",
-    "url": "https://example.com/artworks/5",
-    "alt": "示例作品 5：原图加载失败时的顶班占位",
-    "title": "示例作品 5"
+    "image": "assets/img/fallback/fallback-raven.webp",
+    "alt": "Allen & Ginter, Raven, Birds of America series N4; local fallback image with a replacement notice",
+    "title": "Raven, Birds of America series (N4)"
   },
   {
-    "image": "/wp-content/themes/paddysun-newsprint/assets/img/fallback/fallback-crow.webp",
-    "url": "https://example.com/artworks/6",
-    "alt": "示例作品 6：原图加载失败时的顶班占位",
-    "title": "示例作品 6"
+    "image": "assets/img/fallback/fallback-crow.webp",
+    "alt": "Allen & Ginter, Crow, Birds of America series N4; local fallback image with a replacement notice",
+    "title": "Crow, Birds of America series (N4)"
   },
   {
-    "image": "/wp-content/themes/paddysun-newsprint/assets/img/fallback/fallback-eastern-shore.webp",
-    "url": "https://example.com/artworks/7",
-    "alt": "示例作品 7：原图加载失败时的顶班占位",
-    "title": "示例作品 7"
+    "image": "assets/img/fallback/fallback-eastern-shore.webp",
+    "alt": "The Eastern Shore, after Winslow Homer, published by Louis Prang & Co.; local fallback image with a replacement notice",
+    "title": "The Eastern Shore"
   }
 ]

@@ -1,53 +1,61 @@
-# Paddysun Newsprint
+![Paddy Newsprint 品牌 Logo](https://cos.paddysun.top/brd/paddy-newsprint-logo-black.webp)
 
-面向中文写作者的 WordPress 块主题：报纸式首页、暖纸色阅读页、自托管字体和按内容加载的渲染脚本。
+# Paddy Newsprint
 
-**当前版本：0.10.11** · **许可：GPL-2.0-or-later**
+![版本 0.10.12](https://img.shields.io/badge/version-0.10.12-6b1f1f)
+![WordPress 7.1+](https://img.shields.io/badge/WordPress-7.1%2B-21759b?logo=wordpress&logoColor=white)
+![PHP 7.4+](https://img.shields.io/badge/PHP-7.4%2B-777bb4?logo=php&logoColor=white)
+![许可证 GPL-2.0-or-later](https://img.shields.io/badge/license-GPL--2.0--or--later-blue)
 
-## 目录结构
+报纸风格的中文 WordPress 块主题：完整头版、双耳报头、三栏内容与适合长文的阅读排印。主题自身的字体、图标、图片回退和脚本本地加载；这份 README 的品牌图片与 Shields.io 徽章是公开文档外部资源，不会随主题注入站点。
 
-```text
-README.md
-SECURITY.md
-操作手册.md
-LICENSE
-.gitignore
-paddysun-newsprint/     # 可安装的完整主题文件
-```
+## 下载与安装
 
-这是脱敏发布目录，不包含 WordPress 核心、数据库、用户文章、开发测试夹具或展示站源文件。个人链接和作品介绍配置采用占位内容。截图属于个人站点预览，不随本公开目录分发；不影响主题安装使用。
+- [GitHub 仓库](https://github.com/PaddySun/paddy-newsprint)
+- 国内下载预留地址：`https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-0.10.12.zip`。COS 由站长上传；上传前此地址不代表文件已可用。
+- 安装包文件名：`paddy-newsprint-0.10.12.zip`；包内目录：`paddysun-newsprint/`。
+- SHA-256 与本地安装验证结果将在候选生成后记录于本仓库 `RELEASE-0.10.12.md`。不要将 GitHub 的仓库源码 ZIP 当作可直接安装的主题包。
 
-## 安装
+在 WordPress 后台选择「外观 → 主题 → 上传主题」，安装并启用主题。升级前备份自己的站点；数据库中已定制的模板不会因主题文件更新自动覆盖。
 
-推荐下载单独的 **`paddy-newsprint-0.10.11.zip`**，在 WordPress 后台「外观 → 主题 → 添加新主题 → 上传主题」安装并启用。该 ZIP 顶层目录必须是 `paddysun-newsprint/`。
+## 主要功能
 
-**GitHub 的 Code → Download ZIP 是仓库归档，不是主题安装包。** 若从仓库下载，请解压，将其中的 `paddysun-newsprint/` 上传至站点 `wp-content/themes/`；也可把这个子目录单独压缩后安装。不要修改主题目录名称。
+- **报纸版面**：工具条、完整／紧凑报头、双耳、简报、长读、侧栏及本期要目。
+- **长文阅读**：本地衬线字体、引用、脚注、表格、目录、代码与图表展开／折叠。
+- **公式与图表**：按内容加载 KaTeX、Mermaid、highlight.js，失败时保留可读回退。
+- **媒体回退**：失效图片／视频替换为本地作品图，保留作品名、alt 和提示，不新增“作品介绍”外链。
+- **Markdown**：原文存档、复制和 REST 单篇导出，保留权限、nonce、导出开关与可见性边界。
+- **机器可读内容**：`/llms.txt` 索引、`/llms-full.txt` 全文、SEO/schema 输出与既有 SEO 插件让位机制。
 
-完整配置、升级、缓存排查与提醒弹窗操作见 [操作手册](操作手册.md)。报告安全问题请阅读 [SECURITY.md](SECURITY.md)。
+SEO/schema、Markdown 存档与 REST、llms 是保留的产品功能，不需要另装强制插件。本轮为自主分发，不是 WordPress.org 上架版本或官方审核通过声明。
 
-## 环境
+## 0.10.12 更新
 
-- WordPress 7.1 或更高版本（当前主题元数据与本地测试基线为 7.1）。
-- 发布前实际执行测试的 PHP 版本为 8.3.30。主题元数据仍标注 PHP 7.4，但完整最低版本兼容矩阵尚未执行，**建议使用 PHP 8.3+，不要把 7.4 视为已验证兼容承诺**。
-- 无必装插件。SEO、缓存、安全与评论扩展插件由站长自行选择和配置。
+- 简报采用最多 64 个汉字／词单位及 192 字符双预算，只调整渲染，不改保存正文与摘要。
+- 超长连续拉丁站名使用局部字号约束，不截断站名，不使用全局 `break-all`。
+- 两个阅读入口统一排印；媒体回退不再提供作品介绍按钮。
+- 补入站长已验收的主题预览图，修正公开作者链接。
+- 补齐实际第三方版权及许可证通知，核验字体来源与 roughjs 锁定依赖，强化公开构建和哈希校验。
 
-## 当前功能
+## 兼容性与验证边界
 
-- 首页三栏头条、订阅框和分类要目；桌面三栏总高度预算 820px，手机和平板自然排版。近期文章卡片流已移除。
-- 单篇特色图、目录、长内容折叠、表格横向滚动、代码复制与语法高亮。
-- 自托管 KaTeX、Mermaid 和 highlight.js；未压缩对应制品也随主题提供。
-- Mermaid 采用 strict 配置、图型白名单和 SVG 清洗；不支持或失败的图表回退到源码。
-- 正文失效图片及带 `src` 的视频可用配对作品图替换；小图和显式保留标记排除。视频跨源 iframe 不在此机制范围内。
-- 单篇 Markdown 接口、`/llms.txt`、`/llms-full.txt`；公开输出会排除密码保护内容，并受文章级复制/导出开关约束。
-- 通用「提醒确认弹窗」：编辑器中用核心区块编辑，前台才增强为弹窗。默认不挂载。
-- 完整报头的手机版隐藏副标题、日期与刊训；检索/RSS工具组右对齐。
+WordPress **7.1+**，PHP **7.4+**。真实 PHP 7.4.33 与 8.3.30 的语法、核心摘要渲染及指定业务边界已验证；这不表示所有插件组合均已测试。站长已确认极长／普通标题、简报、阅读入口和媒体回退效果。
 
-## 发布边界
+仓库中的导航、备案、服务状态及按钮示例是占位内容，安装后请按站点情况编辑。主题不导入个人数据库或媒体。
 
-主题自己的运行脚本、字体和样式从本地加载；用户文章、用户添加的远程资源和插件仍可能产生外部请求。未挂提醒部件的默认首页不加载主题 JavaScript，不代表 WordPress 核心与插件没有脚本。
+## 许可证与第三方来源
 
-当前检查包括 PHP/JS 语法、页面端点、模板解析及序列化、发布目录扫描与提醒相关自动测试。**不等同于所有浏览器、插件矩阵、最低 PHP 版本或站点编辑器保存操作均已验收。** 提醒部件的编辑器崩溃报告尚无可复现错误栈，安装后应按手册先在测试站验证。
+主题原声明保持 **GPL-2.0-or-later**。0.10.12 对 GPL 覆盖部分行使 **GPLv3 选项**；不是 GPLv3-only。DOMPurify 采用其 **Apache-2.0 分支**，原双许可全文仍保留。
 
-## 资源许可
+- [分发许可路线](paddysun-newsprint/DISTRIBUTION-LICENSE.md)
+- [GPLv3 全文](paddysun-newsprint/LICENSE-GPL-3.0.txt)
+- [组件及文件哈希清单](paddysun-newsprint/assets/resource-licenses.json)
+- [第三方通知目录](paddysun-newsprint/assets/vendor/licenses/)
 
-主题许可见 [LICENSE](LICENSE)。字体、图标、第三方库和作品素材的许可与出处见 [`paddysun-newsprint/readme.txt`](paddysun-newsprint/readme.txt) 的 Resources 节。素材占位目录包含的是本地生成图或已声明来源的公有领域画作，不包括站长自用的外链 GIF 文件。
+`points-on-curve` 0.2.0 按上游完整包的 **MIT** 许可分发，完整许可已保留。其 `flatness` 函数注明适配自 [Offset Bézier Curves](https://seant23.wordpress.com/2010/11/12/offset-bezier-curves/)；在此保留来源说明，不将该网页描述成另一份已取得的许可，也不修改上游 MIT 声明。
+
+## 作者
+
+![Paddy 个人 88×31](https://cos.paddysun.top/88x31/paddy-88x31-clouds.webp)
+
+[Paddy](https://www.paddysun.top/about-us) · [主题展示页](https://www.paddysun.top/paddy-newsprint)

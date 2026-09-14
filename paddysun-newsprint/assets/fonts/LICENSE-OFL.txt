@@ -1,8 +1,17 @@
-Copyright (c) <dates>, <Copyright Holder> (<URL|email>),
-with Reserved Font Name <Reserved Font Name>.
-Copyright (c) <dates>, <additional Copyright Holder> (<URL|email>),
-with Reserved Font Name <additional Reserved Font Name>.
-Copyright (c) <dates>, <additional Copyright Holder> (<URL|email>).
+Copyright notices transcribed from the name tables of the bundled font files:
+
+Source Serif 4 (source-serif-4-normal.woff2, source-serif-4-italic.woff2):
+© 2014 - 2021 Adobe Systems Incorporated (http://www.adobe.com/), with Reserved Font Name ‘Source’.
+Version 4.004;hotconv 1.0.116;makeotfexe 2.5.65601
+
+Libre Caslon Display (libre-caslon-display-400.woff2):
+Copyright 2012 The Libre Caslon Display Authors (https://github.com/impallari/Libre-Caslon-Display)
+Version 1.100
+
+UnifrakturMaguntia (unifraktur-maguntia-400.woff2):
+Copyright (c) 2010 j. 'mach' wust with Reserved Font Name UnifrakturMaguntia.
+Copyright (c) 2009 Peter Wiegel.
+Version 2010-11-24
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:

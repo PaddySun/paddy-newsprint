@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PADDYSUN_NS_VERSION', '0.10.11' );
+define( 'PADDYSUN_NS_VERSION', '0.10.12' );
 define( 'PADDYSUN_NS_DIR', get_template_directory() );
 define( 'PADDYSUN_NS_URI', get_template_directory_uri() );
 

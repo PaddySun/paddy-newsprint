@@ -11,10 +11,10 @@
  */
 
 $np_snippet_lines = array(
-	'<a href="https://example.com/" target="_blank" rel="noopener"><img src="' . esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-1.png' ) . '" alt="示例站点" width="88" height="31"></a>',
-	'<a href="https://example.com/" target="_blank" rel="noopener"><img src="' . esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-2.png' ) . '" alt="示例站点" width="88" height="31"></a>',
-	'<a href="https://example.com/" target="_blank" rel="noopener"><img src="' . esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-3.png' ) . '" alt="示例站点" width="88" height="31"></a>',
-	'<a href="https://example.com/" target="_blank" rel="noopener"><img src="' . esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-4.png' ) . '" alt="示例站点" width="88" height="31"></a>',
+	'<a href="' . esc_url( home_url( '/' ) ) . '" target="_blank" rel="noopener"><img src="' . esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-1.png' ) . '" alt="示例站点" width="88" height="31"></a>',
+	'<a href="' . esc_url( home_url( '/' ) ) . '" target="_blank" rel="noopener"><img src="' . esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-2.png' ) . '" alt="示例站点" width="88" height="31"></a>',
+	'<a href="' . esc_url( home_url( '/' ) ) . '" target="_blank" rel="noopener"><img src="' . esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-3.png' ) . '" alt="示例站点" width="88" height="31"></a>',
+	'<a href="' . esc_url( home_url( '/' ) ) . '" target="_blank" rel="noopener"><img src="' . esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-4.png' ) . '" alt="示例站点" width="88" height="31"></a>',
 );
 
 ?>
@@ -27,25 +27,25 @@ $np_snippet_lines = array(
 	<!-- wp:group {"className":"np-btnwall","layout":{"type":"default"}} -->
 	<div class="wp-block-group np-btnwall">
 		<!-- wp:image {"linkDestination":"custom","sizeSlug":"full","className":"np-btnwall__btn"} -->
-		<figure class="wp-block-image size-full np-btnwall__btn"><a href="https://example.com/" target="_blank" rel="noopener"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-1.png' ); ?>" alt="示例站点 · clouds"/></a></figure>
+		<figure class="wp-block-image size-full np-btnwall__btn"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" rel="noopener"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-1.png' ); ?>" alt="示例站点 · clouds"/></a></figure>
 		<!-- /wp:image -->
 
 		<!-- wp:image {"linkDestination":"custom","sizeSlug":"full","className":"np-btnwall__btn"} -->
-		<figure class="wp-block-image size-full np-btnwall__btn"><a href="https://example.com/" target="_blank" rel="noopener"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-2.png' ); ?>" alt="示例站点 · dynamic"/></a></figure>
+		<figure class="wp-block-image size-full np-btnwall__btn"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" rel="noopener"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-2.png' ); ?>" alt="示例站点 · dynamic"/></a></figure>
 		<!-- /wp:image -->
 
 		<!-- wp:image {"linkDestination":"custom","sizeSlug":"full","className":"np-btnwall__btn"} -->
-		<figure class="wp-block-image size-full np-btnwall__btn"><a href="https://example.com/" target="_blank" rel="noopener"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-3.png' ); ?>" alt="示例站点 · cyberpunk"/></a></figure>
+		<figure class="wp-block-image size-full np-btnwall__btn"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" rel="noopener"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-3.png' ); ?>" alt="示例站点 · cyberpunk"/></a></figure>
 		<!-- /wp:image -->
 
 		<!-- wp:image {"linkDestination":"custom","sizeSlug":"full","className":"np-btnwall__btn"} -->
-		<figure class="wp-block-image size-full np-btnwall__btn"><a href="https://example.com/" target="_blank" rel="noopener"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-4.png' ); ?>" alt="示例站点 · fire"/></a></figure>
+		<figure class="wp-block-image size-full np-btnwall__btn"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" rel="noopener"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-4.png' ); ?>" alt="示例站点 · fire"/></a></figure>
 		<!-- /wp:image -->
 	</div>
 	<!-- /wp:group -->
 
 	<!-- wp:paragraph {"className":"np-btnwall__note"} -->
-	<p class="np-btnwall__note"><?php esc_html_e( '以下片段供友站引用，任选一枚（GIF 上传媒体库后请把图片地址换成实际 URL）：', 'paddysun-newsprint' ); ?></p>
+	<p class="np-btnwall__note"><?php esc_html_e( '以下为本地抽象占位按钮，链接指向本站首页。公开交换前，请替换为已获授权的站点按钮，并更新图片地址和替代文字：', 'paddysun-newsprint' ); ?></p>
 	<!-- /wp:paragraph -->
 
 	<!-- wp:preformatted {"className":"np-snippet"} -->
