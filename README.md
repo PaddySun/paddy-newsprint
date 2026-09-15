@@ -12,7 +12,7 @@
 ## 下载与安装
 
 - [GitHub 仓库](https://github.com/PaddySun/paddy-newsprint)
-- 国内下载预留地址：`https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-0.10.13.zip`。COS 由站长上传；上传前此地址不代表文件已可用。
+- 国内下载：`https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-0.10.13.zip`（已上传；重新下载核验的字节数与 SHA-256 与本地候选包逐字节一致）
 - 安装包文件名：`paddy-newsprint-0.10.13.zip`；包内目录：`paddysun-newsprint/`。
 - SHA-256：`94b6c4d238faf0a2d9c5999641ca38c7dcb977e729daf08282faf65fdcce11f0`（5,785,156 字节，224 个主题文件）。安装、升级与 HTTP 回归结果见本仓库 `RELEASE-0.10.13.md`。不要将 GitHub 的仓库源码 ZIP 当作可直接安装的主题包。
 
