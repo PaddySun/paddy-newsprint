@@ -3,7 +3,7 @@ Contributors: paddysun
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.10.12
+Stable tag: 0.10.13
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, one-column, custom-colors, custom-menu, editor-style, block-styles, block-patterns, full-site-editing, style-variations, translation-ready
@@ -16,16 +16,29 @@ Paddysun Newsprint 是一款面向中文文字博客的块主题（Block Theme�
 
 全部模板与模板部件均为区块标记，可在站点编辑器（Site Editor）中直接编辑；色板、字体、字号、间距均由 theme.json 提供，在「样式」面板调整后前台与编辑器同步生效。
 
-内置：KaTeX 公式、Mermaid 图表、代码高亮按需加载；一键复制本文 Markdown；/llms.txt 与 /llms-full.txt 机器可读索引；JSON-LD BlogPosting。主题自身资产零外部请求。
+内置：KaTeX 公式、Mermaid 图表、代码高亮按需加载；一键复制本文 Markdown；/llms.txt 与 /llms-full.txt 机器可读索引（开关、内容来源与篇数/摘要口径在「外观 → 菜单」页面底部设置）；JSON-LD BlogPosting。主题自身资产零外部请求。
 
 == Installation ==
 
 1. 后台「外观 → 主题 → 上传主题」上传 zip 并安装。
 2. 启用主题。若此前使用经典主题并建有菜单，「主导航」区块会自动沿用已分配到 primary 位置的经典菜单。
 3. 「外观 → 编辑器」中可编辑报头双耳文案、订阅框、页脚等全部版面元素。
-4. 若 /llms.txt 返回 404，请到「设置 → 固定链接」点一次「保存更改」刷新重写规则。
+4. llms.txt 的开关与内容在「外观 → llms.txt 设置」中设置。
+5. 若 /llms.txt 返回 404，请到「设置 → 固定链接」点一次「保存更改」刷新重写规则。
 
 == Frequently Asked Questions ==
+
+= 如何关闭 /llms.txt 或 /llms-full.txt？ =
+
+「外观 → llms.txt 设置」页有这些开关。关闭总开关后，/llms.txt 与 /llms-full.txt 一律返回 403（正文提示「llms 索引已由站长关闭」），并停止输出 rel="describedby"；关闭态不缓存，切换立即生效。总开关开启时才会出现 /llms-full.txt 的独立开关。
+
+= llms.txt 的内容可以自己写吗？ =
+
+可以，三种来源任选：自动更新生成（站点名 + 简介 + 按分类的最新文章列表）、部分手动（自动列表不变，只由你填写站点介绍文字）、全部手动（整份内容由你填写，原样输出、不做改写）。全部手动模式建议首行写成「# 站点名」，这是 llms.txt 规范里唯一必填的一级标题；不写也不会被拒绝保存，只在面板给出提示。
+
+= /llms-full.txt 的篇数与摘要如何控制？ =
+
+与「设置 → 阅读」的 Feed 控制同义：可设篇数（1–500，默认 100），并选择输出全文（转换后的 Markdown）或仅摘要（核心摘要口径，与 Feed 摘要同源）。全量响应另有 4 MiB 聚合上限，超出即止并在文末附单篇接口指引。**全量端点默认关闭**，需先勾选「开启 /llms-full.txt 全量正文」；关闭时 `/llms.txt` 也不会再推荐该地址。
 
 = 报头的「第 N 卷 · 第 M 期」和日期从哪来？ =
 
@@ -49,6 +62,14 @@ Paddysun Newsprint 是一款面向中文文字博客的块主题（Block Theme�
 官方标准整改：vendor 库随包附未压缩原始文件；检索词转义、检索表单 action、键盘焦点样式等可移植性/无障碍修正。升级后建议清一次缓存。
 
 == Changelog ==
+
+= 0.10.13 =
+* 新增 llms 设置页（外观 → llms.txt 设置）：可开关 /llms.txt，总开关开启时才出现 /llms-full.txt 的独立开关；关闭后两个端点均返回 403 且不缓存。
+* llms.txt 内容三种来源：自动更新生成 / 部分手动（可编辑站点介绍文字）/ 全部手动（原样输出，不改写）；两个文本框按所选模式出现，带中英双语格式提示，切换模式不丢已填内容。
+* /llms-full.txt 参照 Feed 控制：可设篇数（1–500，默认 100），并可选全文或仅摘要（核心摘要口径，与 Feed 同源）；4 MiB 聚合预算不变。
+* 按 llms.txt v2 惯例广播 rel="describedby"（HTML `<link>` 与 HTTP `Link` 响应头，type 为 text/plain）。
+* **全量正文默认关闭**：`/llms-full.txt` 装好后先返回 403，需到设置页勾选「开启 /llms-full.txt 全量正文」。这是相对 0.10.12 的**有意变更**（0.10.12 默认直接输出全文）；`/llms.txt` 默认保持开启，其自动内容不再推荐已关闭的全量地址。
+* 除全量开关外，其余默认值与 0.10.12 一致；把设置调成「索引开 + 全量开 + 自动 + 100 篇 + 全文」后，两个端点输出与 0.10.12 逐字节相同。
 
 = 0.10.12 =
 * 公开源码补丁候选：报头长标题允许收缩与断行，长表头自然换行，手机页脚状态居中、备案分组及静态状态点优化。

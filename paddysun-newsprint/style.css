@@ -4,7 +4,7 @@ Theme URI: https://www.paddysun.top/paddy-newsprint
 Author: Paddy
 Author URI: https://www.paddysun.top/about-us
 Description: 报纸风格的极简中文博客块主题。首页全量移植 Broadside 报纸版面（报头三件套、三栏头条、本期要目），文章页保持 Typora Newsprint 阅读体验；英文内容采用 Broadside 字体方案（Source Serif 4 / Libre Caslon / Unifraktur）。全部模板区块化，色板/字体/间距由 theme.json 提供，站点编辑器所见即所得。内置 KaTeX、Mermaid、代码高亮按需加载与一键复制 Markdown。零外部请求。
-Version: 0.10.12
+Version: 0.10.13
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 7.4
