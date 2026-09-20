@@ -3,7 +3,7 @@ Contributors: paddysun
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.10.13
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, one-column, custom-colors, custom-menu, editor-style, block-styles, block-patterns, full-site-editing, style-variations, translation-ready
@@ -62,6 +62,12 @@ Paddysun Newsprint 是一款面向中文文字博客的块主题（Block Theme�
 官方标准整改：vendor 库随包附未压缩原始文件；检索词转义、检索表单 action、键盘焦点样式等可移植性/无障碍修正。升级后建议清一次缓存。
 
 == Changelog ==
+
+= 1.0.0 =
+* 修复首页文章卡片正文缺失：正文为单个 HTML 块（手工 HTML 粘贴形态）时，首页侧栏摘要回退到经典段落提取，沿用侧栏既有预算（8 段/1400 字）与剔除规则；主稿槽、简报槽、单篇页输出不变。
+* 新增广告位（外观 → 广告位）：首页横幅、文章页侧栏（桌面端专属，随悬浮目录）、文章页「读者来信」上方三处槽位；占位框按桌面端/平板端/手机端分别配置（媒体库选图、每端独立开关与独立跳转链接，框内自动拉伸、超出比例裁切）；文章页侧栏与悬浮目录同右缘对齐，悬浮目录默认收起。
+* 广告代码按受信管理员内容原样输出（仅 manage_options 可写、去 NUL、64KB 上限、不过标记清洗）；失效清理（容器内脚本出错或联盟状态标记显示未填充）按后台配置换回占位图或整块不输出；llms / REST / Feed / JSON-LD 不读取广告配置；首页零 JS 基线在占位态成立，填入代码后由该代码引入脚本。
+* 新增朴素默认邮件样式：出站邮件自动套用表格布局、全行内样式的默认壳并附纯文本降级；探测到其他邮件模板/重写类插件时整体让位；无定制界面、无设置项。
 
 = 0.10.13 =
 * 新增 llms 设置页（外观 → llms.txt 设置）：可开关 /llms.txt，总开关开启时才出现 /llms-full.txt 的独立开关；关闭后两个端点均返回 403 且不缓存。

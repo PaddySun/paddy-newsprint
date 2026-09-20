@@ -4,7 +4,7 @@ Theme URI: https://www.paddysun.top/paddy-newsprint
 Author: Paddy
 Author URI: https://www.paddysun.top/about-us
 Description: 报纸风格的极简中文博客块主题。首页全量移植 Broadside 报纸版面（报头三件套、三栏头条、本期要目），文章页保持 Typora Newsprint 阅读体验；英文内容采用 Broadside 字体方案（Source Serif 4 / Libre Caslon / Unifraktur）。全部模板区块化，色板/字体/间距由 theme.json 提供，站点编辑器所见即所得。内置 KaTeX、Mermaid、代码高亮按需加载与一键复制 Markdown。零外部请求。
-Version: 0.10.13
+Version: 1.0.0
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 7.4
@@ -1342,13 +1342,21 @@ a.np-icon-link {
     padding-left: 14px;
     font-size: var(--np-fs-small);
 }
-/* 目录（悬浮形态）：≥1240px 固定右侧贴版面外缘，滚动跟随当前章节；
-   窄屏与无 JS 环境回退为头部目录盒（静态流内） */
+/* 目录（悬浮形态）：≥1240px 固定右侧贴正文栏右缘，滚动跟随当前章节；
+   窄屏与无 JS 环境回退为头部目录盒（静态流内）。
+   1.0.0 S3 站长要求：目录左缘贴近正文栏右缘（间隙 20px），缩短「正文→目录」
+   视觉往返；右缘锚定 contentSize（680px）而非版面外缘，258 = 目录宽 238 + 间隙 20。
+   max(18px,…) 兜底保右缘不越出视口（1240px 档实算 22px，仍无横向滚动）。
+   1.0.0 S2：右缘公式提升为 --np-rail-right 共享变量，文章页侧栏广告位同用，
+   保证目录与广告在右栏对齐。 */
 @media (min-width: 1240px) {
+    :root {
+        --np-rail-right: max(18px, calc(50vw - var(--wp--style--global--content-size, 680px) / 2 - 258px));
+    }
     .np-toc--float {
         position: fixed;
         top: 110px;
-        right: max(18px, calc(50vw - var(--np-sheet) / 2 - 262px));
+        right: var(--np-rail-right);
         width: 238px;
         max-height: min(62vh, 540px);
         overflow-y: auto;
@@ -1416,6 +1424,127 @@ a.np-icon-link {
         color: var(--np-accent);
         font-weight: 700;
         border-bottom-color: var(--np-accent);
+    }
+}
+
+/* ---- 广告位（1.0.0 S2）----
+   出厂形态 = 占位/收藏品；后台填码后输出受信管理员代码。各端框比例由渲染层
+   内联（--np-ad-ratio-d/-t/-m，断点 桌面≥1240 / 平板 783–1239 / 手机≤782），
+   占位 ↔ 广告 ↔ 清理回占位三态零跳动；占位图 object-fit: cover——框内自动
+   拉伸铺满，超出比例裁切（站长验收口径 2026-09-19）。
+   「整块不输出」是站长显式选择的失效语义（允许收起）。
+   首页 0 JS 基线：占位态零脚本，仅在首页槽位填码后引入清理脚本（README 如实写）。 */
+.np-ad {
+    box-sizing: border-box;
+    aspect-ratio: var(--np-ad-ratio-m, 300 / 250);
+    margin-block: 24px 0;
+}
+.np-ad--band {
+    /* 首页横幅：宽度与整版分隔线一致（站长验收口径），随 .np-front 自适应缩放 */
+    margin-inline: 0;
+}
+.np-ad--rail {
+    /* 桌面端专属（站长验收二轮口径）：手机/平板不输出，页末位由 .np-ad--bottom 承担 */
+    display: none;
+    max-width: 336px;
+    margin-inline: auto;
+    margin-block: 28px 0;
+}
+.np-ad--bottom {
+    max-width: var(--wp--style--global--content-size, 680px);
+    margin-inline: auto;
+}
+/* 分端开关：站长关掉某端 = 该端整块不输出（CSS 按断点隐藏） */
+@media (max-width: 782px) {
+    .np-ad.np-ad--no-mobile {
+        display: none;
+    }
+}
+@media (min-width: 783px) and (max-width: 1239px) {
+    .np-ad.np-ad--no-tablet {
+        display: none;
+    }
+}
+@media (min-width: 1240px) {
+    .np-ad.np-ad--no-desktop {
+        display: none;
+    }
+}
+.np-ad__ph {
+    line-height: 0;
+    height: 100%;
+}
+/* 代码容器撑满预留框：片段 height:100% 才有解析基准（否则卡片塌成内容高、
+   框内留空——站长验收四轮实测）；flex 居中让固定尺寸单元在框内居中 */
+.np-ad__code {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.np-ad__ph--tablet,
+.np-ad__ph--desktop {
+    display: none;
+}
+@media (min-width: 783px) {
+    .np-ad {
+        aspect-ratio: var(--np-ad-ratio-t, 300 / 250);
+    }
+    .np-ad__ph--mobile,
+    .np-ad__ph--desktop {
+        display: none;
+    }
+    .np-ad__ph--tablet {
+        display: block;
+    }
+}
+@media (min-width: 1240px) {
+    .np-ad {
+        aspect-ratio: var(--np-ad-ratio-d, 300 / 250);
+    }
+    .np-ad__ph--mobile,
+    .np-ad__ph--tablet {
+        display: none;
+    }
+    .np-ad__ph--desktop {
+        display: block;
+    }
+    .np-ad--rail {
+        display: block;
+    }
+}
+.np-ad__ph a {
+    display: block;
+    height: 100%;
+}
+.np-ad__ph img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+@media (min-width: 1240px) {
+    .np-ad--rail {
+        position: fixed;
+        top: 110px;
+        /* 与悬浮目录同右缘（整体右移由 --np-rail-right 统一承担） */
+        right: var(--np-rail-right);
+        width: 238px;
+        max-width: 238px;
+        margin: 0;
+        z-index: 20;
+    }
+    /* 侧栏位与悬浮目录同一浮现节奏：下滚一屏才出现（JS 加类；无 JS 常显） */
+    .np-ad--rail.np-ad--armed {
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity var(--np-motion-dur) var(--np-motion-ease), visibility 0s linear var(--np-motion-dur);
+    }
+    .np-ad--rail.np-ad--armed.np-ad--on {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity var(--np-motion-dur) var(--np-motion-ease), visibility 0s;
     }
 }
 

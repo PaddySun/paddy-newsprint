@@ -538,9 +538,10 @@ function paddysun_ns_get_toc( $extra_class = '' ) {
 
 	$class = trim( 'np-toc ' . $extra_class );
 	/* 0.7.2 站长要求：details/summary 提供「收起/拉出」（原生开合零 JS、
-	   键盘可达、读屏自动播报展开态）；两态文案都在 DOM 里由 CSS 切换显示。 */
+	   键盘可达、读屏自动播报展开态）；两态文案都在 DOM 里由 CSS 切换显示。
+	   1.0.0 站长验收反馈：默认收起（拉出才展开）。 */
 	$html  = '<nav class="' . esc_attr( $class ) . '" aria-label="' . esc_attr__( '文章目录', 'paddysun-newsprint' ) . '">'
-		. '<details class="np-toc__box" open>'
+		. '<details class="np-toc__box">'
 		. '<summary class="np-toc__title"><span class="np-toc__title-text">' . esc_html__( '目 录', 'paddysun-newsprint' ) . '</span>'
 		. '<span class="np-toc__toggle" aria-hidden="true"><span class="np-toc__toggle-in">' . esc_html__( '收起', 'paddysun-newsprint' ) . '</span><span class="np-toc__toggle-out">' . esc_html__( '拉出', 'paddysun-newsprint' ) . '</span></span></summary>'
 		. '<ol>';

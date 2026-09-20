@@ -259,6 +259,28 @@ function paddysun_ns_aside_body( $post_id ) {
 			$chars += mb_strlen( wp_strip_all_tags( $b['innerHTML'] ?? '' ) );
 		}
 	}
+
+	/* 单个 core/html 块（手工 HTML 粘贴）或经典内容：区块循环识别不到任何
+	   区块，此前原样返回空串，首页侧栏卡整段丢正文（P1，站长确认修法）。
+	   回退与 np-lead-body 同款的经典 <p> 提取，仍受侧栏预算与剔除规则约束；
+	   区块路径已有产出（含全被剔除的段落场景）时不触发，行为不变。 */
+	if ( '' === $out && preg_match_all( '#<p[^>]*>(.*?)</p>#s', $post->post_content, $m ) ) {
+		foreach ( $m[1] as $p ) {
+			if ( $paras >= 8 || $chars >= 1400 ) {
+				break;
+			}
+			if ( false !== strpos( $p, '$' ) || false !== stripos( $p, '<img' ) || false !== stripos( $p, '<code' ) ) {
+				continue;
+			}
+			$plain = trim( wp_strip_all_tags( $p ) );
+			if ( '' === $plain ) {
+				continue;
+			}
+			$out   .= '<p>' . wp_kses_post( $p ) . '</p>';
+			$paras++;
+			$chars += mb_strlen( $plain );
+		}
+	}
 	return $out;
 }
 

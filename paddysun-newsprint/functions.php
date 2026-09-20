@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PADDYSUN_NS_VERSION', '0.10.13' );
+define( 'PADDYSUN_NS_VERSION', '1.0.0' );
 define( 'PADDYSUN_NS_DIR', get_template_directory() );
 define( 'PADDYSUN_NS_URI', get_template_directory_uri() );
 
@@ -26,6 +26,8 @@ require_once PADDYSUN_NS_DIR . '/inc/schema.php';
 require_once PADDYSUN_NS_DIR . '/inc/block-hooks.php';
 require_once PADDYSUN_NS_DIR . '/inc/toc-settings.php';
 require_once PADDYSUN_NS_DIR . '/inc/img-fallback.php';
+require_once PADDYSUN_NS_DIR . '/inc/ads.php';
+require_once PADDYSUN_NS_DIR . '/inc/email-style.php';
 require_once PADDYSUN_NS_DIR . '/inc/login-style.php';
 
 /* ------------------------------------------------------------
