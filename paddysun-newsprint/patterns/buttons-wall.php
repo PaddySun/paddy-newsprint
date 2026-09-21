@@ -11,10 +11,10 @@
  */
 
 $np_snippet_lines = array(
-	'<a href="' . esc_url( home_url( '/' ) ) . '" target="_blank" rel="noopener"><img src="' . esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-1.png' ) . '" alt="示例站点" width="88" height="31"></a>',
-	'<a href="' . esc_url( home_url( '/' ) ) . '" target="_blank" rel="noopener"><img src="' . esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-2.png' ) . '" alt="示例站点" width="88" height="31"></a>',
-	'<a href="' . esc_url( home_url( '/' ) ) . '" target="_blank" rel="noopener"><img src="' . esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-3.png' ) . '" alt="示例站点" width="88" height="31"></a>',
-	'<a href="' . esc_url( home_url( '/' ) ) . '" target="_blank" rel="noopener"><img src="' . esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-4.png' ) . '" alt="示例站点" width="88" height="31"></a>',
+	'<a href="' . esc_url( home_url( '/' ) ) . '" target="_blank" rel="noopener"><img src="' . esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-1.png' ) . '" alt="' . esc_attr( __( '示例站点', 'paddysun-newsprint' ) ) . '" width="88" height="31"></a>',
+	'<a href="' . esc_url( home_url( '/' ) ) . '" target="_blank" rel="noopener"><img src="' . esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-2.png' ) . '" alt="' . esc_attr( __( '示例站点', 'paddysun-newsprint' ) ) . '" width="88" height="31"></a>',
+	'<a href="' . esc_url( home_url( '/' ) ) . '" target="_blank" rel="noopener"><img src="' . esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-3.png' ) . '" alt="' . esc_attr( __( '示例站点', 'paddysun-newsprint' ) ) . '" width="88" height="31"></a>',
+	'<a href="' . esc_url( home_url( '/' ) ) . '" target="_blank" rel="noopener"><img src="' . esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-4.png' ) . '" alt="' . esc_attr( __( '示例站点', 'paddysun-newsprint' ) ) . '" width="88" height="31"></a>',
 );
 
 ?>
@@ -27,19 +27,19 @@ $np_snippet_lines = array(
 	<!-- wp:group {"className":"np-btnwall","layout":{"type":"default"}} -->
 	<div class="wp-block-group np-btnwall">
 		<!-- wp:image {"linkDestination":"custom","sizeSlug":"full","className":"np-btnwall__btn"} -->
-		<figure class="wp-block-image size-full np-btnwall__btn"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" rel="noopener"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-1.png' ); ?>" alt="示例站点 · clouds"/></a></figure>
+		<figure class="wp-block-image size-full np-btnwall__btn"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" rel="noopener"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-1.png' ); ?>" alt="<?php echo esc_attr( __( '示例站点 · clouds', 'paddysun-newsprint' ) ); ?>"/></a></figure>
 		<!-- /wp:image -->
 
 		<!-- wp:image {"linkDestination":"custom","sizeSlug":"full","className":"np-btnwall__btn"} -->
-		<figure class="wp-block-image size-full np-btnwall__btn"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" rel="noopener"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-2.png' ); ?>" alt="示例站点 · dynamic"/></a></figure>
+		<figure class="wp-block-image size-full np-btnwall__btn"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" rel="noopener"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-2.png' ); ?>" alt="<?php echo esc_attr( __( '示例站点 · dynamic', 'paddysun-newsprint' ) ); ?>"/></a></figure>
 		<!-- /wp:image -->
 
 		<!-- wp:image {"linkDestination":"custom","sizeSlug":"full","className":"np-btnwall__btn"} -->
-		<figure class="wp-block-image size-full np-btnwall__btn"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" rel="noopener"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-3.png' ); ?>" alt="示例站点 · cyberpunk"/></a></figure>
+		<figure class="wp-block-image size-full np-btnwall__btn"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" rel="noopener"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-3.png' ); ?>" alt="<?php echo esc_attr( __( '示例站点 · cyberpunk', 'paddysun-newsprint' ) ); ?>"/></a></figure>
 		<!-- /wp:image -->
 
 		<!-- wp:image {"linkDestination":"custom","sizeSlug":"full","className":"np-btnwall__btn"} -->
-		<figure class="wp-block-image size-full np-btnwall__btn"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" rel="noopener"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-4.png' ); ?>" alt="示例站点 · fire"/></a></figure>
+		<figure class="wp-block-image size-full np-btnwall__btn"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" rel="noopener"><img src="<?php echo esc_url( get_template_directory_uri() . '/assets/img/placeholders/badge-88x31-4.png' ); ?>" alt="<?php echo esc_attr( __( '示例站点 · fire', 'paddysun-newsprint' ) ); ?>"/></a></figure>
 		<!-- /wp:image -->
 	</div>
 	<!-- /wp:group -->

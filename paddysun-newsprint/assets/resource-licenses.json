@@ -2082,8 +2082,8 @@
     },
     {
       "path": "inc/block-hooks.php",
-      "bytes": 36308,
-      "sha256": "84c5fe377204f609dd7b2086ff04ddf90143654e8385d43de4874ff2e241112f"
+      "bytes": 36336,
+      "sha256": "29afda92239d33861eedec743e8547b85cfac5ff5e9231c890da43f4b563f937"
     },
     {
       "path": "inc/content-filters.php",
@@ -2107,13 +2107,13 @@
     },
     {
       "path": "readme.txt",
-      "bytes": 31807,
-      "sha256": "34ba08b78246ebf82b1b7952296d7027982b836cc0d3eb921f54c65a9d02c736"
+      "bytes": 32494,
+      "sha256": "825331eaed603f3371a225879ac6203029b2983d3b98342cdadae59e32f2abf6"
     },
     {
       "path": "screenshot.png",
-      "bytes": 728688,
-      "sha256": "99efc64d825111645620efa2855e35127c21ca07088b767f5569cc2adc56c87f"
+      "bytes": 219243,
+      "sha256": "c1214cbf9889e42d498a297ee80ce52171ac3583143c6f915db221944cafc81e"
     }
   ],
   "note": "This inventory excludes its own hash to avoid self-reference; the release theme_manifest binds this file. Earlier54-name/5-missing-license reports are superseded by59 outer versions plus12 parser versions.",

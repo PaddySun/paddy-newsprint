@@ -339,13 +339,14 @@ add_action( 'admin_enqueue_scripts', function ( $hook ) {
 	}
 	wp_enqueue_media();
 	wp_enqueue_script( 'jquery' );
-	wp_add_inline_script( 'jquery', <<<'JS'
+	$media_title_js = esc_js( __( '选择占位图', 'paddysun-newsprint' ) );
+	wp_add_inline_script( 'jquery', <<<JS
 jQuery(function ($) {
 	var frame;
 	$(document).on('click', '[data-np-ph-pick]', function (e) {
 		e.preventDefault();
 		var key = $(this).data('np-ph-pick');
-		frame = wp.media({ title: '选择占位图', library: { type: 'image' }, multiple: false });
+		frame = wp.media({ title: '{$media_title_js}', library: { type: 'image' }, multiple: false });
 		frame.on('select', function () {
 			var att = frame.state().get('selection').first().toJSON();
 			$('[data-np-ph-input="' + key + '"]').val(att.id);

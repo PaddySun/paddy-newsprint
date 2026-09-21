@@ -26,9 +26,17 @@ const PADDYSUN_NS_LLMS_SLUG            = 'paddysun-llms';
 const PADDYSUN_NS_LLMS_TEXT_MAX_BYTES  = 1048576; // 手动文本上限 1 MiB，防失控
 
 /* 输入框里的规范格式提示（中英双语，按 llms.txt v2 的结构）。 */
-const PADDYSUN_NS_LLMS_INTRO_HINT  = "> 一句话简介 / One-line summary\n\n可选补充段落 / optional context paragraph";
-const PADDYSUN_NS_LLMS_MANUAL_HINT = "# 站点名 / Site name\n\n> 一句话简介 / One-line summary\n\n"
-	. "## 章节名 / Section\n\n- [标题 / Title](https://example.com/page)：说明 / note";
+/*
+ * 输入框里的规范格式提示（中英双语，按 llms.txt v2 的结构）。
+ * 以取值函数承载：gettext 为运行时调用，不能进编译期 const。
+ */
+function paddysun_ns_llms_intro_hint() {
+	return __( "> 一句话简介 / One-line summary\n\n可选补充段落 / optional context paragraph", 'paddysun-newsprint' );
+}
+
+function paddysun_ns_llms_manual_hint() {
+	return __( "# 站点名 / Site name\n\n> 一句话简介 / One-line summary\n\n## 章节名 / Section\n\n- [标题 / Title](https://example.com/page)：说明 / note", 'paddysun-newsprint' );
+}
 
 /**
  * 默认设置。
@@ -266,7 +274,7 @@ function paddysun_ns_llms_render_page() {
 					<tr>
 						<th scope="row"><label for="paddysun-llms-intro"><?php esc_html_e( '站点介绍文字', 'paddysun-newsprint' ); ?></label></th>
 						<td>
-							<textarea id="paddysun-llms-intro" name="<?php echo esc_attr( PADDYSUN_NS_LLMS_OPTION ); ?>[index_intro]" rows="6" class="large-text code" placeholder="<?php echo esc_attr( PADDYSUN_NS_LLMS_INTRO_HINT ); ?>"><?php echo esc_textarea( $settings['index_intro'] ); ?></textarea>
+							<textarea id="paddysun-llms-intro" name="<?php echo esc_attr( PADDYSUN_NS_LLMS_OPTION ); ?>[index_intro]" rows="6" class="large-text code" placeholder="<?php echo esc_attr( paddysun_ns_llms_intro_hint() ); ?>"><?php echo esc_textarea( $settings['index_intro'] ); ?></textarea>
 							<p class="description"><?php esc_html_e( '原样替换站点名之后的介绍段落；留空则回退为站点的自动简介。', 'paddysun-newsprint' ); ?></p>
 						</td>
 					</tr>
@@ -274,7 +282,7 @@ function paddysun_ns_llms_render_page() {
 					<tr>
 						<th scope="row"><label for="paddysun-llms-manual"><?php esc_html_e( '手动全文', 'paddysun-newsprint' ); ?></label></th>
 						<td>
-							<textarea id="paddysun-llms-manual" name="<?php echo esc_attr( PADDYSUN_NS_LLMS_OPTION ); ?>[index_manual]" rows="10" class="large-text code" placeholder="<?php echo esc_attr( PADDYSUN_NS_LLMS_MANUAL_HINT ); ?>"><?php echo esc_textarea( $settings['index_manual'] ); ?></textarea>
+							<textarea id="paddysun-llms-manual" name="<?php echo esc_attr( PADDYSUN_NS_LLMS_OPTION ); ?>[index_manual]" rows="10" class="large-text code" placeholder="<?php echo esc_attr( paddysun_ns_llms_manual_hint() ); ?>"><?php echo esc_textarea( $settings['index_manual'] ); ?></textarea>
 							<p class="description"><?php esc_html_e( '内容原样输出、不做改写；留空则回退为自动生成。', 'paddysun-newsprint' ); ?></p>
 							<?php if ( paddysun_ns_llms_manual_missing_h1( $settings['index_manual'] ) ) : ?>
 								<p class="description" style="color:#b32d2e"><?php esc_html_e( '当前首行不是「# 」开头的一级标题；llms.txt 规范要求首个 H1，建议补上（保存不会被拒绝）。', 'paddysun-newsprint' ); ?></p>

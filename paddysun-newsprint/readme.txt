@@ -1,9 +1,9 @@
 === Paddysun Newsprint ===
-Contributors: paddysun
+Contributors: ispaddy
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, one-column, custom-colors, custom-menu, editor-style, block-styles, block-patterns, full-site-editing, style-variations, translation-ready
@@ -62,6 +62,13 @@ Paddysun Newsprint 是一款面向中文文字博客的块主题（Block Theme�
 官方标准整改：vendor 库随包附未压缩原始文件；检索词转义、检索表单 action、键盘焦点样式等可移植性/无障碍修正。升级后建议清一次缓存。
 
 == Changelog ==
+
+= 1.0.1 =
+* 国际化达标（按 WordPress.org 主题评审 i18n 要求）：全部用户可见 PHP 文本挂入 `paddysun-newsprint` 文本域；随包附 `languages/paddysun-newsprint.pot` 模板与英文翻译包（en_US.po/.mo），英文站点（含「外观 → llms.txt 设置」「外观 → 广告位」两个后台设置页）开箱即英文；HTML 模板静态文本按评审「temporary exception」口径保留。
+* 修复 llms.txt 分类归组：改按分类 slug 判定「未分类」（原按显示名比对，在分类被改名或多语言站点上失效，英文默认分类名会直接成为 llms.txt 的组标题）。
+* 修复广告位设置页媒体框标题未包翻译函数的问题。
+* 截图同尺寸压缩（1200×900，712KB → 219KB）；style.css 头部补 `Domain Path: /languages`。
+* llms.txt 全文模式的手动提示、按钮墙 alt、文章头日期格式等此前硬编码文本全部改为可翻译。
 
 = 1.0.0 =
 * 修复首页文章卡片正文缺失：正文为单个 HTML 块（手工 HTML 粘贴形态）时，首页侧栏摘要回退到经典段落提取，沿用侧栏既有预算（8 段/1400 字）与剔除规则；主稿槽、简报槽、单篇页输出不变。

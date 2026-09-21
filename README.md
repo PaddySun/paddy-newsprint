@@ -2,7 +2,7 @@
 
 # Paddy Newsprint
 
-![版本 1.0.0](https://img.shields.io/badge/version-1.0.0-6b1f1f)
+![版本 1.0.1](https://img.shields.io/badge/version-1.0.1-6b1f1f)
 ![WordPress 7.1+](https://img.shields.io/badge/WordPress-7.1%2B-21759b?logo=wordpress&logoColor=white)
 ![PHP 7.4+](https://img.shields.io/badge/PHP-7.4%2B-777bb4?logo=php&logoColor=white)
 ![许可证 GPL-2.0-or-later](https://img.shields.io/badge/license-GPL--2.0--or--later-blue)
@@ -12,10 +12,10 @@
 ## 下载与安装
 
 - [GitHub 仓库](https://github.com/PaddySun/paddy-newsprint)
-- 国内下载（1.0.0）：`https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.0.0.zip`（**待上传**，上传后需重新下载核验字节数与 SHA-256）
-- 安装包文件名：`paddy-newsprint-1.0.0.zip`；包内目录：`paddysun-newsprint/`。
-- SHA-256：`f50088e7974ee9014cb49577a3e4ef72f26537320afaecbb45aa4477c97021ed`（5,804,113 字节，230 个主题文件）。安装、升级与 HTTP 回归结果见本仓库 `RELEASE-1.0.0.md`。不要将 GitHub 的仓库源码 ZIP 当作可直接安装的主题包。
-- 上一版 0.10.13 仍可下载：`https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-0.10.13.zip`。
+- 国内下载（1.0.1）：`https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.0.1.zip`（**待上传**，上传后需重新下载核验字节数与 SHA-256）
+- 安装包文件名：`paddy-newsprint-1.0.1.zip`；包内目录：`paddysun-newsprint/`。
+- SHA-256：`43cf0e3fcae8373ff42d34cc7ca0871f574ad38facd67ed953fb5e6f546cf3a0`（5,331,765 字节，233 个主题文件）。安装、升级与 HTTP 回归结果见本仓库 `RELEASE-1.0.1.md`。不要将 GitHub 的仓库源码 ZIP 当作可直接安装的主题包。
+- 上一版 1.0.0 仍可下载：`https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.0.0.zip`（待上传）。
 
 在 WordPress 后台选择「外观 → 主题 → 上传主题」，安装并启用主题。升级前备份自己的站点；数据库中已定制的模板不会因主题文件更新自动覆盖。
 
@@ -29,9 +29,18 @@
 - **机器可读内容**：`/llms.txt` 索引与 `/llms-full.txt` 全量全文，可在「外观 → llms.txt 设置」中开关、选内容来源（自动生成／部分手动／全部手动）并控制全量的篇数与摘要口径；另有 SEO/schema 输出与既有 SEO 插件让位机制。
 - **广告位**（外观 → 广告位）：首页横幅、文章页侧栏（桌面端专属，随悬浮目录）与「读者来信」上方三处槽位；占位图按桌面/平板/手机端分别配置（媒体库选图、分端开关与独立跳转链接）；后台填入广告代码后按受信管理员内容输出，加载失败可配置换回占位图或整块不输出。出厂为占位形态，主题不内置任何广告代码。
 - **默认邮件样式**：出站邮件自动套用朴素表格布局并附纯文本降级；检测到其他邮件模板插件时整体让位。
+- **国际化**：全部用户可见 PHP 文本可经 gettext 翻译（文本域 `paddysun-newsprint`），随包附 `.pot` 模板与英文翻译包；英文站点（en_US）前台与后台设置页开箱即英文，中文站点输出不变。
 - **阅读动线**：文章页悬浮目录贴近正文右缘、默认收起。
 
 SEO/schema、Markdown 存档与 REST、llms 是保留的产品功能，不需要另装强制插件。本轮为自主分发，不是 WordPress.org 上架版本或官方审核通过声明。
+
+## 1.0.1 更新
+
+- **国际化达标（WordPress.org 主题评审 i18n 要求）**：全部用户可见 PHP 文本挂入 `paddysun-newsprint` 文本域；随包附 `languages/paddysun-newsprint.pot` 与英文翻译包（en_US.po/.mo），语言包走 WordPress 核心标准路径加载（主题内零自定义加载代码）。英文站点前台与「外观 → llms.txt 设置」「外观 → 广告位」两个后台设置页开箱即英文。
+- **修复 llms.txt 分类归组**：改按分类 slug 判定「未分类」。原按显示名比对，分类被改名或多语言站点上失效（英文默认分类名会直接成为 llms.txt 组标题）。这是本轮唯一的行为变更。
+- 修复广告位设置页媒体框标题未包翻译函数的问题；按钮墙 alt、文章头日期格式等硬编码文本全部改为可翻译。
+- 截图同尺寸压缩（1200×900，712KB → 219KB）；style.css 头部补 `Domain Path: /languages`。
+- HTML 模板静态文本按评审「temporary exception」口径保留；theme.json 编辑器名称等元数据保持中文（产品定位，详见 RELEASE-1.0.1.md 的范围说明）。
 
 ## 1.0.0 更新
 
@@ -45,7 +54,7 @@ SEO/schema、Markdown 存档与 REST、llms 是保留的产品功能，不需要
 
 ## 兼容性与验证边界
 
-WordPress **7.1+**，PHP **7.4+**。候选包已在隔离的合成 WordPress 环境完成验证：PHP 7.4.33 与 8.3.30 上各自的全新安装与「从 0.10.13 升级」四套环境，安装/升级后主题文件与候选包 230 个文件逐一一致、无多余文件，升级保留原有内容、自定义模板、文章元数据与主题修改记录；HTTP 回归 546 项断言全部通过（含「单 HTML 块正文 + GIF 特色图」首页回归用例与广告位占位/填码/清理用例）。48 项静态公开检查全部通过，隐私扫描零命中，全源码无任何真实广告投放标识。这不表示所有插件组合均已测试。站长已在隔离站实测验收 P1 修复、广告位（五轮反馈）、邮件样式样张与目录定位。
+WordPress **7.1+**，PHP **7.4+**。候选包已在隔离的合成 WordPress 环境完成验证：PHP 7.4.33 与 8.3.30 上各自的全新安装与「从 1.0.0 升级」四套环境，安装/升级后主题文件与候选包 233 个文件逐一一致、无多余文件，升级保留原有内容、自定义模板、文章元数据与主题修改记录；HTTP 回归 558 项断言全部通过（含英文语言包在 en_US 站加载生效的新用例）。48 项静态公开检查全部通过，隐私扫描零命中，全源码无任何真实广告投放标识。WordPress.org 评审同款自动化工具 Theme Check（20260901）全量 9,642 项测试通过，0 个 REQUIRED 级与 0 个 WARNING 级结果。中文站点输出与 1.0.0 逐字节一致（仅 llms.txt 分类归组修复一处有意变更）。这不表示所有插件组合均已测试。
 
 仓库中的导航、备案、服务状态及按钮示例是占位内容，安装后请按站点情况编辑。主题不导入个人数据库或媒体。
 

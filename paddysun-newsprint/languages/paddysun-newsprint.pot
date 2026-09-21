@@ -1,0 +1,1059 @@
+# Copyright (C) 2026 Paddy
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Paddysun Newsprint 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/paddysun-newsprint\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-20T13:47:52+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: paddysun-newsprint\n"
+
+#. Theme Name of the theme
+#: style.css
+msgid "Paddysun Newsprint"
+msgstr ""
+
+#. Theme URI of the theme
+#: style.css
+msgid "https://www.paddysun.top/paddy-newsprint"
+msgstr ""
+
+#. Description of the theme
+#: style.css
+msgid "报纸风格的极简中文博客块主题。首页全量移植 Broadside 报纸版面（报头三件套、三栏头条、本期要目），文章页保持 Typora Newsprint 阅读体验；英文内容采用 Broadside 字体方案（Source Serif 4 / Libre Caslon / Unifraktur）。全部模板区块化，色板/字体/间距由 theme.json 提供，站点编辑器所见即所得。内置 KaTeX、Mermaid、代码高亮按需加载与一键复制 Markdown。零外部请求。"
+msgstr ""
+
+#. Author of the theme
+#: style.css
+msgid "Paddy"
+msgstr ""
+
+#. Author URI of the theme
+#: style.css
+msgid "https://www.paddysun.top/about-us"
+msgstr ""
+
+#: functions.php:54
+msgid "主导航（报头下方）"
+msgstr ""
+
+#: functions.php:89
+msgid "宽表已收起 · 展开全表"
+msgstr ""
+
+#: functions.php:90
+msgid "收起全表"
+msgstr ""
+
+#: functions.php:110
+msgid "转换中…"
+msgstr ""
+
+#: functions.php:111
+msgid "Markdown 已复制"
+msgstr ""
+
+#: functions.php:112
+#: functions.php:207
+msgid "复制失败，请重试"
+msgstr ""
+
+#: functions.php:131
+msgid "展开{n}条来信"
+msgstr ""
+
+#: functions.php:132
+msgid "收起来信"
+msgstr ""
+
+#: functions.php:166
+msgid "展开"
+msgstr ""
+
+#: functions.php:167
+#: inc/content-filters.php:546
+msgid "收起"
+msgstr ""
+
+#: functions.php:206
+msgid "代码已复制"
+msgstr ""
+
+#. translators: %s: 作者名
+#: functions.php:286
+#, php-format
+msgid "%s 的头像"
+msgstr ""
+
+#. translators: %s: 作者名
+#: functions.php:286
+msgid "访客头像"
+msgstr ""
+
+#: functions.php:316
+msgid "报纸版面"
+msgstr ""
+
+#: functions.php:317
+msgid "Paddysun Newsprint 的报头、头条、要目、订阅框、文章头尾、评论区等版面组件。"
+msgstr ""
+
+#: functions.php:328
+msgid "书卷式（段首缩进 + 两端对齐）"
+msgstr ""
+
+#: functions.php:335
+msgid "双规线"
+msgstr ""
+
+#: functions.php:342
+msgid "框线盒"
+msgstr ""
+
+#: functions.php:362
+msgid "文章内容（目录 · 头部）"
+msgstr ""
+
+#: functions.php:363
+msgid "正文前显示「目 录」盒（二级标题 ≥ 3 个时）。"
+msgstr ""
+
+#: functions.php:369
+msgid "文章内容（目录 · 右侧悬浮）"
+msgstr ""
+
+#: functions.php:370
+msgid "宽屏时目录固定右侧，滚动跟随当前阅读章节；窄屏回退头部目录盒。"
+msgstr ""
+
+#: functions.php:376
+msgid "文章内容（无目录）"
+msgstr ""
+
+#: functions.php:377
+msgid "不注入目录。"
+msgstr ""
+
+#: inc/ads.php:190
+#: inc/ads.php:243
+msgid "广告位设置"
+msgstr ""
+
+#: inc/ads.php:191
+#: inc/ads.php:411
+msgid "广告位"
+msgstr ""
+
+#: inc/ads.php:224
+msgid "首页横幅位"
+msgstr ""
+
+#: inc/ads.php:225
+msgid "输出在首页「订阅栏」与「本期要目」之间，宽度与整版分隔线一致（自适应缩放）；三端均输出。"
+msgstr ""
+
+#: inc/ads.php:228
+msgid "文章页侧栏位（方形，桌面端专属）"
+msgstr ""
+
+#: inc/ads.php:229
+msgid "仅桌面端（≥1240px）：固定右栏，随悬浮目录（有目录贴其下方并整体较目录右移，未开启目录时替代其固定位）。手机/平板不输出——页末位由「读者来信上方」槽位承担。设备框 300×250。"
+msgstr ""
+
+#: inc/ads.php:232
+msgid "文章页 · 读者来信上方"
+msgstr ""
+
+#: inc/ads.php:233
+msgid "三端均输出在「读者来信」上方，宽度一律与文章尾双规线一致（正文栏自适应）。"
+msgstr ""
+
+#: inc/ads.php:237
+msgid "桌面端"
+msgstr ""
+
+#: inc/ads.php:238
+msgid "平板端"
+msgstr ""
+
+#: inc/ads.php:239
+msgid "手机端"
+msgstr ""
+
+#: inc/ads.php:247
+msgid "加载失败后的处理"
+msgstr ""
+
+#: inc/ads.php:250
+msgid "清理语义（全局）"
+msgstr ""
+
+#: inc/ads.php:252
+msgid "换回占位图"
+msgstr ""
+
+#: inc/ads.php:253
+msgid "整块不输出（该槽位从页面移除）"
+msgstr ""
+
+#: inc/ads.php:254
+msgid "对所有槽位统一生效：广告容器内脚本出错，或联盟状态标记显示未填充时，在超时检查点（加载完成后 2.5 秒，可经 paddysun_ns_ad_deadline_ms 过滤器调整）按此设置处理。"
+msgstr ""
+
+#: inc/ads.php:262
+msgid "启用槽位"
+msgstr ""
+
+#: inc/ads.php:264
+msgid "在前台输出该槽位（未启用 = 整块不输出）"
+msgstr ""
+
+#: inc/ads.php:269
+msgid "广告代码"
+msgstr ""
+
+#: inc/ads.php:272
+msgid "留空 = 只显示占位。填入的内容按受信管理员内容原样输出（不做标记清洗）；脚本的注入方式由站点自行决定，主题不代注入。各端占位框比例即该端预留高度（占位 ↔ 广告 ↔ 清理回占位零跳动），请填与框规格一致的固定尺寸单元以避免布局跳动。"
+msgstr ""
+
+#: inc/ads.php:278
+msgid "方形占位图（桌面端）"
+msgstr ""
+
+#: inc/ads.php:287
+#: inc/ads.php:315
+msgid "从媒体库选择"
+msgstr ""
+
+#: inc/ads.php:288
+#: inc/ads.php:316
+msgid "清除（回内置占位图）"
+msgstr ""
+
+#: inc/ads.php:290
+msgid "占位图跳转链接（选填）："
+msgstr ""
+
+#. translators: 1: width, 2: height
+#: inc/ads.php:294
+#: inc/ads.php:322
+#, php-format
+msgid "框规格 %1$d×%2$d；选图在框内自动拉伸铺满，超出比例部分裁切；未自定义时用内置占位图。"
+msgstr ""
+
+#: inc/ads.php:299
+msgid "分端自定义框（开关 / 占位图 / 独立链接）"
+msgstr ""
+
+#: inc/ads.php:311
+msgid "在该端输出此槽位（关掉 = 该端整块不输出）"
+msgstr ""
+
+#: inc/ads.php:318
+msgid "占位图跳转链接（本端独立，选填）："
+msgstr ""
+
+#: inc/ads.php:342
+msgid "选择占位图"
+msgstr ""
+
+#: inc/block-hooks.php:103
+#: patterns/article-header.php:23
+msgid "Y年n月j日"
+msgstr ""
+
+#: inc/block-hooks.php:211
+msgid "阅读全文 →"
+msgstr ""
+
+#. translators: %d: 分钟数
+#: inc/block-hooks.php:489
+#, php-format
+msgid "约 %d 分钟"
+msgstr ""
+
+#. translators: %s: 评论数
+#: inc/block-hooks.php:517
+#, php-format
+msgid "读者来信（%s）"
+msgstr ""
+
+#: inc/block-hooks.php:539
+msgid "作者"
+msgstr ""
+
+#. translators: %s: 检索词
+#: inc/block-hooks.php:559
+#, php-format
+msgid "检索「%s」"
+msgstr ""
+
+#: inc/block-hooks.php:576
+msgid "复制代码"
+msgstr ""
+
+#: inc/block-hooks.php:740
+msgid "提醒确认"
+msgstr ""
+
+#: inc/block-hooks.php:789
+msgid "显示名称"
+msgstr ""
+
+#: inc/block-hooks.php:790
+msgid "邮箱"
+msgstr ""
+
+#: inc/block-hooks.php:791
+msgid "网站"
+msgstr ""
+
+#: inc/content-filters.php:543
+msgid "文章目录"
+msgstr ""
+
+#: inc/content-filters.php:545
+msgid "目 录"
+msgstr ""
+
+#: inc/content-filters.php:546
+msgid "拉出"
+msgstr ""
+
+#. translators: %s: 作品名
+#: inc/img-fallback.php:146
+#, php-format
+msgid "原图未能加载 · 已替换为作品《%s》"
+msgstr ""
+
+#: inc/llms-settings.php:34
+msgid ""
+"> 一句话简介 / One-line summary\n"
+"\n"
+"可选补充段落 / optional context paragraph"
+msgstr ""
+
+#: inc/llms-settings.php:38
+msgid ""
+"# 站点名 / Site name\n"
+"\n"
+"> 一句话简介 / One-line summary\n"
+"\n"
+"## 章节名 / Section\n"
+"\n"
+"- [标题 / Title](https://example.com/page)：说明 / note"
+msgstr ""
+
+#: inc/llms-settings.php:155
+msgid "llms.txt 已关闭：/llms.txt 与 /llms-full.txt 均返回 403，全量开关一并关闭。"
+msgstr ""
+
+#: inc/llms-settings.php:162
+msgid "全文手动模式的内容为空，当前回退为自动生成。"
+msgstr ""
+
+#: inc/llms-settings.php:203
+#: inc/llms-settings.php:204
+#: inc/llms-settings.php:221
+msgid "llms.txt 设置"
+msgstr ""
+
+#: inc/llms-settings.php:225
+msgid "面向 AI 读者的纯文本索引（llms.txt v2 惯例）。当前地址："
+msgstr ""
+
+#: inc/llms-settings.php:227
+msgid "与"
+msgstr ""
+
+#: inc/llms-settings.php:229
+msgid "若两者都返回 404，请到「设置 → 固定链接」点一次「保存更改」刷新重写规则。"
+msgstr ""
+
+#: inc/llms-settings.php:236
+msgid "llms.txt"
+msgstr ""
+
+#: inc/llms-settings.php:240
+msgid "开启 /llms.txt 索引"
+msgstr ""
+
+#: inc/llms-settings.php:242
+msgid "关闭后 /llms.txt 与 /llms-full.txt 一律返回 403，并停止广播 rel=\"describedby\"。"
+msgstr ""
+
+#: inc/llms-settings.php:247
+msgid "内容来源"
+msgstr ""
+
+#: inc/llms-settings.php:251
+msgid "自动更新生成（站点名 + 简介 + 按分类的最新文章列表）"
+msgstr ""
+
+#: inc/llms-settings.php:252
+msgid "部分手动：自动列表不变，站点介绍文字由我填写"
+msgstr ""
+
+#: inc/llms-settings.php:253
+msgid "全部手动：整份内容由我填写，不再自动生成"
+msgstr ""
+
+#: inc/llms-settings.php:267
+msgid "当前为「自动更新生成」，不需要手填内容。改选「部分手动」或「全部手动」并保存后，这里会出现对应的输入框。"
+msgstr ""
+
+#: inc/llms-settings.php:275
+msgid "站点介绍文字"
+msgstr ""
+
+#: inc/llms-settings.php:278
+msgid "原样替换站点名之后的介绍段落；留空则回退为站点的自动简介。"
+msgstr ""
+
+#: inc/llms-settings.php:283
+msgid "手动全文"
+msgstr ""
+
+#: inc/llms-settings.php:286
+msgid "内容原样输出、不做改写；留空则回退为自动生成。"
+msgstr ""
+
+#: inc/llms-settings.php:288
+msgid "当前首行不是「# 」开头的一级标题；llms.txt 规范要求首个 H1，建议补上（保存不会被拒绝）。"
+msgstr ""
+
+#: inc/llms-settings.php:296
+#: inc/llms-settings.php:335
+msgid "llms-full.txt"
+msgstr ""
+
+#: inc/llms-settings.php:300
+msgid "开启 /llms-full.txt 全量正文"
+msgstr ""
+
+#: inc/llms-settings.php:302
+msgid "关闭后该地址返回 403；聚合总量仍有 4 MiB 上限，超出即止并附单篇接口指引。"
+msgstr ""
+
+#: inc/llms-settings.php:306
+msgid "全量篇数"
+msgstr ""
+
+#: inc/llms-settings.php:309
+msgid "等于「设置 → 阅读」里的 Feed 篇数语义：取最新的 N 篇（1–500，默认 100）。"
+msgstr ""
+
+#: inc/llms-settings.php:313
+msgid "全量内容"
+msgstr ""
+
+#: inc/llms-settings.php:317
+msgid "全文（转换后的 Markdown）"
+msgstr ""
+
+#: inc/llms-settings.php:318
+msgid "仅摘要（与 Feed 摘要同口径）"
+msgstr ""
+
+#: inc/llms-settings.php:336
+msgid "llms.txt 关闭时全量端点一并不可用，因此不提供单独开关。"
+msgstr ""
+
+#: inc/llms-settings.php:340
+msgid "保存 llms 设置"
+msgstr ""
+
+#: inc/llms.php:55
+msgid "llms 索引已由站长关闭。"
+msgstr ""
+
+#: inc/llms.php:126
+msgid "本站为中文文字博客。文章页提供一键复制 Markdown 与 REST 接口："
+msgstr ""
+
+#: inc/llms.php:127
+msgid "- 单篇 Markdown：/wp-json/paddysun/v1/posts/{id}/markdown"
+msgstr ""
+
+#: inc/llms.php:130
+msgid "- 全量正文：/llms-full.txt"
+msgstr ""
+
+#. translators: %s: date of the latest post modification (YYYY-MM-DD).
+#: inc/llms.php:141
+#, php-format
+msgid "> 站点最后更新：%s"
+msgstr ""
+
+#: inc/llms.php:152
+#: inc/llms.php:155
+msgid "其他"
+msgstr ""
+
+#: inc/llms.php:158
+msgid "（无标题）"
+msgstr ""
+
+#. translators: %s: post modified date (YYYY-MM-DD).
+#: inc/llms.php:164
+#, php-format
+msgid " · 更新 %s"
+msgstr ""
+
+#. translators: %s: publish (and update) date stamp.
+#: inc/llms.php:167
+#, php-format
+msgid "（%s）"
+msgstr ""
+
+#. translators: %s: site name.
+#: inc/llms.php:186
+#, php-format
+msgid "# %s — 全量正文"
+msgstr ""
+
+#: inc/llms.php:214
+msgid "（全量导出已达字节预算，其余文章请用单篇接口 /wp-json/paddysun/v1/posts/{id}/markdown 获取）"
+msgstr ""
+
+#: inc/markdown-support.php:43
+msgid "原文 MD（选填）"
+msgstr ""
+
+#: inc/markdown-support.php:57
+msgid "本地写完粘贴一份原文，复制按钮与 AI 将直接使用它；留空则自动从正文反推。"
+msgstr ""
+
+#: inc/markdown-support.php:61
+msgid "允许公开复制与导出（REST / llms.txt）"
+msgstr ""
+
+#: inc/markdown-support.php:132
+msgid "文章不存在或未公开"
+msgstr ""
+
+#: inc/markdown-support.php:270
+msgid "（内容过长，已截断）"
+msgstr ""
+
+#: inc/toc-settings.php:37
+msgid "目录形态"
+msgstr ""
+
+#: inc/toc-settings.php:53
+msgid "悬浮目录（宽屏右侧跟随阅读，默认）"
+msgstr ""
+
+#: inc/toc-settings.php:54
+msgid "目录盒（正文前）"
+msgstr ""
+
+#: inc/toc-settings.php:55
+msgid "无目录"
+msgstr ""
+
+#: inc/toc-settings.php:57
+msgid "二级标题 ≥ 3 个时生效。"
+msgstr ""
+
+#: patterns/about-profile.php
+msgctxt "Pattern title"
+msgid "关于页人物版式（简介 + 时间线）"
+msgstr ""
+
+#: patterns/about-profile.php
+msgctxt "Pattern description"
+msgid "关于页人物骨架：media-text 图文简介（右侧头像）+ 年份时间线。简介与时间线为占位文案，站长自填。（0.10.4 站长裁决：宽幅徽章整节移除，需要时从「徽章墙」pattern 自行拼装。）"
+msgstr ""
+
+#: patterns/about-profile.php:16
+msgid "Hey! 我是……"
+msgstr ""
+
+#: patterns/about-profile.php:20
+msgid "用两三段话说清你是谁：相信什么、写什么、为什么在这里。（此处为占位文案，替换成你自己的介绍。）"
+msgstr ""
+
+#: patterns/about-profile.php:24
+msgid "联系方式与社交账号可以放这一段。"
+msgstr ""
+
+#: patterns/about-profile.php:25
+msgid "人物头像占位图"
+msgstr ""
+
+#: patterns/about-profile.php:31
+msgid "时间线 · Timeline"
+msgstr ""
+
+#: patterns/about-profile.php:37
+msgid "2022 —— 建站，开始写字。"
+msgstr ""
+
+#: patterns/about-profile.php:40
+msgid "2024 —— 换了现在的报纸主题。"
+msgstr ""
+
+#: patterns/about-profile.php:43
+msgid "2026 —— 仍在路上。（整组不需要可直接删除）"
+msgstr ""
+
+#: patterns/ad-band.php
+msgctxt "Pattern title"
+msgid "广告位 · 首页横幅"
+msgstr ""
+
+#: patterns/ad-band.php
+msgctxt "Pattern description"
+msgid "首页横幅广告位（订阅栏与本期要目之间）：出厂占位，后台「外观 → 广告位」填码后输出受信代码。未启用槽位时整块不输出。"
+msgstr ""
+
+#: patterns/ad-bottom.php
+msgctxt "Pattern title"
+msgid "广告位 · 文章页读者来信上方"
+msgstr ""
+
+#: patterns/ad-bottom.php
+msgctxt "Pattern description"
+msgid "三端均输出在「读者来信」上方，宽度一律与文章尾双规线一致（正文栏自适应）；可分端开关与独立跳转链接。出厂占位，后台填码后输出受信代码。"
+msgstr ""
+
+#: patterns/ad-rail.php
+msgctxt "Pattern title"
+msgid "广告位 · 文章页侧栏（方形，桌面端专属）"
+msgstr ""
+
+#: patterns/ad-rail.php
+msgctxt "Pattern description"
+msgid "仅桌面端（≥1240px）固定于右栏：有悬浮目录时贴其下方（整体较目录右移），未开启时替代目录位；手机/平板不输出，页末位由「读者来信上方」槽位承担。出厂占位，后台填码后输出受信代码。"
+msgstr ""
+
+#: patterns/article-footer.php
+msgctxt "Pattern title"
+msgid "文章尾（标签 / 上下篇）"
+msgstr ""
+
+#: patterns/article-footer.php
+msgctxt "Pattern description"
+msgid "双规线之下：标签与上下篇导航。「复制 MD」按钮在文章头的署名行右侧。"
+msgstr ""
+
+#: patterns/article-footer.php:17
+#: patterns/article-footer.php:18
+msgid "上下篇"
+msgstr ""
+
+#: patterns/article-footer.php:19
+msgid "较新一篇"
+msgstr ""
+
+#: patterns/article-footer.php:20
+msgid "较早一篇"
+msgstr ""
+
+#: patterns/article-header.php
+msgctxt "Pattern title"
+msgid "文章头（眉题 / 标题 / 署名行 + 复制 MD）"
+msgstr ""
+
+#: patterns/article-header.php
+msgctxt "Pattern description"
+msgid "Typora Newsprint 文章头：分类眉题、底线标题，署名行（日期 · 作者 · 阅读时间）右侧带浅色「复制 MD」小按钮；署名行下方为特色题图（无图自动不输出，0.10.4 站长反馈补）。"
+msgstr ""
+
+#: patterns/article-header.php:32
+msgid "复制 MD"
+msgstr ""
+
+#: patterns/buttons-wall.php
+msgctxt "Pattern title"
+msgid "88×31 按钮墙（我的按钮 + 交换墙）"
+msgstr ""
+
+#: patterns/buttons-wall.php
+msgctxt "Pattern description"
+msgid "复古 88×31 按钮文化两件套：上方「我的按钮」展示站长自荐按钮并附供他站复制的 HTML 片段；下方「按钮墙」收纳交换所得的友站按钮。尺寸由主题 CSS 锁死（88×31 + pixelated），GIF 原样输出。"
+msgstr ""
+
+#: patterns/buttons-wall.php:14
+#: patterns/buttons-wall.php:15
+#: patterns/buttons-wall.php:16
+#: patterns/buttons-wall.php:17
+msgid "示例站点"
+msgstr ""
+
+#: patterns/buttons-wall.php:24
+msgid "我的按钮 · My Buttons"
+msgstr ""
+
+#: patterns/buttons-wall.php:30
+msgid "示例站点 · clouds"
+msgstr ""
+
+#: patterns/buttons-wall.php:34
+msgid "示例站点 · dynamic"
+msgstr ""
+
+#: patterns/buttons-wall.php:38
+msgid "示例站点 · cyberpunk"
+msgstr ""
+
+#: patterns/buttons-wall.php:42
+msgid "示例站点 · fire"
+msgstr ""
+
+#: patterns/buttons-wall.php:48
+msgid "以下为本地抽象占位按钮，链接指向本站首页。公开交换前，请替换为已获授权的站点按钮，并更新图片地址和替代文字："
+msgstr ""
+
+#: patterns/buttons-wall.php:60
+msgid "按钮墙 · Button Wall"
+msgstr ""
+
+#: patterns/buttons-wall.php:64
+msgid "与友站交换所得的 88×31 按钮收藏在此，按交换先后排列。"
+msgstr ""
+
+#: patterns/comments.php
+msgctxt "Pattern title"
+msgid "读者来信（评论区）"
+msgstr ""
+
+#: patterns/comments.php
+msgctxt "Pattern description"
+msgid "极简评论区：来信标题、评论列表（头像 / 作者 / 日期 / 正文 / 回复）、分页、评论表单。"
+msgstr ""
+
+#: patterns/lead-trio.php
+msgctxt "Pattern title"
+msgid "三栏头条（简报栏 | 主稿 | 侧栏）"
+msgstr ""
+
+#: patterns/lead-trio.php
+msgctxt "Pattern description"
+msgid "Broadside 报纸头版三栏：左栏近日简报（4 篇）、中栏题图压底主稿（最新 1 篇，正文 10 段/2200 字先到为准，首字下沉双栏）、右栏 4:5 题图侧栏（固定第 6 篇，offset=5）。"
+msgstr ""
+
+#: patterns/lead-trio.php:18
+msgid "近日简报"
+msgstr ""
+
+#: patterns/lead-trio.php:47
+msgid "长读 · The Long Read"
+msgstr ""
+
+#: patterns/lead-trio.php:77
+msgid "读这篇文章 →"
+msgstr ""
+
+#: patterns/not-found.php
+msgctxt "Pattern title"
+msgid "更正启事（404）"
+msgstr ""
+
+#: patterns/not-found.php
+msgctxt "Pattern description"
+msgid "报纸「更正启事」风格的 404：说明、返回头版链接、检索框。"
+msgstr ""
+
+#: patterns/not-found.php:19
+msgid "更正：您要找的版面不存在，或已被撤稿。"
+msgstr ""
+
+#: patterns/not-found.php:23
+msgid "← 返回头版"
+msgstr ""
+
+#: patterns/not-found.php:28
+msgid "检索"
+msgstr ""
+
+#: patterns/not-found.php:28
+msgid "检索本刊…"
+msgstr ""
+
+#: patterns/post-list.php
+msgctxt "Pattern title"
+msgid "规线清单（归档 / 检索 / 索引）"
+msgstr ""
+
+#: patterns/post-list.php
+msgctxt "Pattern description"
+msgid "日期在左、标题与摘要在右的规线清单，继承当前查询（归档、检索、博客索引通用），含分页与空结果提示。"
+msgstr ""
+
+#: patterns/post-list.php:31
+msgid "« 较新"
+msgstr ""
+
+#: patterns/post-list.php:32
+msgid "较早 »"
+msgstr ""
+
+#: patterns/post-list.php:39
+msgid "本版暂无稿目"
+msgstr ""
+
+#: patterns/post-list.php:43
+msgid "该版面下还没有文章，换个关键词或分类试试。"
+msgstr ""
+
+#: patterns/sections.php
+msgctxt "Pattern title"
+msgid "本期要目（分类框线网格）"
+msgstr ""
+
+#: patterns/sections.php
+msgctxt "Pattern description"
+msgid "「本期要目」：按分类分块的框线网格，每块列出该分类最新 3 篇。分类由主题自动按最近更新排序并排除「未分类」；在「分类查询」区块里手动勾选分类可覆盖。"
+msgstr ""
+
+#: patterns/sections.php:14
+msgid "本期要目 · Inside This Edition"
+msgstr ""
+
+#: patterns/subscribe.php
+msgctxt "Pattern title"
+msgid "订阅框（墨底 RSS / llms.txt）"
+msgstr ""
+
+#: patterns/subscribe.php
+msgctxt "Pattern description"
+msgid "Broadside newsletter 框改造：墨底双规线，左侧眉题 / 标题 / 说明，右侧 RSS 与 llms.txt 按钮。"
+msgstr ""
+
+#: patterns/subscribe.php:17
+msgid "订阅 · Subscribe"
+msgstr ""
+
+#: patterns/subscribe.php:21
+msgid "订阅本刊"
+msgstr ""
+
+#: patterns/subscribe.php:25
+msgid "RSS 可用任意阅读器订阅；llms.txt 为机器读者而设，AI 可循此索引取阅全刊。"
+msgstr ""
+
+#: patterns/subscribe.php:33
+msgid "RSS 订阅"
+msgstr ""
+
+#: theme.json
+#: styles/01-plain-white.json
+msgctxt "Color name"
+msgid "纸面"
+msgstr ""
+
+#: theme.json
+#: styles/01-plain-white.json
+msgctxt "Color name"
+msgid "纸影（桌面 / 代码底）"
+msgstr ""
+
+#: theme.json
+#: styles/01-plain-white.json
+msgctxt "Color name"
+msgid "纸晕"
+msgstr ""
+
+#: theme.json
+#: styles/01-plain-white.json
+msgctxt "Color name"
+msgid "墨"
+msgstr ""
+
+#: theme.json
+#: styles/01-plain-white.json
+msgctxt "Color name"
+msgid "墨·深"
+msgstr ""
+
+#: theme.json
+#: styles/01-plain-white.json
+msgctxt "Color name"
+msgid "墨·柔"
+msgstr ""
+
+#: theme.json
+#: styles/01-plain-white.json
+msgctxt "Color name"
+msgid "墨·褪"
+msgstr ""
+
+#: theme.json
+#: styles/01-plain-white.json
+msgctxt "Color name"
+msgid "墨·淡"
+msgstr ""
+
+#: theme.json
+#: styles/01-plain-white.json
+msgctxt "Color name"
+msgid "深红"
+msgstr ""
+
+#: theme.json
+#: styles/01-plain-white.json
+msgctxt "Color name"
+msgid "古金（墨底反白）"
+msgstr ""
+
+#: theme.json
+#: styles/01-plain-white.json
+msgctxt "Color name"
+msgid "眉题棕"
+msgstr ""
+
+#: theme.json
+#: styles/01-plain-white.json
+msgctxt "Color name"
+msgid "规线"
+msgstr ""
+
+#: theme.json
+#: styles/01-plain-white.json
+msgctxt "Color name"
+msgid "规线·细"
+msgstr ""
+
+#: theme.json
+#: styles/01-plain-white.json
+msgctxt "Color name"
+msgid "斑马行"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "小字"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "正文"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "大字"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "小题"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "题"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "头条"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "正文（Source Serif 4 / 中文衬线）"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "标题（Libre Caslon Display / 中文衬线）"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "报头哥特体（UnifrakturMaguntia）"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "引文楷体（Caslon / 楷体）"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "等宽"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "微 4px"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "小 8px"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "稍小 12px"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "中 16px"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "大 24px"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "加大 32px"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "版块 48px"
+msgstr ""
+
+#: theme.json
+msgctxt "Space size name"
+msgid "版面 64px"
+msgstr ""
+
+#: theme.json
+msgctxt "Shadow name"
+msgid "纸张"
+msgstr ""
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "关于页"
+msgstr ""
+
+#: theme.json
+msgctxt "Template part name"
+msgid "报头（完整）"
+msgstr ""
+
+#: theme.json
+msgctxt "Template part name"
+msgid "报头（紧凑，文章页）"
+msgstr ""
+
+#: theme.json
+msgctxt "Template part name"
+msgid "页脚"
+msgstr ""
+
+#: theme.json
+msgctxt "Template part name"
+msgid "提醒确认弹窗"
+msgstr ""
+
+#: styles/01-plain-white.json
+msgctxt "Style variation name"
+msgid "素白（高对比印张）"
+msgstr ""

@@ -52,7 +52,7 @@ function paddysun_ns_llms_render_refusal() {
 	header( 'Content-Type: text/plain; charset=utf-8' );
 	header( 'X-Robots-Tag: noindex, nofollow' );
 	header( 'Cache-Control: private, no-store' );
-	echo "llms 索引已由站长关闭。\n";
+	echo __( 'llms 索引已由站长关闭。', 'paddysun-newsprint' ) . "\n";
 }
 
 /**
@@ -123,11 +123,11 @@ function paddysun_ns_llms_render_index( $settings ) {
 		$out .= $settings['index_intro'] . "\n\n";
 	} else {
 		$out .= "> {$desc}\n\n";
-		$out .= "本站为中文文字博客。文章页提供一键复制 Markdown 与 REST 接口：\n";
-		$out .= "- 单篇 Markdown：/wp-json/paddysun/v1/posts/{id}/markdown\n";
+		$out .= __( '本站为中文文字博客。文章页提供一键复制 Markdown 与 REST 接口：', 'paddysun-newsprint' ) . "\n";
+		$out .= __( '- 单篇 Markdown：/wp-json/paddysun/v1/posts/{id}/markdown', 'paddysun-newsprint' ) . "\n";
 		/* 全量端点关闭时不推荐它——那个地址此时返回 403（站长 2026-09-15 验收要求） */
 		if ( ! empty( $settings['full_enabled'] ) ) {
-			$out .= "- 全量正文：/llms-full.txt\n";
+			$out .= __( '- 全量正文：/llms-full.txt', 'paddysun-newsprint' ) . "\n";
 		}
 		$out .= "\n";
 
@@ -137,7 +137,8 @@ function paddysun_ns_llms_render_index( $settings ) {
 			$latest = max( $latest, get_post_modified_time( 'U', true, $p ) );
 		}
 		if ( $latest ) {
-			$out .= '> 站点最后更新：' . gmdate( 'Y-m-d', $latest ) . "\n\n";
+			/* translators: %s: date of the latest post modification (YYYY-MM-DD). */
+			$out .= sprintf( __( '> 站点最后更新：%s', 'paddysun-newsprint' ), gmdate( 'Y-m-d', $latest ) ) . "\n\n";
 		}
 	}
 
@@ -148,19 +149,22 @@ function paddysun_ns_llms_render_index( $settings ) {
 			continue; // 与 full 同口径：密码/单篇关闭导出均不进 AI 索引
 		}
 		$cats    = get_the_category( $p->ID );
-		$catname = $cats ? $cats[0]->name : '其他';
-		if ( '未分类' === $catname ) {
-			$catname = '其他';
+		$catname = $cats ? $cats[0]->name : __( '其他', 'paddysun-newsprint' );
+		/* 归组判定按 slug：分类显示名可被站长自定义（含改名/多语言站），不可作为比对键 */
+		if ( $cats && 'uncategorized' === $cats[0]->slug ) {
+			$catname = __( '其他', 'paddysun-newsprint' );
 		}
 		$title   = wp_specialchars_decode( get_the_title( $p ), ENT_QUOTES );
-		$title   = '' !== trim( $title ) ? $title : '（无标题）'; // 空标题兜底
+		$title   = '' !== trim( $title ) ? $title : __( '（无标题）', 'paddysun-newsprint' ); // 空标题兜底
 		$date    = get_the_date( 'Y-m-d', $p );
 		$mod     = get_post_modified_time( 'Y-m-d', true, $p );
 		$stamp   = $date;
 		if ( $mod && $mod > $date && strtotime( $mod ) - strtotime( $date ) > DAY_IN_SECONDS ) {
-			$stamp .= " · 更新 {$mod}";
+			/* translators: %s: post modified date (YYYY-MM-DD). */
+			$stamp .= sprintf( __( ' · 更新 %s', 'paddysun-newsprint' ), $mod );
 		}
-		$groups[ $catname ][] = "- [" . str_replace( ']', '\\]', $title ) . "](" . get_permalink( $p ) . ")（{$stamp}）";
+		/* translators: %s: publish (and update) date stamp. */
+		$groups[ $catname ][] = "- [" . str_replace( ']', '\\]', $title ) . "](" . get_permalink( $p ) . ")" . sprintf( __( '（%s）', 'paddysun-newsprint' ), $stamp );
 	}
 	foreach ( $groups as $catname => $items ) {
 		$out .= "## {$catname}\n\n" . implode( "\n", $items ) . "\n\n";
@@ -178,7 +182,8 @@ function paddysun_ns_llms_render_index( $settings ) {
  */
 function paddysun_ns_llms_render_full( $settings ) {
 	$site = wp_specialchars_decode( get_bloginfo( 'name' ), ENT_QUOTES );
-	$out  = "# {$site} — 全量正文\n\n";
+	/* translators: %s: site name. */
+	$out  = sprintf( __( '# %s — 全量正文', 'paddysun-newsprint' ), $site ) . "\n\n";
 
 	$posts = get_posts(
 		array(
@@ -206,7 +211,7 @@ function paddysun_ns_llms_render_full( $settings ) {
 		}
 		$entry = "\n\n====\n\n# {$title}\n\n{$url} · {$date}\n\n" . $chunk;
 		if ( $bytes_out + strlen( $entry ) > PADDYSUN_NS_LLMS_FULL_MAX_BYTES ) {
-			$out .= "\n\n（全量导出已达字节预算，其余文章请用单篇接口 /wp-json/paddysun/v1/posts/{id}/markdown 获取）\n";
+			$out .= "\n\n" . __( '（全量导出已达字节预算，其余文章请用单篇接口 /wp-json/paddysun/v1/posts/{id}/markdown 获取）', 'paddysun-newsprint' ) . "\n";
 			break;
 		}
 		$out .= $entry;

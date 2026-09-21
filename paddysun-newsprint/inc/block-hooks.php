@@ -100,7 +100,7 @@ function paddysun_ns_dynamic_tokens() {
 		'{issue}'   => esc_html( number_format_i18n( $issue ) ),
 		'{volume}'  => esc_html( number_format_i18n( max( 1, $year - $est + 1 ) ) ),
 		'{est}'     => esc_html( (string) $est ),
-		'{date}'    => esc_html( date_i18n( 'Y年n月j日' ) ),
+		'{date}'    => esc_html( date_i18n( __( 'Y年n月j日', 'paddysun-newsprint' ) ) ),
 		'{weekday}' => esc_html( date_i18n( 'l' ) ),
 		'{year}'    => esc_html( (string) $year ),
 		'{site}'    => esc_html( get_bloginfo( 'name' ) ),
@@ -553,9 +553,9 @@ function paddysun_ns_render_search_title( $content, $parsed_block, $block = null
 	if ( 'search' !== ( $attrs['type'] ?? '' ) || ! is_search() ) {
 		return $content;
 	}
-	/* translators: %s: 检索词 */
 	// get_search_query(false) 取原始值：下游 paddysun_ns_replace_inner_text 会
 	// 统一 esc_html——默认转义形态再转义一次会让 & 显示为 &amp;（审查 E0-P3）
+	/* translators: %s: 检索词 */
 	$text = sprintf( __( '检索「%s」', 'paddysun-newsprint' ), get_search_query( false ) );
 	return paddysun_ns_replace_inner_text( $content, $text );
 }

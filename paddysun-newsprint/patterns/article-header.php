@@ -20,7 +20,10 @@
 	<div class="wp-block-group np-article__byline">
 		<!-- wp:group {"className":"np-article__meta","layout":{"type":"flex","flexWrap":"wrap","verticalAlignment":"center"}} -->
 		<div class="wp-block-group np-article__meta">
-			<!-- wp:post-date {"format":"Y年n月j日"} /-->
+			<?php
+			// 末尾补 \n：PHP 会吞掉关闭标记后的首个换行，缺它则输出比静态版少一节换行。
+			echo '<!-- wp:post-date {"format":"' . esc_attr( __( 'Y年n月j日', 'paddysun-newsprint' ) ) . '"} /-->' . "\n";
+			?>
 			<!-- wp:post-author-name /-->
 			<!-- wp:post-time-to-read {"averageReadingSpeed":400} /-->
 		</div>
