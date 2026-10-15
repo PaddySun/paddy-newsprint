@@ -251,11 +251,12 @@ function paddysun_ns_normalize_block_markup( $content ) {
 	/* 5) Markdown 脚注 → core/footnotes（M-01）：正文 [^id] 引用转为
 	   sup.fn[data-fn] 角标，文末 [^id]: 定义段落提取入 footnotes meta，
 	   并补 <!-- wp:footnotes /--> 区块。幂等；已有角标（含 0.5.0 的 *
-	   存量与编辑器原生 uuid 形态）每次保存按出现序重编号。 */
-	if ( false !== strpos( $content, '[^' ) ) {
+	   存量与编辑器原生 uuid 形态）每次保存按出现序重编号。
+	   1.0.2：定义行支持段落/列表项/裸 <p> 三种块形态；定义行标签
+	   （[^id]: 带冒号）不再被误转为角标；早前版本已把定义行标签转成
+	   角标的存量文（重复角标 + 定义文字游离）在保存时自动还原修复。 */
+	if ( false !== strpos( $content, '[^' ) || false !== strpos( $content, 'data-fn=' ) ) {
 		$content = paddysun_ns_normalize_footnotes( $content );
-	} elseif ( false !== strpos( $content, 'data-fn=' ) ) {
-		$content = paddysun_ns_renumber_footnote_refs( $content );
 	}
 
 	return $content;
@@ -284,11 +285,30 @@ function paddysun_ns_footnote_stash( $set = null ) {
 }
 
 /**
+ * 暂存一条脚注定义（各块形态的提取回调共用）。
+ *
+ * @param array  $defs 暂存数组（引用传递）。
+ * @param string $id   脚注标签。
+ * @param string $text 定义内容（块内 HTML，转义形态）。
+ * @return string 空串（定义行从正文移除）。
+ */
+function paddysun_ns_stash_footnote_def( array &$defs, $id, $text ) {
+	$def_content = trim( wp_unslash( $text ) );
+	$def_content = preg_replace( '/\s*<br\s*\/?>\s*/i', ' ', $def_content );
+	$defs[ $id ] = is_string( $def_content ) ? $def_content : trim( wp_unslash( $text ) );
+	return '';
+}
+
+/**
  * 转义形态内容上的脚注归一化（保持转义进出平衡：插入的标记不含反斜杠）。
  *
  * 角标文本写「出现序号」（与核心编辑器保存时重写锚文本为数字的行为一致，
  * 前台直接显示序号）；同一脚注多处引用共用同一序号，回链锚只在首次出现
  * 时生成（id 唯一，跳回首个引用位）。
+ *
+ * 1.0.2 修复：定义行按段落 / 列表项 / 裸 <p> 三种块形态提取；「[^id]:」
+ * 定义标签不再被当作引用转成角标；早前版本误转产生的「块首角标 + 冒号」
+ * 存量（定义文字游离、重复角标）在保存时还原为定义行后一并提取。
  *
  * @param string $content 斜杠转义的正文。
  * @return string
@@ -296,19 +316,55 @@ function paddysun_ns_footnote_stash( $set = null ) {
 function paddysun_ns_normalize_footnotes( $content ) {
 	$defs = array();
 
-	/* 定义段：完整段落区块 [^id]: text → 移除并暂存 */
+	/* 0) 存量修复：早前版本把定义行标签 [^id]: 误转成了角标，特征是
+	   li/p 块内容以「角标 + 冒号」开头（正文引用后紧跟冒号的实际写作
+	   极少出现在块首）。还原为字面定义行，交由下面的提取统一处理。 */
 	$content = preg_replace_callback(
-		'/<!-- wp:paragraph(?: \{.*?\})? -->\s*<p>\s*\[\^([A-Za-z0-9_-]+)\]:\s*(.*?)<\/p>\s*<!-- \/wp:paragraph -->/s',
-		static function ( $m ) use ( &$defs ) {
-			$def_content          = trim( wp_unslash( $m[2] ) );
-			$def_content          = preg_replace( '/\s*<br\s*\/?>\s*/i', ' ', $def_content );
-			$defs[ $m[1] ]        = is_string( $def_content ) ? $def_content : trim( wp_unslash( $m[2] ) );
-			return '';
+		'/(<(?:li|p)[^>]*>)(\s*)<sup class="fn" data-fn="([A-Za-z0-9_-]+)"><a href="#\3"[^>]*>[^<]*<\/a><\/sup>(\s*):/',
+		static function ( $m ) {
+			return $m[1] . $m[2] . '[^' . $m[3] . ']:' . $m[4];
 		},
 		$content
 	);
 
-	/* 引用：[^id] → sup 角标（跳过 pre/code 片段，代码示例里的 [^] 不动） */
+	/* 1a) 定义段：段落区块形态 [^id]: text → 移除并暂存 */
+	$content = preg_replace_callback(
+		'/<!-- wp:paragraph(?: \{.*?\})? -->\s*<p>\s*\[\^([A-Za-z0-9_-]+)\]:\s*(.*?)<\/p>\s*<!-- \/wp:paragraph -->/s',
+		static function ( $m ) use ( &$defs ) {
+			return paddysun_ns_stash_footnote_def( $defs, $m[1], $m[2] );
+		},
+		$content
+	);
+
+	/* 1b) 定义段：列表项形态（1.0.1 起真实写作常用 "- [^id]: text"，此前
+	   完全不被识别，导致定义不入 meta 且标签被二次转成角标） */
+	$content = preg_replace_callback(
+		'/<!-- wp:list-item -->\s*<li[^>]*>\s*\[\^([A-Za-z0-9_-]+)\]:\s*(.*?)<\/li>\s*<!-- \/wp:list-item -->/s',
+		static function ( $m ) use ( &$defs ) {
+			return paddysun_ns_stash_footnote_def( $defs, $m[1], $m[2] );
+		},
+		$content
+	);
+
+	/* 1c) 定义段：无区块注释的裸 <p>（经典/自由形态粘贴） */
+	$content = preg_replace_callback(
+		'/<p>\s*\[\^([A-Za-z0-9_-]+)\]:\s*(.*?)<\/p>/s',
+		static function ( $m ) use ( &$defs ) {
+			return paddysun_ns_stash_footnote_def( $defs, $m[1], $m[2] );
+		},
+		$content
+	);
+
+	/* 1d) 定义项提空后的空列表容器一并移除（避免残留空 wp:list） */
+	$content = preg_replace(
+		'/<!-- wp:list(?: \{.*?\})? -->\s*<(ol|ul)[^>]*>\s*(?:<!-- \/wp:list-item -->)?\s*<\/\1>\s*<!-- \/wp:list -->/s',
+		'',
+		$content
+	);
+
+	/* 2) 引用：[^id] → sup 角标（跳过 pre/code 片段，代码示例里的 [^] 不动；
+	   后跟冒号的定义标签 [^id]: 不在此转换——已由 1) 提取，漏网的定义行
+	   标签保持字面可见，不再制造重复角标） */
 	$ref_ids   = array();
 	$ordinals  = array();
 	$seen      = array();
@@ -320,7 +376,7 @@ function paddysun_ns_normalize_footnotes( $content ) {
 				continue; // 偶数索引为普通内容，奇数为捕获的分隔片段
 			}
 			$segments[ $i ] = preg_replace_callback(
-				'/\[\^([A-Za-z0-9_-]+)\]/',
+				'/\[\^([A-Za-z0-9_-]+)\](?!\s*:)/',
 				static function ( $m ) use ( &$ref_ids, &$ordinals, &$seen, &$converted ) {
 					$id        = $m[1];
 					$ref_ids[] = $id;

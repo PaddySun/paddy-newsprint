@@ -3,7 +3,7 @@ Contributors: ispaddy
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, one-column, custom-colors, custom-menu, editor-style, block-styles, block-patterns, full-site-editing, style-variations, translation-ready
@@ -62,6 +62,11 @@ Paddysun Newsprint 是一款面向中文文字博客的块主题（Block Theme�
 官方标准整改：vendor 库随包附未压缩原始文件；检索词转义、检索表单 action、键盘焦点样式等可移植性/无障碍修正。升级后建议清一次缓存。
 
 == Changelog ==
+
+= 1.0.2 =
+* 修复脚注（引用）两个线上问题：①定义行此前只识别「独立段落」形态，写在列表项里的 `- [^id]: 文字` 定义不被识别——定义不进文末列表（只剩空序号）、定义行标签还被误转成重复角标、定义文字以普通文本游离在正文中；每次重新粘贴还会继续叠加（无限增殖）。现支持段落 / 列表项 / 裸段落三种定义形态，定义标签不再误转角标，提取后的空列表一并清理。②早前版本已受损的文章（重复角标 + 游离定义文字）无需手工修复：再次保存时按「块首角标 + 冒号」特征自动还原为定义行并提取。代码块内的 `[^x]` 字面量仍保持不动；正文引用后紧跟半角冒号的写法现保持字面可见（不再转角标，属极端写法的文档化取舍）。
+* 修复 shields.io 徽章等行内小图排版：插在段落/列表文字中间的图片此前被主题的全局插图规则强制块级化（独占一行、与文字基线错位、无法并排、间距异常）。现段落与列表内的图片保持行内排版（垂直居中、原始大小、并排自然），独立图块（图片区块 figure）仍走原有插图协议（块级、居中、图注）。
+* 受损存量文的修复口径：升级后把受损文章各保存一次即可自动修复；文末列表缺失但角标完好的文章，配合「原文 MD」可由随仓修复脚本重建 meta（见发布说明）。
 
 = 1.0.1 =
 * 国际化达标（按 WordPress.org 主题评审 i18n 要求）：全部用户可见 PHP 文本挂入 `paddysun-newsprint` 文本域；随包附 `languages/paddysun-newsprint.pot` 模板与英文翻译包（en_US.po/.mo），英文站点（含「外观 → llms.txt 设置」「外观 → 广告位」两个后台设置页）开箱即英文；HTML 模板静态文本按评审「temporary exception」口径保留。

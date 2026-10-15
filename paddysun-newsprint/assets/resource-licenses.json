@@ -2087,8 +2087,8 @@
     },
     {
       "path": "inc/content-filters.php",
-      "bytes": 22757,
-      "sha256": "49ed0dbd2247f2d3bf31acf0f7341a14ebc9f7dfa79b7ca4a57e761cc2386b3d"
+      "bytes": 25371,
+      "sha256": "038d18732274e98dadad11dbec9701530dc922d05a58c106d030ba00ae21534c"
     },
     {
       "path": "parts/footer.html",
@@ -2107,8 +2107,8 @@
     },
     {
       "path": "readme.txt",
-      "bytes": 32494,
-      "sha256": "825331eaed603f3371a225879ac6203029b2983d3b98342cdadae59e32f2abf6"
+      "bytes": 33982,
+      "sha256": "0ae3da2b7aa7bc5b23e0fc0dfe0b27e542527204495cdc75899a5ecaba03f2d7"
     },
     {
       "path": "screenshot.png",
