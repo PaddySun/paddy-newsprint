@@ -817,6 +817,16 @@
 			"name": "template-about",
 			"title": "关于页",
 			"postTypes": ["page"]
+		},
+		{
+			"name": "template-blog",
+			"title": "档案馆页",
+			"postTypes": ["page"]
+		},
+		{
+			"name": "template-tags",
+			"title": "版签总目页",
+			"postTypes": ["page"]
 		}
 	],
 	"templateParts": [
@@ -830,16 +840,15 @@
 			"title": "报头（紧凑，文章页）",
 			"area": "header"
 		},
-			{
-				"name": "footer",
-				"title": "页脚",
-				"area": "footer"
-			},
-			{
-				"name": "maintenance-notice",
-				"title": "提醒确认弹窗",
-				"area": "uncategorized"
-			}
-
+		{
+			"name": "footer",
+			"title": "页脚",
+			"area": "footer"
+		},
+		{
+			"name": "maintenance-notice",
+			"title": "提醒确认弹窗",
+			"area": "uncategorized"
+		}
 	]
 }

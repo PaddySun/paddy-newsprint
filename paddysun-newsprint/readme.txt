@@ -3,7 +3,7 @@ Contributors: ispaddy
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.0.2
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, one-column, custom-colors, custom-menu, editor-style, block-styles, block-patterns, full-site-editing, style-variations, translation-ready
@@ -62,6 +62,19 @@ Paddysun Newsprint 是一款面向中文文字博客的块主题（Block Theme�
 官方标准整改：vendor 库随包附未压缩原始文件；检索词转义、检索表单 action、键盘焦点样式等可移植性/无障碍修正。升级后建议清一次缓存。
 
 == Changelog ==
+
+= 1.1.0 =
+* 工程：修复脚本 repair-footnotes.php 移出主题包（保留于仓库 tools/ 目录，wp-cli 用法见文件头注释；1.0.2 包内自带该脚本的旧版用户可继续使用）；打包校验新增同名排除规则防回流。WordPress 官方主题目录要求在本项目中作为工程指引采用（暂不提交目录）；本分发行使 GPL-3.0 选项（DOMPurify 的 Apache-2.0 分支与 GPLv2 不兼容、与 GPLv3 兼容），GPLv2+ 与 GPLv3 双许可原文随包。
+* 工程（审计 P3 卫生清理）：全主题唯一非 Yoda 条件改正；广告位与 REST 编码共 5 处闭包钩子改具名函数（可被 remove_filter 移除）；filemtime 增加 paddysun_ns_file_ver 可读守卫（vendor 裁剪缺失时退回版本常量）；两个新 pattern 补 ABSPATH 守卫；评论 label 替换改 preg_replace_callback（译文含 $n/反斜杠不再被当反向引用）；JSON-LD 输出增加 wp_json_encode 失败守卫；边缘缓存层的 REQUEST_METHOD 读取规范化；补 3 处 translators 注释与 PHP_INT_MAX 意图注释；theme.json 为 template-blog / template-tags 补 customTemplates 中文标题并修正 templateParts 缩进；en_US 译文补齐 5 条此前留空的界面文案。
+* 修复（审计三重检查后）：索引缓存改固定键 + 值内版本比对（版本推进原地覆盖，不再产生孤儿 transient 行）；save_post 排除修订/自动保存与 post/page 以外类型、词表钩子仅认 category/post_tag（避免写作心跳打穿缓存）；%author% 固定链接结构下年历链接带真实作者段（瘦列补 post_author）；缓存头挂载优先级调至 99（canonical 301 先行，晚决策 DONOTCACHEPAGE 的插件可拦截），已存在 Cache-Control 或 Set-Cookie 时让位不叠加；新增 paddysun_ns_edge_cache / paddysun_ns_multilingual 过滤器与多语言（Polylang/WPML）自动退回 WP API 取数路径；选项/瞬态统一 paddysun_ns_ 前缀；PHP 7.4 兼容（str_contains → strpos）。
+* 性能：全主题 CDN 边缘缓存头（inc/cache.php）——对匿名 GET 的公开视图（主页 / 全部归档 / 单篇 / 页面）输出 Cache-Control: public, max-age=0, s-maxage=600, stale-while-revalidate=3600 与 Last-Modified（全站最新内容时间），支持 If-Modified-Since 回 304；登录态、评论者/登录/阅读密码 Cookie、带查询串请求（搜索、replytocom、统计参数）、feed、404、预览、加密内容一律不发缓存头，配合 EdgeOne 等「遵循源站」的 CDN 即可整页缓存。定义 DONOTCACHEPAGE 可整体禁用。
+* 性能：「档案馆」「版签总目」整段结果改走 transient 缓存（生产站启用 Redis Object Cache 时存于 Redis），发文/删文/词表增删改即整体失效；「版签总目」从 212 次查询降至冷缓存 8 次、暖缓存 1 次，「档案馆」从 53 次降至冷缓存 15 次、暖缓存 2 次（108 篇 / 177 签实测）。
+* 国际化：1.1.0 新增的 23 条可译字符串（含两个区块模式的标题/描述）已重新生成 paddysun-newsprint.pot 并补齐 en_US.po 译文（make-pot → 手改 po → make-mo 可复现链），en_US 站点下档案馆/版签总目已实测输出英文；索引缓存键含 locale，切语言不串页。
+* 性能：两索引取数全部批量化——每栏目最新发文一条 GROUP BY（含子分类归并）、年历只取 ID/标题/别名/日期瘦列（不捞正文）、每篇文章标签一条批量 SQL、固定链接用瘦 WP_Post/WP_Term 对象拼装（%category%/%author% 永久链接结构自动回退完整缓存）。
+* 新增两个页面模板，均可在站点编辑器「页面 → 模板」中为任意页面指定；版面组件以区块模式提供（blog-archive / tag-index），可在编辑器中直接改版：
+* 「Blog 档案馆」（template-blog，建议用于 /blog 页面）：栏目导览（按文章数降序最多 16 个分类的 4 列网格，每卡含篇数与「最近 年-月-日 更新」）+ 热门版签（前 8 个，附指向版签总目的入口）与月度字数条状统计图（近 24 个月，纯 CSS，最新月在最右、整体右对齐，统计行「[站点名] / 从 年-月 到 年-月 / 更新了 X 篇文章 / 共计 Y 字」按「/」分段自适应换行、站点名过长截断省略；悬停柱显示「年-月 · 字数 / 篇数」气泡）双栏 + 年历（按年份分组的全量文章：年份 + 当年篇数 + 编号清单，每条附日期与前三个标签；年份区块使用 content-visibility 原生懒渲染）。档案馆内分割线统一用单横线；无标题文章兜底显示「无题」。
+* 「版签总目」（template-tags，建议用于 /tags 页面）：统计行（标签总数 + 覆盖篇数）+ 以一级分类为分组的标签清单，组内按篇数降序、行内排布；不属于任何栏目的标签归入「散签」，默认「未分类」不作为分组。分组标题保留双实线，与档案馆的单横线区分。
+* 版签与其计数全局统一半透明圆角矩形底（档案馆与版签总目一致）；移动端 / 平板 / 桌面端响应式适配（栏目网格 4→3→2→1 列并随之展示 16→12→8→6 个，月度字数图随宽度从最老月份起收窄 24→18→12→8 根，双栏窄屏叠放，年历清单窄屏换行）。
 
 = 1.0.2 =
 * 修复脚注（引用）两个线上问题：①定义行此前只识别「独立段落」形态，写在列表项里的 `- [^id]: 文字` 定义不被识别——定义不进文末列表（只剩空序号）、定义行标签还被误转成重复角标、定义文字以普通文本游离在正文中；每次重新粘贴还会继续叠加（无限增殖）。现支持段落 / 列表项 / 裸段落三种定义形态，定义标签不再误转角标，提取后的空列表一并清理。②早前版本已受损的文章（重复角标 + 游离定义文字）无需手工修复：再次保存时按「块首角标 + 冒号」特征自动还原为定义行并提取。代码块内的 `[^x]` 字面量仍保持不动；正文引用后紧跟半角冒号的写法现保持字面可见（不再转角标，属极端写法的文档化取舍）。

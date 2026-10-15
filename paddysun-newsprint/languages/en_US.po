@@ -3,7 +3,7 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Paddysun Newsprint 1.0.2\n"
+"Project-Id-Version: Paddysun Newsprint 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/paddysun-newsprint\n"
 "Last-Translator: Paddy\n"
 "Language-Team: English (United States)\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2026-09-20T13:47:52+00:00\n"
-"PO-Revision-Date: 2026-10-15 12:00+0800\n"
+"PO-Revision-Date: 2026-10-15 23:55+0800\n"
 "X-Generator: hand-authored\n"
 "X-Domain: paddysun-newsprint\n"
 "Language: en_US\n"
@@ -703,7 +703,7 @@ msgstr "Sample site"
 
 #: patterns/buttons-wall.php:24
 msgid "我的按钮 · My Buttons"
-msgstr ""
+msgstr "My Buttons"
 
 #: patterns/buttons-wall.php:30
 msgid "示例站点 · clouds"
@@ -727,7 +727,7 @@ msgstr "These are local abstract placeholder buttons linking to this site's fron
 
 #: patterns/buttons-wall.php:60
 msgid "按钮墙 · Button Wall"
-msgstr ""
+msgstr "Button Wall"
 
 #: patterns/buttons-wall.php:64
 msgid "与友站交换所得的 88×31 按钮收藏在此，按交换先后排列。"
@@ -759,7 +759,7 @@ msgstr "Latest Briefs"
 
 #: patterns/lead-trio.php:47
 msgid "长读 · The Long Read"
-msgstr ""
+msgstr "The Long Read"
 
 #: patterns/lead-trio.php:77
 msgid "读这篇文章 →"
@@ -829,7 +829,7 @@ msgstr "Inside This Edition: a boxed grid grouped by category, each box listing 
 
 #: patterns/sections.php:14
 msgid "本期要目 · Inside This Edition"
-msgstr ""
+msgstr "Inside This Edition"
 
 #: patterns/subscribe.php
 msgctxt "Pattern title"
@@ -843,7 +843,7 @@ msgstr "A Broadside newsletter box reworked: ink background with double rules, k
 
 #: patterns/subscribe.php:17
 msgid "订阅 · Subscribe"
-msgstr ""
+msgstr "Subscribe"
 
 #: patterns/subscribe.php:21
 msgid "订阅本刊"
@@ -1070,3 +1070,76 @@ msgstr "Notice dialog"
 msgctxt "Style variation name"
 msgid "素白（高对比印张）"
 msgstr "Plain white (high-contrast print)"
+
+msgid "栏目导览"
+msgstr "Sections"
+
+msgid "热门版签"
+msgstr "Popular Tags"
+
+msgid "月度字数"
+msgstr "Monthly Words"
+
+msgid "全部版签 →"
+msgstr "All tags →"
+
+msgid "近 24 个月每月更新字数条状图"
+msgstr "Bar chart of words written per month over the last 24 months"
+
+msgid "从 %1$s 到 %2$s"
+msgstr "from %1$s to %2$s"
+
+msgid "更新了 %s 篇文章"
+msgstr "published %s posts"
+
+msgid "共计 %s 字"
+msgstr "%s chars in total"
+
+msgid "字"
+msgstr "chars"
+
+msgid "篇"
+msgstr "posts"
+
+msgid "%s 篇"
+msgstr "%s posts"
+
+msgid "共 %s 篇"
+msgstr "%s posts in total"
+
+msgid "最近 %s 更新"
+msgstr "updated %s"
+
+msgid "无题"
+msgstr "(Untitled)"
+
+msgid "还没有发表过文章，先去写一篇吧。"
+msgstr "No posts published yet — go write one."
+
+msgid "尚无版签"
+msgstr "No tags yet"
+
+msgid "给文章加上标签后，这里会出现标签总目。"
+msgstr "Tag posts and the tag index will appear here."
+
+msgid "散签"
+msgstr "Ungrouped"
+
+msgid "共 %1$s 个版签 · 覆盖 %2$s 篇"
+msgstr "%1$s tags · covering %2$s posts"
+
+msgctxt "Pattern title"
+msgid "档案馆（全量文章索引）"
+msgstr "Archive (full post index)"
+
+msgctxt "Pattern description"
+msgid "档案馆页版面：栏目导览（分类网格）+ 热门版签与月度字数双栏 + 按年份分组的全量文章清单（年历，滚动懒渲染）；整段结果 transient 缓存，SQL 走批量聚合。配「档案馆」页面模板（/blog）使用。"
+msgstr "Archive page layout: section guide (category grid), popular tags & monthly word-count duo, and a year-by-year full post index (lazy-rendered); the whole fragment is transient-cached with batched SQL. Use with the Archive page template (/blog)."
+
+msgctxt "Pattern title"
+msgid "版签总目（按栏目分组的标签索引）"
+msgstr "Tag Index (grouped by section)"
+
+msgctxt "Pattern description"
+msgid "全站标签的统计与展示索引：统计行 + 以一级分类为组的标签清单（组内按篇数排序，行内排布）；不属于任何栏目的标签归入「散签」。两条批量聚合 SQL 取数，整段结果 transient 缓存。配「版签总目」页面模板（/tags）使用。"
+msgstr "Site-wide tag index with stats: a stats line plus tags grouped by top-level category (sorted by count within each group); tags outside any section fall into Ungrouped. Two batched SQL queries, transient-cached. Use with the Tag Index page template (/tags)."

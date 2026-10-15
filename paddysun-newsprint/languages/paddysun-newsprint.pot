@@ -2,14 +2,14 @@
 # This file is distributed under the GNU General Public License v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Paddysun Newsprint 1.0.2\n"
+"Project-Id-Version: Paddysun Newsprint 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/paddysun-newsprint\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-15T12:55:55+00:00\n"
+"POT-Creation-Date: 2026-10-15T15:55:52+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: paddysun-newsprint\n"
@@ -39,104 +39,104 @@ msgstr ""
 msgid "https://www.paddysun.top/about-us"
 msgstr ""
 
-#: functions.php:54
+#: functions.php:55
 msgid "主导航（报头下方）"
 msgstr ""
 
-#: functions.php:89
+#: functions.php:90
 msgid "宽表已收起 · 展开全表"
 msgstr ""
 
-#: functions.php:90
+#: functions.php:91
 msgid "收起全表"
 msgstr ""
 
-#: functions.php:110
+#: functions.php:111
 msgid "转换中…"
 msgstr ""
 
-#: functions.php:111
+#: functions.php:112
 msgid "Markdown 已复制"
 msgstr ""
 
-#: functions.php:112
-#: functions.php:207
+#: functions.php:113
+#: functions.php:208
 msgid "复制失败，请重试"
 msgstr ""
 
-#: functions.php:131
+#: functions.php:132
 msgid "展开{n}条来信"
 msgstr ""
 
-#: functions.php:132
+#: functions.php:133
 msgid "收起来信"
 msgstr ""
 
-#: functions.php:166
+#: functions.php:167
 msgid "展开"
 msgstr ""
 
-#: functions.php:167
+#: functions.php:168
 #: inc/content-filters.php:602
 msgid "收起"
 msgstr ""
 
-#: functions.php:206
+#: functions.php:207
 msgid "代码已复制"
 msgstr ""
 
 #. translators: %s: 作者名
-#: functions.php:286
+#: functions.php:287
 #, php-format
 msgid "%s 的头像"
 msgstr ""
 
 #. translators: %s: 作者名
-#: functions.php:286
+#: functions.php:287
 msgid "访客头像"
 msgstr ""
 
-#: functions.php:316
+#: functions.php:317
 msgid "报纸版面"
 msgstr ""
 
-#: functions.php:317
+#: functions.php:318
 msgid "Paddysun Newsprint 的报头、头条、要目、订阅框、文章头尾、评论区等版面组件。"
 msgstr ""
 
-#: functions.php:328
+#: functions.php:329
 msgid "书卷式（段首缩进 + 两端对齐）"
 msgstr ""
 
-#: functions.php:335
+#: functions.php:336
 msgid "双规线"
 msgstr ""
 
-#: functions.php:342
+#: functions.php:343
 msgid "框线盒"
 msgstr ""
 
-#: functions.php:362
+#: functions.php:363
 msgid "文章内容（目录 · 头部）"
 msgstr ""
 
-#: functions.php:363
+#: functions.php:364
 msgid "正文前显示「目 录」盒（二级标题 ≥ 3 个时）。"
 msgstr ""
 
-#: functions.php:369
+#: functions.php:370
 msgid "文章内容（目录 · 右侧悬浮）"
 msgstr ""
 
-#: functions.php:370
+#: functions.php:371
 msgid "宽屏时目录固定右侧，滚动跟随当前阅读章节；窄屏回退头部目录盒。"
 msgstr ""
 
-#: functions.php:376
+#: functions.php:377
 msgid "文章内容（无目录）"
 msgstr ""
 
-#: functions.php:377
+#: functions.php:378
 msgid "不注入目录。"
 msgstr ""
 
@@ -671,6 +671,90 @@ msgstr ""
 msgid "复制 MD"
 msgstr ""
 
+#: patterns/blog-archive.php
+msgctxt "Pattern title"
+msgid "档案馆（全量文章索引）"
+msgstr ""
+
+#: patterns/blog-archive.php
+msgctxt "Pattern description"
+msgid "档案馆页版面：栏目导览（分类网格）+ 热门版签与月度字数双栏 + 按年份分组的全量文章清单（年历，滚动懒渲染）；整段结果 transient 缓存，SQL 走批量聚合。配「档案馆」页面模板（/blog）使用。"
+msgstr ""
+
+#: patterns/blog-archive.php:14
+msgid "无题"
+msgstr ""
+
+#: patterns/blog-archive.php:194
+#: patterns/post-list.php:39
+msgid "本版暂无稿目"
+msgstr ""
+
+#: patterns/blog-archive.php:198
+msgid "还没有发表过文章，先去写一篇吧。"
+msgstr ""
+
+#: patterns/blog-archive.php:209
+msgid "栏目导览"
+msgstr ""
+
+#. translators: %s: 该分类下的文章篇数
+#: patterns/blog-archive.php:219
+#, php-format
+msgid "%s 篇"
+msgstr ""
+
+#: patterns/blog-archive.php:225
+#, php-format
+msgid "最近 %s 更新"
+msgstr ""
+
+#: patterns/blog-archive.php:239
+msgid "热门版签"
+msgstr ""
+
+#: patterns/blog-archive.php:249
+msgid "全部版签 →"
+msgstr ""
+
+#: patterns/blog-archive.php:255
+msgid "月度字数"
+msgstr ""
+
+#: patterns/blog-archive.php:256
+msgid "近 24 个月每月更新字数条状图"
+msgstr ""
+
+#: patterns/blog-archive.php:260
+msgid "字"
+msgstr ""
+
+#: patterns/blog-archive.php:261
+msgid "篇"
+msgstr ""
+
+#: patterns/blog-archive.php:277
+#, php-format
+msgid "从 %1$s 到 %2$s"
+msgstr ""
+
+#: patterns/blog-archive.php:279
+#, php-format
+msgid "更新了 %s 篇文章"
+msgstr ""
+
+#. translators: %s: 字数
+#: patterns/blog-archive.php:284
+#, php-format
+msgid "共计 %s 字"
+msgstr ""
+
+#. translators: %s: 当年文章篇数
+#: patterns/blog-archive.php:301
+#, php-format
+msgid "共 %s 篇"
+msgstr ""
+
 #: patterns/buttons-wall.php
 msgctxt "Pattern title"
 msgid "88×31 按钮墙（我的按钮 + 交换墙）"
@@ -796,10 +880,6 @@ msgstr ""
 msgid "较早 »"
 msgstr ""
 
-#: patterns/post-list.php:39
-msgid "本版暂无稿目"
-msgstr ""
-
 #: patterns/post-list.php:43
 msgid "该版面下还没有文章，换个关键词或分类试试。"
 msgstr ""
@@ -842,6 +922,34 @@ msgstr ""
 
 #: patterns/subscribe.php:33
 msgid "RSS 订阅"
+msgstr ""
+
+#: patterns/tag-index.php
+msgctxt "Pattern title"
+msgid "版签总目（按栏目分组的标签索引）"
+msgstr ""
+
+#: patterns/tag-index.php
+msgctxt "Pattern description"
+msgid "全站标签的统计与展示索引：统计行 + 以一级分类为组的标签清单（组内按篇数排序，行内排布）；不属于任何栏目的标签归入「散签」。两条批量聚合 SQL 取数，整段结果 transient 缓存。配「版签总目」页面模板（/tags）使用。"
+msgstr ""
+
+#: patterns/tag-index.php:38
+msgid "尚无版签"
+msgstr ""
+
+#: patterns/tag-index.php:42
+msgid "给文章加上标签后，这里会出现标签总目。"
+msgstr ""
+
+#. translators: 1: 标签总数，2: 被标签覆盖的文章篇数
+#: patterns/tag-index.php:162
+#, php-format
+msgid "共 %1$s 个版签 · 覆盖 %2$s 篇"
+msgstr ""
+
+#: patterns/tag-index.php:175
+msgid "散签"
 msgstr ""
 
 #: theme.json

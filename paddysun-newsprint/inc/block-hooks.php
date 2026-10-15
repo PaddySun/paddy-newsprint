@@ -100,6 +100,7 @@ function paddysun_ns_dynamic_tokens() {
 		'{issue}'   => esc_html( number_format_i18n( $issue ) ),
 		'{volume}'  => esc_html( number_format_i18n( max( 1, $year - $est + 1 ) ) ),
 		'{est}'     => esc_html( (string) $est ),
+		/* translators: PHP 日期格式串（date_i18n）。 */
 		'{date}'    => esc_html( date_i18n( __( 'Y年n月j日', 'paddysun-newsprint' ) ) ),
 		'{weekday}' => esc_html( date_i18n( 'l' ) ),
 		'{year}'    => esc_html( (string) $year ),
@@ -776,6 +777,8 @@ function paddysun_ns_the_title_escape( $title ) {
 	}
 	return esc_html( wp_specialchars_decode( $title, ENT_QUOTES ) );
 }
+/* PHP_INT_MAX 属刻意：escape 必须排在所有改写 the_title 的过滤器之后（最后一道防线）；
+   需要移除时用同优先级 remove_filter 即可。 */
 add_filter( 'the_title', 'paddysun_ns_the_title_escape', PHP_INT_MAX );
 
 /* ------------------------------------------------------------
@@ -797,9 +800,12 @@ function paddysun_ns_comment_field_labels( $fields ) {
 		/* 必填指示保留核心原样（核心仅在 require_name_email 开启时写入） */
 		$required = false !== strpos( $html, 'class="required"' ) || false !== strpos( $html, "class='required'" );
 		$inner    = esc_html( $map[ $key ] ) . ( $required ? wp_required_field_indicator() : '' );
-		$replaced = preg_replace(
+		/* 译文经 callback 注入：replacement 字符串形式会把译文里的 $n/\ 当反向引用。 */
+		$replaced = preg_replace_callback(
 			'/(<label\b[^>]*>).*?(<\/label>)/s',
-			'$1' . $inner . '$2',
+			function ( $m ) use ( $inner ) {
+				return $m[1] . $inner . $m[2];
+			},
 			$html,
 			1,
 			$count

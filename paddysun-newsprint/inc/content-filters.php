@@ -114,7 +114,7 @@ function paddysun_ns_filter_content( $content ) {
 			function ( $m ) use ( &$i, $threshold ) {
 				$i++;
 				$tag = $m[0];
-				if ( $i <= $threshold || str_contains( $tag, 'loading=' ) || str_contains( $tag, 'fetchpriority=' ) ) {
+				if ( $i <= $threshold || false !== strpos( $tag, 'loading=' ) || false !== strpos( $tag, 'fetchpriority=' ) ) {
 					return $tag;
 				}
 				return '<img loading="lazy"' . substr( $tag, 4 );

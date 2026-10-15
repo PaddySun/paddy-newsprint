@@ -89,7 +89,9 @@ function paddysun_ns_json_ld() {
 		$data,
 		JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
 	);
-	echo '<script type="application/ld+json">' . $json . '</script>' . "\n";
+	if ( is_string( $json ) && '' !== $json ) {
+		echo '<script type="application/ld+json">' . $json . '</script>' . "\n";
+	}
 }
 add_action( 'wp_head', 'paddysun_ns_json_ld', 5 );
 

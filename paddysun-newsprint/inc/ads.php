@@ -185,7 +185,7 @@ function paddysun_ns_ads_sanitize( $raw ) {
 	return $out;
 }
 
-add_action( 'admin_menu', function () {
+function paddysun_ns_ads_admin_menu() {
 	add_theme_page(
 		__( '广告位设置', 'paddysun-newsprint' ),
 		__( '广告位', 'paddysun-newsprint' ),
@@ -193,9 +193,10 @@ add_action( 'admin_menu', function () {
 		'paddysun-ns-ads',
 		'paddysun_ns_ads_render_page'
 	);
-} );
+}
+add_action( 'admin_menu', 'paddysun_ns_ads_admin_menu' );
 
-add_action( 'admin_init', function () {
+function paddysun_ns_ads_admin_init() {
 	register_setting(
 		'paddysun_ns_ads_group',
 		'paddysun_ns_ads',
@@ -205,7 +206,8 @@ add_action( 'admin_init', function () {
 			'default'           => paddysun_ns_ads_defaults(),
 		)
 	);
-} );
+}
+add_action( 'admin_init', 'paddysun_ns_ads_admin_init' );
 
 /**
  * 后台页：标准 .wrap 版式（同 llms-settings 页），每槽位含 桌面端/平板端/手机端
@@ -333,7 +335,7 @@ function paddysun_ns_ads_render_page() {
 	<?php
 }
 
-add_action( 'admin_enqueue_scripts', function ( $hook ) {
+function paddysun_ns_ads_admin_assets( $hook ) {
 	if ( 'appearance_page_paddysun-ns-ads' !== $hook ) {
 		return;
 	}
@@ -364,7 +366,8 @@ jQuery(function ($) {
 	});
 });
 JS );
-} );
+}
+add_action( 'admin_enqueue_scripts', 'paddysun_ns_ads_admin_assets' );
 
 /**
  * 单端占位资源：该端自选媒体库图片（含尺寸），缺省回该端内置占位图。
@@ -471,7 +474,7 @@ function paddysun_ns_ad_slot( $key ) {
  * 任一文章页槽位填码时引入（侧栏固定位需要定位脚本，文章页本就不在
  * 0 JS 承诺内）。
  */
-add_action( 'wp_enqueue_scripts', function () {
+function paddysun_ns_ads_maybe_enqueue() {
 	$settings = paddysun_ns_ads_normalize( get_option( 'paddysun_ns_ads', array() ) );
 	$need     = false;
 	if ( is_front_page() && '' !== trim( $settings['slots']['home']['code'] ) ) {
@@ -500,4 +503,5 @@ add_action( 'wp_enqueue_scripts', function () {
 			'deadline' => (int) apply_filters( 'paddysun_ns_ad_deadline_ms', 2500 ),
 		)
 	);
-} );
+}
+add_action( 'wp_enqueue_scripts', 'paddysun_ns_ads_maybe_enqueue' );

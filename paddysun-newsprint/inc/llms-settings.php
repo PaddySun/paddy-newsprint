@@ -155,7 +155,7 @@ function paddysun_ns_llms_sanitize( $input ) {
 			__( 'llms.txt 已关闭：/llms.txt 与 /llms-full.txt 均返回 403，全量开关一并关闭。', 'paddysun-newsprint' ),
 			'warning'
 		);
-	} elseif ( $settings['index_mode'] === 'manual' && '' === trim( $settings['index_manual'] ) ) {
+	} elseif ( 'manual' === $settings['index_mode'] && '' === trim( $settings['index_manual'] ) ) {
 		add_settings_error(
 			PADDYSUN_NS_LLMS_OPTION,
 			'paddysun_llms_manual_empty',

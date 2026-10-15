@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'PADDYSUN_NS_VERSION', '1.0.2' );
+define( 'PADDYSUN_NS_VERSION', '1.1.0' );
 define( 'PADDYSUN_NS_DIR', get_template_directory() );
 define( 'PADDYSUN_NS_URI', get_template_directory_uri() );
 
@@ -29,6 +29,7 @@ require_once PADDYSUN_NS_DIR . '/inc/img-fallback.php';
 require_once PADDYSUN_NS_DIR . '/inc/ads.php';
 require_once PADDYSUN_NS_DIR . '/inc/email-style.php';
 require_once PADDYSUN_NS_DIR . '/inc/login-style.php';
+require_once PADDYSUN_NS_DIR . '/inc/cache.php';
 
 /* ------------------------------------------------------------
  * 主题初始化
@@ -60,9 +61,14 @@ add_action( 'after_setup_theme', 'paddysun_ns_setup' );
  * filemtime（文件变动自动换 URL），主题自有 JS 用 PADDYSUN_NS_VERSION 常量
  * （cache-buster：改 JS 必须升版本，0.9.2 教训）（审查 C-F21 表述精确化）
  * ---------------------------------------------------------- */
+// filemtime 带可读守卫：vendor 资产按需裁剪分发时文件可能缺失，退回版本常量。
+function paddysun_ns_file_ver( $path ) {
+	return is_readable( $path ) ? (string) filemtime( $path ) : PADDYSUN_NS_VERSION;
+}
+
 function paddysun_ns_assets() {
 	$css = PADDYSUN_NS_DIR . '/style.css';
-	wp_enqueue_style( 'paddysun-newsprint', PADDYSUN_NS_URI . '/style.css', array(), filemtime( $css ) );
+	wp_enqueue_style( 'paddysun-newsprint', PADDYSUN_NS_URI . '/style.css', array(), paddysun_ns_file_ver( $css ) );
 	wp_style_add_data( 'paddysun-newsprint', 'path', $css );
 
 	// 「桌面」色只在前台给 html：编辑器画布保持纸面色，与文章观感一致。
@@ -128,6 +134,7 @@ function paddysun_ns_assets() {
 					'paddysun-comments-fold',
 					'PADDYSUN_COMMENTS',
 					array(
+						/* translators: {n} 为前端脚本替换的条数占位符。 */
 						'expand' => __( '展开{n}条来信', 'paddysun-newsprint' ),
 						'fold'   => __( '收起来信', 'paddysun-newsprint' ),
 					)
@@ -170,7 +177,7 @@ function paddysun_ns_maybe_enqueue_rich_renderers( $content ) {
 	}
 
 	if ( $has_math ) {
-		$v = filemtime( PADDYSUN_NS_DIR . '/assets/vendor/katex/katex.min.js' );
+		$v = paddysun_ns_file_ver( PADDYSUN_NS_DIR . '/assets/vendor/katex/katex.min.js' );
 		wp_enqueue_style( 'paddysun-katex', PADDYSUN_NS_URI . '/assets/vendor/katex/katex.min.css', array(), $v );
 		wp_enqueue_script( 'paddysun-katex', PADDYSUN_NS_URI . '/assets/vendor/katex/katex.min.js', array(), $v, true );
 		wp_enqueue_script( 'paddysun-katex-auto', PADDYSUN_NS_URI . '/assets/vendor/katex/contrib/auto-render.min.js', array( 'paddysun-katex' ), $v, true );
@@ -178,7 +185,7 @@ function paddysun_ns_maybe_enqueue_rich_renderers( $content ) {
 	}
 
 	if ( $has_mermaid ) {
-		$v = filemtime( PADDYSUN_NS_DIR . '/assets/vendor/mermaid/mermaid.min.js' );
+		$v = paddysun_ns_file_ver( PADDYSUN_NS_DIR . '/assets/vendor/mermaid/mermaid.min.js' );
 		wp_enqueue_script( 'paddysun-mermaid', PADDYSUN_NS_URI . '/assets/vendor/mermaid/mermaid.min.js', array(), $v, true );
 		wp_enqueue_script( 'paddysun-mermaid-init', PADDYSUN_NS_URI . '/assets/js/mermaid-init.js', array( 'paddysun-mermaid' ), PADDYSUN_NS_VERSION, true );
 	}
@@ -188,7 +195,7 @@ function paddysun_ns_maybe_enqueue_rich_renderers( $content ) {
 	//   mermaid 块渲染期已转为图表容器，不会被 hljs 误处理）
 	$has_plain_code = (bool) preg_match( '#<pre(?![^>]*language-mermaid)[^>]*>\s*<code(?![^>]*language-mermaid)#i', $content );
 	if ( $has_plain_code ) {
-		$v = filemtime( PADDYSUN_NS_DIR . '/assets/vendor/highlight/highlight.min.js' );
+		$v = paddysun_ns_file_ver( PADDYSUN_NS_DIR . '/assets/vendor/highlight/highlight.min.js' );
 		wp_enqueue_script( 'paddysun-highlight', PADDYSUN_NS_URI . '/assets/vendor/highlight/highlight.min.js', array(), $v, true );
 		wp_enqueue_script( 'paddysun-highlight-init', PADDYSUN_NS_URI . '/assets/js/highlight-init.js', array( 'paddysun-highlight' ), PADDYSUN_NS_VERSION, true );
 		wp_enqueue_style( 'paddysun-highlight-css', PADDYSUN_NS_URI . '/assets/vendor/highlight/ascetic.min.css', array(), $v );
@@ -261,7 +268,7 @@ function paddysun_ns_local_avatar( $avatar, $id_or_email, $args ) {
 	} elseif ( is_numeric( $id_or_email ) ) {
 		$user = get_user_by( 'id', (int) $id_or_email );
 		$name = $user ? $user->display_name : '';
-	} elseif ( is_string( $id_or_email ) && str_contains( $id_or_email, '@' ) ) {
+	} elseif ( is_string( $id_or_email ) && false !== strpos( $id_or_email, '@' ) ) {
 		$user = get_user_by( 'email', $id_or_email );
 		$name = $user ? $user->display_name : strstr( $id_or_email, '@', true );
 	}
@@ -298,13 +305,11 @@ add_filter( 'pre_get_avatar', 'paddysun_ns_local_avatar', 10, 3 );
 /* ------------------------------------------------------------
  * REST 输出中文原样（不转 \uXXXX），复制按钮与 AI 抓取可读性更好
  * ---------------------------------------------------------- */
-add_filter(
-	'rest_json_encode_options',
-	static function ( $options ) {
-		$options |= JSON_UNESCAPED_UNICODE;
-		return $options;
-	}
-);
+function paddysun_ns_rest_encode_options( $options ) {
+	$options |= JSON_UNESCAPED_UNICODE;
+	return $options;
+}
+add_filter( 'rest_json_encode_options', 'paddysun_ns_rest_encode_options' );
 
 /* ------------------------------------------------------------
  * 区块模式分类 / 区块样式（替代原 Customizer「排印」开关）

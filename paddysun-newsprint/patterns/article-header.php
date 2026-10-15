@@ -22,6 +22,7 @@
 		<div class="wp-block-group np-article__meta">
 			<?php
 			// 末尾补 \n：PHP 会吞掉关闭标记后的首个换行，缺它则输出比静态版少一节换行。
+			/* translators: PHP 日期格式串（post-date 区块 format 属性）。 */
 			echo '<!-- wp:post-date {"format":"' . esc_attr( __( 'Y年n月j日', 'paddysun-newsprint' ) ) . '"} /-->' . "\n";
 			?>
 			<!-- wp:post-author-name /-->

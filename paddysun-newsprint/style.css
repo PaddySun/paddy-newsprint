@@ -4,7 +4,7 @@ Theme URI: https://www.paddysun.top/paddy-newsprint
 Author: Paddy
 Author URI: https://www.paddysun.top/about-us
 Description: 报纸风格的极简中文博客块主题。首页全量移植 Broadside 报纸版面（报头三件套、三栏头条、本期要目），文章页保持 Typora Newsprint 阅读体验；英文内容采用 Broadside 字体方案（Source Serif 4 / Libre Caslon / Unifraktur）。全部模板区块化，色板/字体/间距由 theme.json 提供，站点编辑器所见即所得。内置 KaTeX、Mermaid、代码高亮按需加载与一键复制 Markdown。零外部请求。
-Version: 1.0.2
+Version: 1.1.0
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 7.4
@@ -1067,6 +1067,375 @@ a.np-icon-link {
     margin-top: 2rem;
     font-size: var(--np-fs-compact);
 }
+
+/* ============================================================
+   6a-bis. 档案馆（/blog）+ 版签总目（/tags）—— v1.1.0
+   ============================================================ */
+.np-blog,
+.np-tagindex {
+    max-width: calc(var(--np-sheet) - 2 * var(--np-sheet-margin));
+    margin: 0 auto;
+    padding: 26px 0 44px;
+}
+
+/* 版签：全局统一半透明圆角矩形底 */
+.np-chip {
+    display: inline-block;
+    padding: 0.08em 0.55em;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.055);
+    color: var(--np-ink);
+    text-decoration: none;
+}
+.np-chip:hover {
+    background: rgba(0, 0, 0, 0.1);
+    color: var(--np-accent);
+    text-decoration: none;
+}
+
+/* 版签总目（/tags）：统计行 + 一级分类分组（标题下双实线，与档案馆区分） */
+.np-taggroups__stats {
+    font-size: var(--np-fs-meta);
+    color: var(--np-ink-ghost);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+}
+.np-taggroup__heading {
+    margin: 1.4rem 0 0.4rem;
+    padding-bottom: 6px;
+    border-bottom: 3px double var(--np-ink);
+    font-family: var(--np-display);
+    font-weight: 400;
+    font-size: var(--np-fs-headline);
+    line-height: 1.1;
+}
+.np-taggroup__heading a {
+    color: var(--np-ink);
+    text-decoration: none;
+}
+.np-taggroup__heading a:hover {
+    color: var(--np-accent);
+    text-decoration: none;
+}
+.np-taggroup__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45em 1.4em;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+.np-taggroup__item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35em;
+}
+.np-taggroup__count {
+    font-size: var(--np-fs-meta);
+    color: var(--np-ink-ghost);
+    font-variant-numeric: tabular-nums;
+}
+
+/* 档案馆（/blog）版面小节标题：单横向分割线（与版签总目的双实线区分） */
+.np-blogsec {
+    margin: 2rem 0;
+}
+.np-blogsec__heading {
+    margin: 0 0 0.7rem;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--np-rule);
+    font-family: var(--np-display);
+    font-weight: 400;
+    font-size: var(--np-fs-headline);
+    line-height: 1.1;
+}
+.np-blogsec__heading a {
+    color: var(--np-ink);
+    text-decoration: none;
+}
+.np-blogsec__heading a:hover {
+    color: var(--np-accent);
+    text-decoration: none;
+}
+.np-blogsec__more {
+    margin: 0.6rem 0 0;
+    font-style: italic;
+    font-size: var(--np-fs-compact);
+}
+.np-blogsec__more a {
+    color: var(--np-ink-faded);
+    text-decoration: none;
+}
+.np-blogsec__more a:hover {
+    color: var(--np-accent);
+    text-decoration: none;
+}
+
+/* 块一：栏目导览 —— 4 列网格（平板 3 / 2 列，手机 1 列） */
+.np-blogcats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.np-blogcat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.6rem 0.7rem;
+    border: 1px solid var(--np-rule);
+}
+.np-blogcat__name {
+    color: var(--np-ink);
+    font-family: var(--np-display);
+    font-size: 17px;
+    line-height: 1.3;
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.np-blogcat__name:hover {
+    color: var(--np-accent);
+    text-decoration: none;
+}
+.np-blogcat__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5em;
+    font-size: var(--np-fs-meta);
+    color: var(--np-ink-ghost);
+    font-variant-numeric: tabular-nums;
+}
+
+/* 块二：左右双栏（热门版签 | 月度字数），窄屏叠放 */
+.np-blogduo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+.np-blogduo__col {
+    min-width: 0;
+}
+.np-blogtoptags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45em 0.9em;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.np-blogtoptags__item {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.3em;
+}
+.np-blogtoptags__count {
+    font-size: var(--np-fs-meta);
+    color: var(--np-ink-ghost);
+    font-variant-numeric: tabular-nums;
+}
+
+/* 月度字数条状图：纯 CSS，最新月在最右、整体右对齐 */
+.np-blogchart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: 3px;
+    height: 88px;
+    padding: 0 2px;
+}
+.np-blogchart__bar {
+    position: relative;
+    flex: 1;
+    min-width: 4px;
+    max-width: 34px;
+    background: rgba(0, 0, 0, 0.14);
+    border-radius: 2px 2px 0 0;
+}
+.np-blogchart__bar:hover {
+    background: var(--np-accent);
+}
+/* 悬停气泡：月份 · 字数 / 篇数 */
+.np-blogchart__bar::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    background: var(--np-ink);
+    color: var(--np-paper);
+    font-size: var(--np-fs-meta);
+    letter-spacing: 0.03em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--np-motion-dur) var(--np-motion-ease);
+    z-index: 5;
+}
+.np-blogchart__bar:hover::after {
+    opacity: 0.96;
+}
+/* 统计行：按「/」分段自适应换行，站点名过长时截断省略 */
+.np-blogchart__caption {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    column-gap: 0.5em;
+    row-gap: 0.1em;
+    margin: 0.5rem 0 0;
+    font-size: var(--np-fs-meta);
+    color: var(--np-ink-ghost);
+    letter-spacing: 0.05em;
+    font-variant-numeric: tabular-nums;
+}
+.np-blogchart__seg {
+    white-space: nowrap;
+}
+.np-blogchart__seg--name {
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.np-blogchart__sep {
+    color: var(--np-rule);
+}
+
+/* 年历：年份标题用单横线；整年区块滚动到视口附近才渲染（原生懒加载） */
+.np-blogyear {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 480px;
+    margin: 1.6rem 0 0;
+}
+.np-blogyear__head {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75em;
+    border-bottom: 1px solid var(--np-rule);
+    padding-bottom: 6px;
+}
+.np-blogyear__title {
+    margin: 0;
+    font-family: var(--np-display);
+    font-weight: 400;
+    font-size: var(--np-fs-headline);
+    line-height: 1.1;
+}
+.np-blogyear__count {
+    font-size: var(--np-fs-meta);
+    color: var(--np-ink-ghost);
+    letter-spacing: 0.1em;
+}
+
+/* 年历清单：编号在左、标题在上、日期与标签在下 */
+.np-blogyear__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: np-blogitem;
+}
+.np-blogitem {
+    counter-increment: np-blogitem;
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--np-rule);
+}
+.np-blogitem::before {
+    content: counter(np-blogitem, decimal-leading-zero);
+    flex: 0 0 2.4em;
+    font-size: var(--np-fs-meta);
+    color: var(--np-ink-ghost);
+    font-variant-numeric: tabular-nums;
+}
+.np-blogitem__title {
+    flex: 1;
+    min-width: 0;
+    color: var(--np-ink);
+    text-decoration: none;
+}
+.np-blogitem__title:hover {
+    color: var(--np-accent);
+    text-decoration: none;
+}
+.np-blogitem__meta {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75em;
+    font-size: var(--np-fs-meta);
+}
+.np-blogitem__date {
+    color: var(--np-ink-ghost);
+    letter-spacing: 0.05em;
+    font-variant-numeric: tabular-nums;
+}
+.np-blogitem__tags {
+    display: flex;
+    gap: 0.4em;
+}
+
+/* 响应式：栏目网格 4→3→2→1 列，随列数裁剪展示个数（16→12→8→6）；
+   字数图随宽度从左侧（最老月份）起收窄（24→18→12→8 根）。 */
+@media (max-width: 1024px) {
+    .np-blogcats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .np-blogcats .np-blogcat:nth-child(n + 13) {
+        display: none;
+    }
+    /* 仅当月份充足（>18）时从最老月份收窄，至少保留 18 根 */
+    .np-blogchart__bar:nth-child(-n + 6):nth-last-child(n + 19) {
+        display: none;
+    }
+}
+@media (max-width: 800px) {
+    .np-blogduo {
+        grid-template-columns: 1fr;
+        gap: 1.6rem;
+    }
+}
+@media (max-width: 700px) {
+    .np-blogcats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .np-blogcats .np-blogcat:nth-child(n + 9) {
+        display: none;
+    }
+    /* 至少保留 12 根 */
+    .np-blogchart__bar:nth-child(-n + 12):nth-last-child(n + 13) {
+        display: none;
+    }
+    .np-blogitem {
+        flex-wrap: wrap;
+    }
+    .np-blogitem__meta {
+        flex-basis: 100%;
+        padding-left: calc(2.4em + 1rem);
+    }
+}
+@media (max-width: 430px) {
+    .np-blogcats {
+        grid-template-columns: 1fr;
+    }
+    .np-blogcats .np-blogcat:nth-child(n + 7) {
+        display: none;
+    }
+    /* 至少保留 8 根 */
+    .np-blogchart__bar:nth-child(-n + 16):nth-last-child(n + 9) {
+        display: none;
+    }
+}
+
 
 /* ============================================================
    6b. 站点栏目页（links / about）+ 徽章挂件 —— 阶段四

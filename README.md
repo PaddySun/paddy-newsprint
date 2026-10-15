@@ -2,7 +2,7 @@
 
 # Paddy Newsprint
 
-![版本 1.0.2](https://img.shields.io/badge/version-1.0.2-6b1f1f)
+![版本 1.1.0](https://img.shields.io/badge/version-1.1.0-6b1f1f)
 ![WordPress 7.1+](https://img.shields.io/badge/WordPress-7.1%2B-21759b?logo=wordpress&logoColor=white)
 ![PHP 7.4+](https://img.shields.io/badge/PHP-7.4%2B-777bb4?logo=php&logoColor=white)
 ![许可证 GPL-2.0-or-later](https://img.shields.io/badge/license-GPL--2.0--or--later-blue)
@@ -12,10 +12,10 @@
 ## 下载与安装
 
 - [GitHub 仓库](https://github.com/PaddySun/paddy-newsprint)
-- 国内下载（1.0.1）：`https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.0.1.zip`（**待上传**，上传后需重新下载核验字节数与 SHA-256）
-- 安装包文件名：`paddy-newsprint-1.0.1.zip`；包内目录：`paddysun-newsprint/`。
-- SHA-256：`43cf0e3fcae8373ff42d34cc7ca0871f574ad38facd67ed953fb5e6f546cf3a0`（5,331,765 字节，233 个主题文件）。安装、升级与 HTTP 回归结果见本仓库 `RELEASE-1.0.1.md`。不要将 GitHub 的仓库源码 ZIP 当作可直接安装的主题包。
-- 上一版 1.0.0 仍可下载：`https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.0.0.zip`（待上传）。
+- 国内下载（1.1.0）：`https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.1.0.zip`（**待上传**，上传后需重新下载核验字节数与 SHA-256）
+- 安装包文件名：`paddy-newsprint-1.1.0.zip`；包内目录：`paddysun-newsprint/`。
+- SHA-256：`3e782330d3503467dded9a47235725152fb4a2ca868d8ec1277b21822a5cbedc`（5,313,553 字节，238 个主题文件）。验证过程见本仓库 `RELEASE-1.1.0.md`。不要将 GitHub 的仓库源码 ZIP 当作可直接安装的主题包。
+- 上一版仍可下载：[1.0.2](https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.0.2.zip)（SHA-256 `3e70b653…fdf95`）、[1.0.1](https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.0.1.zip)、[1.0.0](https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.0.0.zip)。
 
 在 WordPress 后台选择「外观 → 主题 → 上传主题」，安装并启用主题。升级前备份自己的站点；数据库中已定制的模板不会因主题文件更新自动覆盖。
 
@@ -31,8 +31,20 @@
 - **默认邮件样式**：出站邮件自动套用朴素表格布局并附纯文本降级；检测到其他邮件模板插件时整体让位。
 - **国际化**：全部用户可见 PHP 文本可经 gettext 翻译（文本域 `paddysun-newsprint`），随包附 `.pot` 模板与英文翻译包；英文站点（en_US）前台与后台设置页开箱即英文，中文站点输出不变。
 - **阅读动线**：文章页悬浮目录贴近正文右缘、默认收起。
+- **档案馆与版签总目**：可指定给页面的「档案馆」模板（栏目导览网格 + 热门版签与月度字数条状图 + 按年分组的全量文章年历，滚动懒渲染）与「版签总目」模板（按一级分类分组的标签索引）；版签统一半透明圆角底，桌面/平板/手机自适应。
+- **CDN 友好**：匿名公开视图输出标准 `Cache-Control`（`s-maxage` + `stale-while-revalidate`）与 `Last-Modified`（支持 304），登录态/评论者/带查询串请求自动直通；配合 EdgeOne 等「遵循源站」的 CDN 即可整页缓存。索引页结果层走 transient 缓存（启用 Redis Object Cache 时即 Redis），取数批量化、多语言（Polylang/WPML）自动退回 WP API 路径。
 
 SEO/schema、Markdown 存档与 REST、llms 是保留的产品功能，不需要另装强制插件。本轮为自主分发，不是 WordPress.org 上架版本或官方审核通过声明。
+
+## 1.1.0 更新
+
+- **新增「档案馆」页面模板**（建议用于 /blog）：栏目导览（按文章数降序最多 16 个分类的 4 列网格，随视口 4→3→2→1 列并裁剪个数）+ 双栏「热门版签 × 月度字数」（近 24 个月纯 CSS 条状图，最新月在最右、悬停显示年月/字数/篇数，统计行按「/」分段自适应换行）+ 年历（按年份分组的全量文章，`content-visibility` 原生懒渲染）。
+- **新增「版签总目」页面模板**（建议用于 /tags）：标签按一级分类分组（组内篇数降序），不属于任何栏目的归入「散签」；分组标题双实线与档案馆的单横线刻意区分。
+- **性能三层优化**：索引结果 transient 缓存（固定键 + 版本失效，发文/词表变动即刷新）；直连 SQL 全批量化（版签总目 212→8 查询，档案馆 53→15，暖缓存 1-2 条）；年历瘦列取数不捞正文，`%author%`/`%category%` 固定链接结构实测可配。
+- **CDN 边缘缓存头网关**：见上「CDN 友好」；与页面缓存/SEO 插件的头互让，`paddysun_ns_edge_cache` 过滤器可整体停用。
+- **国际化补全**：23 条新增可译字符串入 `.pot` 并补英文译文，en_US 站点档案馆/版签总目开箱英文；索引缓存键含 locale。
+- **工程与安全**：独立 Agent 双重代码审查 + Theme Check（0 REQUIRED/0 WARNING）+ 渗透测试（36 项探测，XSS/SQLi/缓存投毒/越权/CSRF 面全过，报告见 RELEASE-1.1.0.md）；`repair-footnotes.php` 移出主题包（保留在仓库 `tools/` 目录）；PHP 7.4 兼容性修复与一批编码卫生清理。
+- 官方主题目录要求在本轮作为工程指引采用（暂不提交目录）；细节与取舍见 `RELEASE-1.1.0.md`。
 
 ## 1.0.2 更新
 
@@ -60,7 +72,7 @@ SEO/schema、Markdown 存档与 REST、llms 是保留的产品功能，不需要
 
 ## 兼容性与验证边界
 
-WordPress **7.1+**，PHP **7.4+**。候选包已在隔离的合成 WordPress 环境完成验证：PHP 7.4.33 与 8.3.30 上各自的全新安装与「从 1.0.1 升级」四套环境，安装/升级后主题文件与候选包 234 个文件逐一一致、无多余文件，升级保留原有内容、自定义模板、文章元数据与主题修改记录；HTTP 回归 594 项断言全部通过——矩阵新增脚注与行内徽章长期回归夹具：升级环境用 1.0.1 播种出受损脚注文（3 角标），升级到 1.0.2 并重存后断言自愈（2 角标），把「受损→升级→自愈」全链路钉进常设矩阵。48 项静态公开检查全部通过，隐私扫描零命中，全源码无任何真实广告投放标识。WordPress.org 评审同款自动化工具 Theme Check（20260901）全量 9,642 项测试通过，0 个 REQUIRED 级与 0 个 WARNING 级结果。中文站点输出与 1.0.0 逐字节一致（仅 llms.txt 分类归组修复一处有意变更）。这不表示所有插件组合均已测试。
+WordPress **7.1+**，PHP **7.4+**。1.1.0 候选包在隔离合成站（导入 108 篇真实量级内容）完成验证：全部公开视图响应头矩阵、304 条件请求、多宽度响应式断点（iframe 实测）、`%author%` 固定链接结构往返、多语言常量模拟回退、索引缓存失效钩子真实触发、暖/冷查询数计量（版签总目 212→8→1）；Theme Check（20260901）0 REQUIRED / 0 WARNING（与 1.0.2 基线一致的两条已知 INFO）；独立 Agent 双重全主题代码审查（PHP 层 + 模板资产层，对照官方手册与编码规范）与渗透测试（36 项，XSS/SQLi/缓存投毒/越权/CSRF/信息泄露面全部闭合）。1.0.2 的四环境安装/升级与 594 项 HTTP 回归结论沿袭有效（见 `RELEASE-1.0.2.md`）。这不表示所有插件组合均已测试。
 
 仓库中的导航、备案、服务状态及按钮示例是占位内容，安装后请按站点情况编辑。主题不导入个人数据库或媒体。
 
