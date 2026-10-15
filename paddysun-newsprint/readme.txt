@@ -3,7 +3,7 @@ Contributors: ispaddy
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, one-column, custom-colors, custom-menu, editor-style, block-styles, block-patterns, full-site-editing, style-variations, translation-ready
@@ -62,6 +62,10 @@ Paddysun Newsprint 是一款面向中文文字博客的块主题（Block Theme�
 官方标准整改：vendor 库随包附未压缩原始文件；检索词转义、检索表单 action、键盘焦点样式等可移植性/无障碍修正。升级后建议清一次缓存。
 
 == Changelog ==
+
+= 1.1.1 =
+* 修复站点编辑器打开「档案馆」「版签总目」模板时报「区块包含未预料的或无效的内容」：两个索引区块模式的主体输出此前为无区块定界注释的裸 HTML，编辑器解析 pattern 内容时校验失败（前台渲染不受影响）。现主体输出包入 core/html 区块封套，前台输出逐字节不变、编辑器解析合法。
+* 主题更新/切换时自动推进索引缓存版本（after_switch_theme），升级后旧格式 transient 立即失效重建，无需等待 10 分钟 TTL。
 
 = 1.1.0 =
 * 工程：修复脚本 repair-footnotes.php 移出主题包（保留于仓库 tools/ 目录，wp-cli 用法见文件头注释；1.0.2 包内自带该脚本的旧版用户可继续使用）；打包校验新增同名排除规则防回流。WordPress 官方主题目录要求在本项目中作为工程指引采用（暂不提交目录）；本分发行使 GPL-3.0 选项（DOMPurify 的 Apache-2.0 分支与 GPLv2 不兼容、与 GPLv3 兼容），GPLv2+ 与 GPLv3 双许可原文随包。

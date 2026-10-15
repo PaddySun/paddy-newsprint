@@ -202,6 +202,7 @@ else :
 		);
 	}
 	?>
+<!-- wp:html -->
 <div class="np-taggroups">
 	<p class="np-taggroups__stats">
 		<?php
@@ -237,7 +238,9 @@ else :
 </div>
 	<?php
 endif;
-
+?>
+<!-- /wp:html -->
+<?php
 $np_tags_idx_html = ob_get_clean();
 set_transient(
 	$np_tags_idx_key,

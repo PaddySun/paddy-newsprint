@@ -151,6 +151,15 @@ function paddysun_ns_bump_index_version() {
 }
 
 /**
+ * 主题更新/切换时推进索引版本：令旧格式 transient 立即失效重建
+ * （1.1.1 起索引输出带区块封套，需淘汰 1.1.0 的无封套缓存）。
+ */
+function paddysun_ns_flush_index_cache_on_switch() {
+	paddysun_ns_bump_index_version();
+}
+add_action( 'after_switch_theme', 'paddysun_ns_flush_index_cache_on_switch' );
+
+/**
  * save_post：仅 post / page 的真实保存（排除修订、自动保存）推进索引版本。
  *
  * @param int          $post_id 文章 ID。

@@ -2,7 +2,7 @@
 
 # Paddy Newsprint
 
-![版本 1.1.0](https://img.shields.io/badge/version-1.1.0-6b1f1f)
+![版本 1.1.1](https://img.shields.io/badge/version-1.1.1-6b1f1f)
 ![WordPress 7.1+](https://img.shields.io/badge/WordPress-7.1%2B-21759b?logo=wordpress&logoColor=white)
 ![PHP 7.4+](https://img.shields.io/badge/PHP-7.4%2B-777bb4?logo=php&logoColor=white)
 ![许可证 GPL-2.0-or-later](https://img.shields.io/badge/license-GPL--2.0--or--later-blue)
@@ -12,10 +12,10 @@
 ## 下载与安装
 
 - [GitHub 仓库](https://github.com/PaddySun/paddy-newsprint)
-- 国内下载（1.1.0）：`https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.1.0.zip`（**待上传**，上传后需重新下载核验字节数与 SHA-256）
-- 安装包文件名：`paddy-newsprint-1.1.0.zip`；包内目录：`paddysun-newsprint/`。
-- SHA-256：`3e782330d3503467dded9a47235725152fb4a2ca868d8ec1277b21822a5cbedc`（5,313,553 字节，238 个主题文件）。验证过程见本仓库 `RELEASE-1.1.0.md`。不要将 GitHub 的仓库源码 ZIP 当作可直接安装的主题包。
-- 上一版仍可下载：[1.0.2](https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.0.2.zip)（SHA-256 `3e70b653…fdf95`）、[1.0.1](https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.0.1.zip)、[1.0.0](https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.0.0.zip)。
+- 国内下载（1.1.1）：`https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.1.1.zip`（**待上传**，上传后需重新下载核验字节数与 SHA-256）
+- 安装包文件名：`paddy-newsprint-1.1.1.zip`；包内目录：`paddysun-newsprint/`。
+- SHA-256：`6e6224500e920436dd94a76df405b7da300b918b08051b3919c6bf9fea39b228`（5,313,920 字节，238 个主题文件）。验证过程见本仓库 `RELEASE-1.1.1.md`。不要将 GitHub 的仓库源码 ZIP 当作可直接安装的主题包。
+- 上一版仍可下载：[1.1.0](https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.1.0.zip)、[1.0.2](https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.0.2.zip)（SHA-256 `3e70b653…fdf95`）及更早版本。
 
 在 WordPress 后台选择「外观 → 主题 → 上传主题」，安装并启用主题。升级前备份自己的站点；数据库中已定制的模板不会因主题文件更新自动覆盖。
 
@@ -35,6 +35,12 @@
 - **CDN 友好**：匿名公开视图输出标准 `Cache-Control`（`s-maxage` + `stale-while-revalidate`）与 `Last-Modified`（支持 304），登录态/评论者/带查询串请求自动直通；配合 EdgeOne 等「遵循源站」的 CDN 即可整页缓存。索引页结果层走 transient 缓存（启用 Redis Object Cache 时即 Redis），取数批量化、多语言（Polylang/WPML）自动退回 WP API 路径。
 
 SEO/schema、Markdown 存档与 REST、llms 是保留的产品功能，不需要另装强制插件。本轮为自主分发，不是 WordPress.org 上架版本或官方审核通过声明。
+
+## 1.1.1 更新
+
+- **修复站点编辑器报「区块包含未预料的或无效的内容」**：在站点编辑器中打开「档案馆」「版签总目」模板时，两个索引区块模式的主体输出（无区块定界注释的裸 HTML）无法通过编辑器的区块校验。现主体输出包入 `core/html` 区块封套——前台输出逐字节不变、编辑器解析合法（已在隔离站编辑器复现并验证清零）。前台渲染与既有功能不受影响。
+- 主题更新/切换时自动推进索引缓存版本（`after_switch_theme`），升级后旧格式 transient 立即失效重建，无需等待 TTL。
+- 若 1.1.0 期间曾在站点编辑器保存过这两个模板：请删除数据库中的用户自定义模板副本（外观 → 编辑器 → 模板 → 已自定义），让模板回到随主题文件的最新版本。
 
 ## 1.1.0 更新
 

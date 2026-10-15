@@ -298,6 +298,7 @@ if ( empty( $blog_years ) && ! $has_intro ) :
 	<?php
 else :
 	?>
+<!-- wp:html -->
 <div class="np-blogindex">
 
 	<?php if ( ! empty( $blog_cats ) ) : ?>
@@ -445,7 +446,9 @@ else :
 </div>
 	<?php
 endif;
-
+?>
+<!-- /wp:html -->
+<?php
 $np_arch_html = ob_get_clean();
 set_transient(
 	$np_arch_key,
