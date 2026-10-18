@@ -1,5 +1,3 @@
-![Paddy Newsprint 品牌 Logo](https://cos.paddysun.top/brd/paddy-newsprint-title.webp)
-
 # Paddy Newsprint
 
 ![版本 1.1.1](https://img.shields.io/badge/version-1.1.1-6b1f1f)
