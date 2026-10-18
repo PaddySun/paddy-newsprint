@@ -10,10 +10,10 @@
 ## 下载与安装
 
 - [GitHub 仓库](https://github.com/PaddySun/paddy-newsprint)
-- 国内下载（1.1.1）：`https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.1.1.zip`（**待上传**，上传后需重新下载核验字节数与 SHA-256）
+- 国内下载（1.1.1）：[cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.1.1.zip](https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.1.1.zip)（已上传并核验与发布工件字节一致）
 - 安装包文件名：`paddy-newsprint-1.1.1.zip`；包内目录：`paddysun-newsprint/`。
 - SHA-256：`6e6224500e920436dd94a76df405b7da300b918b08051b3919c6bf9fea39b228`（5,313,920 字节，238 个主题文件）。验证过程见本仓库 `RELEASE-1.1.1.md`。不要将 GitHub 的仓库源码 ZIP 当作可直接安装的主题包。
-- 上一版仍可下载：[1.1.0](https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.1.0.zip)、[1.0.2](https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.0.2.zip)（SHA-256 `3e70b653…fdf95`）及更早版本。
+- 历史版本不再提供 COS 下载（1.1.0 及更早均未上传过 COS）；各版本的变更说明见仓库 RELEASE 文档，安装包随后由 GitHub Releases 归档提供。
 
 在 WordPress 后台选择「外观 → 主题 → 上传主题」，安装并启用主题。升级前备份自己的站点；数据库中已定制的模板不会因主题文件更新自动覆盖。
 
