@@ -1,4 +1,4 @@
-![Paddy Newsprint 品牌 Logo](https://cos.paddysun.top/brd/paddy-newsprint-logo-orange.png)
+![Paddy Newsprint 品牌 Logo](https://cos.paddysun.top/brd/paddy-newsprint-title.webp)
 
 # Paddy Newsprint
 
