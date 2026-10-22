@@ -3,7 +3,7 @@ Contributors: ispaddy
 Requires at least: 7.1
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, one-column, custom-colors, custom-menu, editor-style, block-styles, block-patterns, full-site-editing, style-variations, translation-ready
@@ -62,6 +62,11 @@ Paddysun Newsprint 是一款面向中文文字博客的块主题（Block Theme�
 官方标准整改：vendor 库随包附未压缩原始文件；检索词转义、检索表单 action、键盘焦点样式等可移植性/无障碍修正。升级后建议清一次缓存。
 
 == Changelog ==
+
+= 1.1.2 =
+* 修复热修：文章发布后收到的新评论可能对老访客「不可见」——边缘缓存头的 Last-Modified 此前只取全站 post_modified 最大值，而评论不改写文章行，发文后该值静止不动，条件请求被无限 304，浏览器一直持有发文瞬间的页面快照（换任何文章同理）。现 Last-Modified 纳入「最新已批准评论时间」与单调内容戳记（paddysun_ns_stamp，随发文/评论/词表事件推进、只增不减，防删除导致验证时间回退）；评论入库/状态变更/编辑均推进戳记。
+* 新发布 24 小时内的文章，s-maxage 降至 60 秒（新文评论区热流量即时生效），24 小时后恢复 600 秒；paddysun_ns_fresh_window 过滤器可调窗口。
+* 选项写入增加 add_option 兜底（个别持久化层 update_option 无法创建不存在的选项）。
 
 = 1.1.1 =
 * 修复站点编辑器打开「档案馆」「版签总目」模板时报「区块包含未预料的或无效的内容」：两个索引区块模式的主体输出此前为无区块定界注释的裸 HTML，编辑器解析 pattern 内容时校验失败（前台渲染不受影响）。现主体输出包入 core/html 区块封套，前台输出逐字节不变、编辑器解析合法。

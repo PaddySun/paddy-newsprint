@@ -1,6 +1,6 @@
 # Paddy Newsprint
 
-![版本 1.1.1](https://img.shields.io/badge/version-1.1.1-6b1f1f)
+![版本 1.1.2](https://img.shields.io/badge/version-1.1.2-6b1f1f)
 ![WordPress 7.1+](https://img.shields.io/badge/WordPress-7.1%2B-21759b?logo=wordpress&logoColor=white)
 ![PHP 7.4+](https://img.shields.io/badge/PHP-7.4%2B-777bb4?logo=php&logoColor=white)
 ![许可证 GPL-2.0-or-later](https://img.shields.io/badge/license-GPL--2.0--or--later-blue)
@@ -10,10 +10,10 @@
 ## 下载与安装
 
 - [GitHub 仓库](https://github.com/PaddySun/paddy-newsprint)
-- 国内下载（1.1.1）：[cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.1.1.zip](https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.1.1.zip)（已上传并核验与发布工件字节一致）
-- 安装包文件名：`paddy-newsprint-1.1.1.zip`；包内目录：`paddysun-newsprint/`。
-- SHA-256：`6e6224500e920436dd94a76df405b7da300b918b08051b3919c6bf9fea39b228`（5,313,920 字节，238 个主题文件）。验证过程见本仓库 `RELEASE-1.1.1.md`。不要将 GitHub 的仓库源码 ZIP 当作可直接安装的主题包。
-- 历史版本不再提供 COS 下载（1.1.0 及更早均未上传过 COS）；各版本的变更说明见仓库 RELEASE 文档，安装包随后由 GitHub Releases 归档提供。
+- 国内下载（1.1.2）：[cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.1.2.zip](https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.1.2.zip)（**待上传**，上传后请核验与发布工件字节一致）
+- 安装包文件名：`paddy-newsprint-1.1.2.zip`；包内目录：`paddysun-newsprint/`。
+- SHA-256：`0bd592e7da63c8a19305e3a349a598b250b5caa0a8e2e8d19d0331760a58111e`（5,315,134 字节，238 个主题文件）。验证过程见本仓库 `RELEASE-1.1.2.md`。不要将 GitHub 的仓库源码 ZIP 当作可直接安装的主题包。
+- 1.1.1 仍可下载：[cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.1.1.zip](https://cos.paddysun.top/paddy-newsprint/rel/paddy-newsprint-1.1.1.zip)（SHA-256 `6e622450…39b228`）；更早版本未上传过 COS，变更说明见仓库 RELEASE 文档，安装包随后由 GitHub Releases 归档提供。
 
 在 WordPress 后台选择「外观 → 主题 → 上传主题」，安装并启用主题。升级前备份自己的站点；数据库中已定制的模板不会因主题文件更新自动覆盖。
 
@@ -33,6 +33,12 @@
 - **CDN 友好**：匿名公开视图输出标准 `Cache-Control`（`s-maxage` + `stale-while-revalidate`）与 `Last-Modified`（支持 304），登录态/评论者/带查询串请求自动直通；配合 EdgeOne 等「遵循源站」的 CDN 即可整页缓存。索引页结果层走 transient 缓存（启用 Redis Object Cache 时即 Redis），取数批量化、多语言（Polylang/WPML）自动退回 WP API 路径。
 
 SEO/schema、Markdown 存档与 REST、llms 是保留的产品功能，不需要另装强制插件。本轮为自主分发，不是 WordPress.org 上架版本或官方审核通过声明。
+
+## 1.1.2 更新
+
+- **修复：发文后的新评论对老访客不可见。** CDN 边缘缓存头的 `Last-Modified` 此前只取全站文章修改时间的最大值，而评论不改动文章本身——发文后该验证时间静止，老访客的条件请求被无限 `304`，浏览器一直持有发文瞬间的页面快照（表现为「没有评论区」）。现验证时间纳入最新已批准评论时间与单调内容戳记（随发文/评论/词表事件推进、只增不减），评论入库即刷新验证时间，条件请求立即返回 200 与新内容。
+- 新发布 24 小时内的文章 `s-maxage` 降至 60 秒（新文评论热流量即时生效），之后恢复 600 秒；`paddysun_ns_fresh_window` 过滤器可调窗口。
+- 已受影响浏览器的自愈：升级 1.1.2 后无需任何操作——新的验证时间已晚于旧快照的 `If-Modified-Since`，下一次刷新即返回 200 全量内容。
 
 ## 1.1.1 更新
 

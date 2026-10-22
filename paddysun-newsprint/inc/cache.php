@@ -73,7 +73,12 @@ function paddysun_ns_edge_cacheable() {
 }
 
 /**
- * 全站最新已发布内容的 Last-Modified（单条 MAX 查询，请求内静态缓存）。
+ * 全站内容验证时间（Last-Modified 原料，请求内静态缓存）。
+ *
+ * 取三者最大：最新已发布 post/page 的修改时间、最新**已批准评论**时间、
+ * 单调内容戳记（paddysun_ns_stamp，内容/词表/评论事件时推进，只增不减）。
+ * 评论必须纳入：单篇页的评论区由服务端渲染，若仅看 post_modified，
+ * 发文后的新评论会被条件请求 304 挡住（1.1.1 线上缺陷）。
  *
  * @return string GMT 格式时间，如 "Wed, 15 Oct 2026 15:34:50 GMT"。
  */
@@ -84,13 +89,18 @@ function paddysun_ns_edge_last_modified() {
 		return $last_modified;
 	}
 
-	$raw = $wpdb->get_var(
+	$post_max    = $wpdb->get_var(
 		"SELECT MAX(post_modified_gmt) FROM {$wpdb->posts}
 		 WHERE post_status = 'publish' AND post_type IN ('post', 'page')"
 	);
-	$last_modified = $raw
-		? mysql2date( 'D, d M Y H:i:s', $raw, false ) . ' GMT'
-		: gmdate( 'D, d M Y H:i:s' ) . ' GMT';
+	$comment_max = $wpdb->get_var(
+		"SELECT MAX(comment_date_gmt) FROM {$wpdb->comments}
+		 WHERE comment_approved = '1'"
+	);
+	$stamp       = get_option( 'paddysun_ns_stamp' );
+	$candidates  = array_filter( array( $post_max, $comment_max, $stamp ) );
+	$raw         = $candidates ? max( $candidates ) : gmdate( 'Y-m-d H:i:s' );
+	$last_modified = mysql2date( 'D, d M Y H:i:s', $raw, false ) . ' GMT';
 	return $last_modified;
 }
 
@@ -113,20 +123,44 @@ function paddysun_ns_edge_cache_headers() {
 	}
 
 	$last_modified = paddysun_ns_edge_last_modified();
+	$control       = paddysun_ns_edge_cache_control();
 
 	if ( isset( $_SERVER['HTTP_IF_MODIFIED_SINCE'] ) ) {
 		$since_parts = explode( ';', sanitize_text_field( wp_unslash( $_SERVER['HTTP_IF_MODIFIED_SINCE'] ) ) );
 		$since       = strtotime( trim( $since_parts[0] ) );
 		if ( $since && strtotime( $last_modified ) <= $since ) {
 			status_header( 304 );
-			header( 'Cache-Control: public, max-age=0, s-maxage=600, stale-while-revalidate=3600' );
+			header( 'Cache-Control: ' . $control );
 			header( 'Last-Modified: ' . $last_modified );
 			exit;
 		}
 	}
 
-	header( 'Cache-Control: public, max-age=0, s-maxage=600, stale-while-revalidate=3600' );
+	header( 'Cache-Control: ' . $control );
 	header( 'Last-Modified: ' . $last_modified );
+}
+
+/**
+ * Cache-Control 策略：最新文章发布 24 小时内 s-maxage 降至 60 秒
+ * （新文评论热流量即时生效），其余 600 + SWR 3600。
+ *
+ * @return string
+ */
+function paddysun_ns_edge_cache_control() {
+	global $wpdb;
+	static $control = null;
+	if ( null !== $control ) {
+		return $control;
+	}
+	$fresh_window = (int) apply_filters( 'paddysun_ns_fresh_window', DAY_IN_SECONDS );
+	$newest       = $wpdb->get_var(
+		"SELECT MAX(post_date_gmt) FROM {$wpdb->posts}
+		 WHERE post_type = 'post' AND post_status = 'publish'"
+	);
+	$short = 'public, max-age=0, s-maxage=60, stale-while-revalidate=300';
+	$long  = 'public, max-age=0, s-maxage=600, stale-while-revalidate=3600';
+	$control = ( $newest && ( time() - strtotime( $newest ) ) < $fresh_window ) ? $short : $long;
+	return $control;
 }
 add_action( 'template_redirect', 'paddysun_ns_edge_cache_headers', 99 );
 
@@ -148,6 +182,21 @@ function paddysun_ns_index_version() {
  */
 function paddysun_ns_bump_index_version() {
 	update_option( 'paddysun_ns_idx_ver', paddysun_ns_index_version() + 1, false );
+	paddysun_ns_touch_content_stamp();
+}
+
+/**
+ * 推进单调内容戳记（GMT）：Last-Modified 的组成部分，保证验证时间只增不减
+ * （删除最新评论/文章导致 MAX 回退时，戳记守住验证时间不倒退）。
+ */
+function paddysun_ns_touch_content_stamp() {
+	$gmt = gmdate( 'Y-m-d H:i:s' );
+	// 某些持久化层（如个别 SQLite dropin）update_option 无法创建不存在的选项，先 add 兜底。
+	if ( false === get_option( 'paddysun_ns_stamp' ) ) {
+		add_option( 'paddysun_ns_stamp', $gmt, '', false );
+		return;
+	}
+	update_option( 'paddysun_ns_stamp', $gmt, false );
 }
 
 /**
@@ -203,6 +252,10 @@ function paddysun_ns_flush_index_cache_on_term( $term_id, $tt_id = 0, $arg3 = nu
 foreach ( array( 'created_term', 'edited_term', 'deleted_term' ) as $term_action ) {
 	add_action( $term_action, 'paddysun_ns_flush_index_cache_on_term', 10, 4 );
 }
+
+add_action( 'comment_post', 'paddysun_ns_touch_content_stamp', 10 );
+add_action( 'edit_comment', 'paddysun_ns_touch_content_stamp', 10 );
+add_action( 'wp_set_comment_status', 'paddysun_ns_touch_content_stamp', 10, 2 );
 
 /* ------------------------------------------------------------
  * 3. 多语言环境探测
